@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "swiftyhttp",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/antonio-war/SwiftyHTTP",
+      "state" : {
+        "revision" : "ba23642d414cc3fdb65565e36b6d57fd46b698a0",
+        "version" : "0.1.1"
+      }
+    }
+  ],
+  "version" : 2
+}
