@@ -17,7 +17,7 @@ final class SwiftyGPTTests: XCTestCase {
     func testDefaultChatCompletion() {
         let expectation = expectation(description: "DefaultChatCompletion")
         var result: Result<SwiftyGPTResponse, Error>? = nil
-        swiftyGPT.chat(messages: [SwiftyGPTMessage(role: .user, content: "Hi, how are you?")]) { response in
+        swiftyGPT.chat(messages: [SwiftyGPTMessage(role: .user, content: "Hi, how are you?")], temperature: 5) { response in
             result = response
             expectation.fulfill()
         }
@@ -26,7 +26,5 @@ final class SwiftyGPTTests: XCTestCase {
         XCTAssertNotNil(result)
         
         XCTAssertNoThrow(try result!.get())
-        
-        print(result)
     }
 }
