@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SwiftyGPTRole {
+enum SwiftyGPTRole: String, Codable {
     case system
     case user
     case assistant

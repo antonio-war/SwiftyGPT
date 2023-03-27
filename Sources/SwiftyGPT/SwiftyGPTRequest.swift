@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import SwiftyHTTP
 
-struct SwiftyGPTRequest {
+struct SwiftyGPTRequest: SwiftyHTTPBody {
     let model: SwiftyGPTModel
     let messages: [SwiftyGPTMessage]
 }

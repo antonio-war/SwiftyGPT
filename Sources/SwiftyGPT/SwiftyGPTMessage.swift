@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct SwiftyGPTMessage {
+struct SwiftyGPTMessage: Codable, Identifiable {
+    let id: UUID = UUID()
     let role: SwiftyGPTRole
     let content: String
 }
