@@ -1,6 +1,9 @@
 public struct SwiftyGPT {
-    public private(set) var text = "Hello, World!"
-
-    public init() {
+    let apiKey: String
+    let model: SwiftyGPTModel
+    
+    init(apiKey: String, model: SwiftyGPTModel = SwiftyGPTModel.stable) {
+        self.apiKey = apiKey
+        self.model = model
     }
 }
