@@ -35,5 +35,26 @@ public struct SwiftyGPT {
         }
     }
     
+    public func chat(messages: [String], role: SwiftyGPTRole = .user, model: SwiftyGPTModel = .stable, completion: @escaping (Result<String, Error>) -> ()) {
+        chat(messages: messages.map { SwiftyGPTMessage(role: role, content: $0)}) { result in
+            switch result {
+            case .success(let response):
+                guard let message = response.choices.first?.message.content else {
+                    completion(.failure(URLError(.badServerResponse)))
+                    return
+                }
+                completion(.success(message))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     
+    public func chat(messages: [String], role: SwiftyGPTRole = .user, model: SwiftyGPTModel = .stable) async -> Result<String, Error> {
+        return await withCheckedContinuation { continuation in
+            chat(messages: messages, model: model) { result in
+                continuation.resume(returning: result)
+            }
+        }
+    }
 }
