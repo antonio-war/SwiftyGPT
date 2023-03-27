@@ -13,4 +13,33 @@ final class SwiftyGPTTests: XCTestCase {
         try super.tearDownWithError()
         swiftyGPT = nil
     }
+    
+    func testDefaultChatCompletion() {
+        let expectation = expectation(description: "DefaultChatCompletion")
+        var result: Result<SwiftyGPTResponse, Error>? = nil
+        swiftyGPT.chat(messages: [SwiftyGPTMessage(role: .user, content: "Hi, how are you?")]) { response in
+            result = response
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 30, handler: nil)
+        
+        XCTAssertNotNil(result)
+        
+        XCTAssertNoThrow(try result!.get())
+    }
+    
+    func testEasyChatCompletion() {
+        let expectation = expectation(description: "EasyChatCompletion")
+        var result: Result<String, Error>? = nil
+        swiftyGPT.chat(messages: ["Hi, how are you?"]) { response in
+            result = response
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 30, handler: nil)
+        
+        XCTAssertNotNil(result)
+        
+        XCTAssertNoThrow(try result!.get())
+        print(result)
+    }
 }

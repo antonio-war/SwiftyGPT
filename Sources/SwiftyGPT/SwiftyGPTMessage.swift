@@ -8,9 +8,13 @@
 import Foundation
 
 public struct SwiftyGPTMessage: Codable {
-//    public private(set) var id: UUID = UUID()
     let role: SwiftyGPTRole
     let content: String
+    
+    init(role: SwiftyGPTRole, content: String) {
+        self.role = role
+        self.content = content
+    }
 }
 
 // MARK: - Role
