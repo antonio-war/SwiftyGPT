@@ -7,8 +7,15 @@
 
 import Foundation
 
-struct SwiftyGPTMessage: Codable, Identifiable {
-    let id: UUID = UUID()
+public struct SwiftyGPTMessage: Codable {
+//    public private(set) var id: UUID = UUID()
     let role: SwiftyGPTRole
     let content: String
+}
+
+// MARK: - Role
+public enum SwiftyGPTRole: String, Codable {
+    case system
+    case user
+    case assistant
 }

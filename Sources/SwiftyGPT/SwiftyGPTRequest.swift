@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyHTTP
 
-struct SwiftyGPTRequest: SwiftyHTTPBody {
+public struct SwiftyGPTRequest: SwiftyHTTPBody {
     let model: SwiftyGPTModel
     let messages: [SwiftyGPTMessage]
 }

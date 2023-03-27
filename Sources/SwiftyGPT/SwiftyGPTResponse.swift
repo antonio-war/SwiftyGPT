@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyHTTP
 
-struct SwiftyGPTResponse: SwiftyHTTPBody {
+public struct SwiftyGPTResponse: SwiftyHTTPBody {
     let id, object: String
     let created: TimeInterval
     let model: SwiftyGPTModel
@@ -17,7 +17,7 @@ struct SwiftyGPTResponse: SwiftyHTTPBody {
 }
 
 // MARK: - Choice
-struct SwiftyGPTChoice: Codable {
+public struct SwiftyGPTChoice: Codable {
     let message: SwiftyGPTMessage
     let finishReason: SwiftyGPTFinishReason
     let index: Int
@@ -30,7 +30,7 @@ struct SwiftyGPTChoice: Codable {
 }
 
 // MARK: - Usage
-struct SwiftyGPTUsage: Codable {
+public struct SwiftyGPTUsage: Codable {
     let promptTokens, completionTokens, totalTokens: Int
 
     enum CodingKeys: String, CodingKey {
@@ -41,7 +41,7 @@ struct SwiftyGPTUsage: Codable {
 }
 
 // MARK: - FinishReason
-enum SwiftyGPTFinishReason: String, Codable {
+public enum SwiftyGPTFinishReason: String, Codable {
     case stop
     case length
     case contentFilter = "content_filter"

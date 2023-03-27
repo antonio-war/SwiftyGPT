@@ -2,10 +2,15 @@ import XCTest
 @testable import SwiftyGPT
 
 final class SwiftyGPTTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-//        XCTAssertEqual(SwiftyGPT().text, "Hello, World!")
+    private var swiftyGPT: SwiftyGPT!
+    
+    override func setUpWithError() throws {
+        try super.setUpWithError()
+        swiftyGPT = SwiftyGPT(apiKey: "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")
+    }
+
+    override func tearDownWithError() throws {
+        try super.tearDownWithError()
+        swiftyGPT = nil
     }
 }
