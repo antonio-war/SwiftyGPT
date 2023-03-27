@@ -7,9 +7,16 @@
 
 import Foundation
 
-public struct SwiftyGPTMessage: Codable {
+public struct SwiftyGPTMessage: Codable, Identifiable, Datable {
+    public let id: UUID = UUID()
+    public let date: Date = Date()
     let role: SwiftyGPTRole
     let content: String
+    
+    enum CodingKeys: String, CodingKey {
+        case role
+        case content
+    }
     
     init(role: SwiftyGPTRole, content: String) {
         self.role = role

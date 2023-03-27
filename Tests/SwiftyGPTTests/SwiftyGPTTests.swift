@@ -27,4 +27,14 @@ final class SwiftyGPTTests: XCTestCase {
         
         XCTAssertNoThrow(try result!.get())
     }
+    
+    func testConversation() {
+        let count = swiftyGPT.conversation.count
+        let expectation = expectation(description: "DefaultChatCompletion")
+        swiftyGPT.chat(messages: [SwiftyGPTMessage(role: .user, content: "Hi, how are you?")], temperature: 5) { response in
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 30, handler: nil)
+        XCTAssertGreaterThan(swiftyGPT.conversation.count, count)
+    }
 }
