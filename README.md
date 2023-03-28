@@ -80,6 +80,15 @@ let message = response.choices.first?.message
 
 However, if you have requested a different number of choices, the array will have a larger size and you will have to manage the response in a custom way.
 
+## SwiftUI
+
+SwiftyGPT was born with the idea of integrating perfectly with SwiftUI, that's why a SwiftyGPT object is an ObservableObject that exposes some published variable like :
+
+```swift
+@Published var conversation: [SwiftyGPTMessage]
+```
+That enable you to trace all current session messages and update your UI.
+
 ---
 # License
 SwiftyCache is published under the Apache 2.0 license.
