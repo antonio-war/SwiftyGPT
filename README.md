@@ -35,9 +35,7 @@ Then click **Add Package**.
 
 ---
 
-# Overview
-
-## Setting Up
+# Setting Up
 
 The first thing you need to do is to create a SwiftyGPT instance.
 
@@ -45,21 +43,33 @@ The first thing you need to do is to create a SwiftyGPT instance.
 let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
 ```
 
-## Chat
+---
 
-Once you have created an instance you can use it to start a chat with ChatGPT.
-You need to create an array of SwiftyGPTMessage.
+# Chat
+
+Chat is the main feature of SwiftyGPT, as you can guess it allows you to ask ChatGPT for something. There are several method that you can use to reach the same goal.
+
+## Deep Version
+
+Deep version allow you more control over request creation. The main element of a request is a SwiftyGPTMessage.
 
 ```swift
-let messages = [SwiftyGPTMessage(role: .user, content: "Hi, how are you?")]
+let message = SwiftyGPTMessage(role: .user, content: "Hi, how are you?")
 ```
-You can use the role to instruct the model precisely as explained by the ChatGPT documentation. Or use a simpler constructor that uses 'user' as default role.
+
+You can use role to instruct the model precisely as explained by the ChatGPT documentation and get the control you want.
 
 ```swift
-let messages = [SwiftyGPTMessage(content: "Hi, how are you?")]
+swiftyGPT.chat(message: message) { result in
+    switch result {
+        case .success(let response):
+            print(response)
+        case .failure(let error):
+            print(error)
+    }
+}
 ```
-
-Once the message array is created you can use it to make a request through the chat method.
+Alternatively if you need to send multiple messages in one request you can use the multiple input method.
 
 ```swift
 swiftyGPT.chat(messages: messages) { result in
@@ -71,8 +81,30 @@ swiftyGPT.chat(messages: messages) { result in
     }
 }
 ```
+In both method you can specify some optional parameters like model, temperature and others established by OpenAI.
 
-The same method is also available in Async/Await version.
+## High Version
+
+If you don't need a lot of control on your requests you can use High Versions methods that works with simple Strings. With the only limitation that their output consists of a single choice and messages all use 'user' as role.
+
+```swift
+swiftyGPT.chat(message: "Hi how are you ?") { response in
+    switch result {
+        case .success(let response):
+            print(response)
+        case .failure(let error):
+            print(error)
+    }    
+}
+```
+
+## Async/Await
+
+All methods of the chat feature are also available in Async/Await version.
+
+```swift
+let result: Result<String, Error> = await swiftyGPT.chat(message: "Hi how are you ?")
+```
 
 ### Response Handling
 
