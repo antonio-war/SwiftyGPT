@@ -39,4 +39,12 @@ public class SwiftyGPT: ObservableObject {
             }
         }
     }
+    
+    public func chat(message: SwiftyGPTMessage, model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, choices: Int = 1, tokens: Int = Int.max, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil, completion: @escaping (Result<SwiftyGPTResponse, Error>) -> ()) {
+        chat(messages: [message], model: model, temperature: temperature, choices: choices, tokens: tokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user, completion: completion)
+    }
+    
+    public func chat(message: SwiftyGPTMessage, model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, choices: Int = 1, tokens: Int = Int.max, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil) async -> Result<SwiftyGPTResponse, Error> {
+        await chat(messages: [message], model: model, temperature: temperature, choices: choices, tokens: tokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
+    }
 }
