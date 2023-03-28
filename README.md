@@ -51,7 +51,7 @@ Chat is the main feature of SwiftyGPT, as you can guess it allows you to ask Cha
 
 ## Deep Version
 
-Deep version allow you more control over request creation. The main element of a request is a SwiftyGPTMessage.
+Deep version allow you maximum over request creation. The main element of a request is a SwiftyGPTMessage.
 
 ```swift
 let message = SwiftyGPTMessage(role: .user, content: "Hi, how are you?")
