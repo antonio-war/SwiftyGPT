@@ -9,15 +9,15 @@ import Foundation
 import SwiftyHTTP
 
 public struct SwiftyGPTRequest: SwiftyHTTPBody {
-    let messages: [SwiftyGPTMessage]
-    let model: SwiftyGPTModel
-    let temperature: Float
-    let choices: Int
-    let stream: Bool
-    let tokens: Int
-    let presencePenalty: Float
-    let frequencyPenalty: Float
-    let user: String?
+    public let messages: [SwiftyGPTMessage]
+    public let model: SwiftyGPTModel
+    public let temperature: Float
+    public let choices: Int
+    public let stream: Bool
+    public let tokens: Int
+    public let presencePenalty: Float
+    public let frequencyPenalty: Float
+    public let user: String?
     
     enum CodingKeys: String, CodingKey {
         case model

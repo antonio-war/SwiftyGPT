@@ -9,18 +9,18 @@ import Foundation
 import SwiftyHTTP
 
 public struct SwiftyGPTResponse: SwiftyHTTPBody {
-    let id, object: String
-    let created: TimeInterval
-    let model: SwiftyGPTModel
-    let usage: SwiftyGPTUsage
-    let choices: [SwiftyGPTChoice]
+    public let id, object: String
+    public let created: TimeInterval
+    public let model: SwiftyGPTModel
+    public let usage: SwiftyGPTUsage
+    public let choices: [SwiftyGPTChoice]
 }
 
 // MARK: - Choice
 public struct SwiftyGPTChoice: Codable {
-    let message: SwiftyGPTMessage
-    let finishReason: SwiftyGPTFinishReason
-    let index: Int
+    public let message: SwiftyGPTMessage
+    public let finishReason: SwiftyGPTFinishReason
+    public let index: Int
 
     enum CodingKeys: String, CodingKey {
         case message
@@ -31,7 +31,7 @@ public struct SwiftyGPTChoice: Codable {
 
 // MARK: - Usage
 public struct SwiftyGPTUsage: Codable {
-    let promptTokens, completionTokens, totalTokens: Int
+    public let promptTokens, completionTokens, totalTokens: Int
 
     enum CodingKeys: String, CodingKey {
         case promptTokens = "prompt_tokens"
