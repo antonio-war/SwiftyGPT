@@ -29,3 +29,42 @@ Use **Up to Next Major Version** as dependency rule and enter the current Swifty
 Then click **Add Package**.
 
 ---
+
+# Overview
+
+## Setting Up
+
+The first thing you need to do is to create a SwiftyGPT instance.
+
+```swift
+let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
+```
+
+## Chat
+
+Once you have created an instance you can use it to start a chat with ChatGPT.
+You need to create an array of SwiftyGPTMessage.
+
+```swift
+let messages = [SwiftyGPTMessage(role: .user, content: "Hi, how are you?")]
+```
+You can use the role to instruct the model precisely as explained by the ChatGPT documentation. Or use a simpler constructor that uses 'user' as default role.
+
+```swift
+let messages = [SwiftyGPTMessage(content: "Hi, how are you?")]
+```
+
+Once the message array is created you can use it to make a request through the chat method.
+
+```swift
+swiftyGPT.chat(messages: messages) { result in
+    switch result {
+        case .success(let response):
+            print(response)
+        case .failure(let error):
+            print(error)
+    }
+}
+```
+
+The same method is also available in Async/Await version.
