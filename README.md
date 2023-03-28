@@ -68,3 +68,14 @@ swiftyGPT.chat(messages: messages) { result in
 ```
 
 The same method is also available in Async/Await version.
+
+### Response Handling
+
+Chat method in success case return a SwiftyGPTResponse object which is the entire transcript of ChatGPT HTTP response.
+To access the received message or messages you have to check the content of the 'choices' attribute. By default choices array size is one, so you can get the message in this way and read its content or other attributes.
+
+```swift
+let message = response.choices.first?.message
+```
+
+However, if you have requested a different number of choices, the array will have a larger size and you will have to manage the response in a custom way.
