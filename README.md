@@ -79,3 +79,7 @@ let message = response.choices.first?.message
 ```
 
 However, if you have requested a different number of choices, the array will have a larger size and you will have to manage the response in a custom way.
+
+---
+# License
+SwiftyCache is published under the Apache 2.0 license.
