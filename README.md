@@ -129,4 +129,4 @@ That enable you to trace all current session messages and update your UI.
 
 ---
 # License
-SwiftyCache is published under the Apache 2.0 license.
+SwiftyGPT is published under the Apache 2.0 license.
