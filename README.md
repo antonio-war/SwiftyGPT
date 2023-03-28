@@ -1,4 +1,6 @@
-![SwiftyGPT](https://user-images.githubusercontent.com/59933379/228211801-2646ac50-4bbf-4b4c-88b9-366bad8d76cf.png)
+<p align="center">
+<img width="1042" src="https://user-images.githubusercontent.com/59933379/228211801-2646ac50-4bbf-4b4c-88b9-366bad8d76cf.png">
+</p>
 
 SwiftyGPT is a simple and lightweight wrapper around OpenAI API.
 It was born with the aim of provide a Swift like interface around all OpenAI capabilities, so you can make requestes and get responses with minimal coding effort.
