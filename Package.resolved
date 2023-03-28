@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/antonio-war/SwiftyHTTP",
       "state" : {
-        "revision" : "cc1cabe875ad0620820b35fc585d69f38e1acfcc",
-        "version" : "0.1.2"
+        "revision" : "cd1437c5d5ea4fd87767d3af7b063dd9237a954a",
+        "version" : "0.1.3"
       }
     }
   ],
