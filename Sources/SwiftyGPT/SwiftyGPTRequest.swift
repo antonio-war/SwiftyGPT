@@ -14,7 +14,6 @@ public struct SwiftyGPTRequest: SwiftyHTTPBody {
     public let temperature: Float
     public let choices: Int
     public let stream: Bool
-    public let tokens: Int
     public let presencePenalty: Float
     public let frequencyPenalty: Float
     public let user: String?
@@ -26,7 +25,6 @@ public struct SwiftyGPTRequest: SwiftyHTTPBody {
         case choices = "n"
         case stream
         case user
-        case tokens = "max_tokens"
         case presencePenalty = "presence_penalty"
         case frequencyPenalty = "frequency_penalty"
     }
