@@ -9,14 +9,12 @@ import Foundation
 import SwiftyHTTP
 import SwiftyRanged
 
-public class SwiftyGPT: ObservableObject {
+public struct SwiftyGPT {
     
     let apiKey: String
-    @Published var conversation: [SwiftyGPTMessage]
     
     public init(apiKey: String) {
         self.apiKey = apiKey
-        self.conversation = []
     }
         
     // MARK: - Chat
@@ -32,8 +30,6 @@ public class SwiftyGPT: ObservableObject {
                         completion(.failure(URLError(.badServerResponse)))
                         return
                     }
-                    self.conversation.append(contentsOf: request.messages)
-                    self.conversation.append(contentsOf: body.choices.compactMap({ $0.message }))
                     completion(.success(body))
                 } else {
                     guard let error = try? JSONDecoder().decode(SwiftyGPTError.self, from: response.body) else {
