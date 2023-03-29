@@ -19,17 +19,17 @@ final class RangedTests: XCTestCase {
     }
 
     func testPureValue() throws {
-        @Ranged(0.0...2.0) var temperature: Float = 1.0
+        @Ranged(0...2) var temperature: Float? = 1.0
         XCTAssertEqual(temperature, 1.0)
     }
     
     func testMinValue() throws {
-        @Ranged(0.0...2.0) var temperature: Float = -1.0
+        @Ranged(0...2) var temperature: Float? = -1.0
         XCTAssertEqual(temperature, 0.0)
     }
     
     func testMaxValue() throws {
-        @Ranged(0.0...2.0) var temperature: Float = 3.0
+        @Ranged(0...2) var temperature: Float? = 3.0
         XCTAssertEqual(temperature, 2.0)
     }
 }

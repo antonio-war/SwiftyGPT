@@ -6,7 +6,7 @@ final class SwiftyGPTChatTests: XCTestCase {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        swiftyGPT = SwiftyGPT(apiKey: "")
+        swiftyGPT = SwiftyGPT(apiKey: "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")
     }
 
     override func tearDownWithError() throws {

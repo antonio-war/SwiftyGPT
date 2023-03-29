@@ -20,8 +20,9 @@ public class SwiftyGPT: ObservableObject {
         
     // MARK: - Chat
     
-    public func chat(messages: [SwiftyGPTMessage], model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, choices: Int = 1, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil, completion: @escaping (Result<SwiftyGPTResponse, Error>) -> ()) {
-        let request = SwiftyGPTRequest(messages: messages, model: model, temperature: temperature, choices: choices, stream: false, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
+    public func chat(messages: [SwiftyGPTMessage], model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float? = nil, choices: Int? = nil, @Ranged(0...4096) maxTokens: Int? = nil, @Ranged(-2...2) presencePenalty: Float? = nil, @Ranged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTResponse, Error>) -> ()) {
+        
+        let request = SwiftyGPTRequest(messages: messages, model: model, temperature: temperature, choices: choices, stream: false, maxTokens: maxTokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
         SwiftyHTTP.request(with: SwiftyGPTRouter.chat(apiKey, request)) { result in
             switch result {
             case .success(let response):
@@ -46,24 +47,27 @@ public class SwiftyGPT: ObservableObject {
         }
     }
     
-    public func chat(messages: [SwiftyGPTMessage], model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, choices: Int = 1, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil) async -> Result<SwiftyGPTResponse, Error> {
+    public func chat(messages: [SwiftyGPTMessage], model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float? = nil, choices: Int? = nil, @Ranged(0...4096) maxTokens: Int? = nil, @Ranged(-2...2) presencePenalty: Float? = nil, @Ranged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil) async -> Result<SwiftyGPTResponse, Error> {
+        
         return await withCheckedContinuation { continuation in
-            chat(messages: messages, model: model, temperature: temperature, choices: choices, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user) { result in
+            chat(messages: messages, model: model, temperature: temperature, choices: choices, maxTokens: maxTokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user) { result in
                 continuation.resume(returning: result)
             }
         }
+        
     }
     
-    public func chat(message: SwiftyGPTMessage, model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, choices: Int = 1, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil, completion: @escaping (Result<SwiftyGPTResponse, Error>) -> ()) {
-        chat(messages: [message], model: model, temperature: temperature, choices: choices, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user, completion: completion)
+    public func chat(message: SwiftyGPTMessage, model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float? = nil, choices: Int? = nil, @Ranged(0...4096) maxTokens: Int? = nil, @Ranged(-2...2) presencePenalty: Float? = nil, @Ranged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTResponse, Error>) -> ()) {
+        chat(messages: [message], model: model, temperature: temperature, choices: choices, maxTokens: maxTokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user, completion: completion)
     }
-    
-    public func chat(message: SwiftyGPTMessage, model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, choices: Int = 1, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil) async -> Result<SwiftyGPTResponse, Error> {
-        await chat(messages: [message], model: model, temperature: temperature, choices: choices, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
+
+    public func chat(message: SwiftyGPTMessage, model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float? = nil, choices: Int? = nil, @Ranged(0...4096) maxTokens: Int? = nil, @Ranged(-2...2) presencePenalty: Float? = nil, @Ranged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil) async -> Result<SwiftyGPTResponse, Error> {
+        
+        await chat(messages: [message], model: model, temperature: temperature, choices: choices, maxTokens: maxTokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
     }
-    
-    public func chat(messages: [String], model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil, completion: @escaping (Result<String, Error>) -> ()) {
-        chat(messages: messages.map({SwiftyGPTMessage(content: $0)}), model: model, temperature: temperature, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user) { result in
+
+    public func chat(messages: [String], model: SwiftyGPTModel = .stable, user: String? = nil, completion: @escaping (Result<String, Error>) -> ()) {
+        chat(messages: messages.map({SwiftyGPTMessage(content: $0)}), model: model, user: user) { result in
             switch result {
             case .success(let response):
                 guard let message = response.choices.first?.message else {
@@ -76,20 +80,20 @@ public class SwiftyGPT: ObservableObject {
             }
         }
     }
-    
-    public func chat(messages: [String], model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil) async -> Result<String, Error> {
+
+    public func chat(messages: [String], model: SwiftyGPTModel = .stable, user: String? = nil) async -> Result<String, Error> {
         return await withCheckedContinuation { continuation in
-            chat(messages: messages, model: model, temperature: temperature, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user) { result in
+            chat(messages: messages, model: model, user: user) { result in
                 continuation.resume(returning: result)
             }
         }
     }
-    
-    public func chat(message: String, model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil, completion: @escaping (Result<String, Error>) -> ()) {
-        chat(messages: [message], model: model, temperature: temperature, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user, completion: completion)
+
+    public func chat(message: String, model: SwiftyGPTModel = .stable, user: String? = nil, completion: @escaping (Result<String, Error>) -> ()) {
+        chat(messages: [message], model: model, user: user, completion: completion)
     }
-    
-    public func chat(message: String, model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil) async -> Result<String, Error> {
-        await chat(messages: [message], model: model, temperature: temperature, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
+
+    public func chat(message: String, model: SwiftyGPTModel = .stable, user: String? = nil) async -> Result<String, Error> {
+        await chat(messages: [message], model: model, user: user)
     }
 }

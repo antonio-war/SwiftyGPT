@@ -11,11 +11,12 @@ import SwiftyHTTP
 public struct SwiftyGPTRequest: SwiftyHTTPRequestBody {
     public let messages: [SwiftyGPTMessage]
     public let model: SwiftyGPTModel
-    public let temperature: Float
-    public let choices: Int
-    public let stream: Bool
-    public let presencePenalty: Float
-    public let frequencyPenalty: Float
+    public let temperature: Float?
+    public let choices: Int?
+    public let stream: Bool?
+    public let maxTokens: Int?
+    public let presencePenalty: Float?
+    public let frequencyPenalty: Float?
     public let user: String?
     
     enum CodingKeys: String, CodingKey {
@@ -24,8 +25,9 @@ public struct SwiftyGPTRequest: SwiftyHTTPRequestBody {
         case temperature
         case choices = "n"
         case stream
-        case user
+        case maxTokens = "max_tokens"
         case presencePenalty = "presence_penalty"
         case frequencyPenalty = "frequency_penalty"
+        case user
     }
 }
