@@ -34,7 +34,11 @@ public class SwiftyGPT: ObservableObject {
                     self.conversation.append(contentsOf: body.choices.compactMap({ $0.message }))
                     completion(.success(body))
                 } else {
-                    
+                    guard let error = try? JSONDecoder().decode(SwiftyGPTError.self, from: response.body) else {
+                        completion(.failure(URLError(.badServerResponse)))
+                        return
+                    }
+                    completion(.failure(error))
                 }
             case .failure(let error):
                 completion(.failure(error))
