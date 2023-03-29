@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SwiftyGPTError: Error, Decodable {
+public struct SwiftyGPTError: Error, Decodable {
     let message, type, code: String
     
     enum WrapperCodingKeys: CodingKey {
@@ -20,7 +20,7 @@ struct SwiftyGPTError: Error, Decodable {
         case code
     }
     
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let wrapper = try decoder.container(keyedBy: WrapperCodingKeys.self)
         let container = try wrapper.nestedContainer(keyedBy: CodingKeys.self, forKey: .error)
         self.message = try container.decode(String.self, forKey: .message)

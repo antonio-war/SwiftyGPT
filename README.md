@@ -51,7 +51,7 @@ Chat is the main feature of SwiftyGPT, as you can guess it allows you to ask Cha
 
 ## Deep Version
 
-Deep version allow you maximum over request creation. The main element of a request is a SwiftyGPTMessage.
+Deep versions allow you maximum over request creation. The main element of a request is a SwiftyGPTMessage.
 
 ```swift
 let message = SwiftyGPTMessage(role: .user, content: "Hi, how are you?")
@@ -81,11 +81,26 @@ swiftyGPT.chat(messages: messages) { result in
     }
 }
 ```
-In both method you can specify some optional parameters like model, temperature and others established by OpenAI.
+In both method you can specify some optional parameters like model, temperature, maxTokens and others established by OpenAI. 
+
+```swift
+swiftyGPT.chat(message: SwiftyGPTMessage(role: .user, content: "Hi, how are you?"), temperature: 5, user: "Test")  { result in
+    switch result {
+        case .success(let response):
+            print(response)
+        case .failure(let error):
+            print(error)
+    }
+}
+```
 
 ## High Version
 
-If you don't need a lot of control on your requests you can use High Versions methods that works with simple Strings. With the only limitation that their output consists of a single choice and messages all use 'user' as role.
+If you don't need a lot of control on your requests you can use High Versions methods that works with simple Strings. Obviously this brings some limitations :
+
+- **Role:** all messages are sent using the 'user' role, you can't send messages as 'system'.
+- **Parameters:** these methods allow you to specify only the model to use and, if necessary, a user.
+- **Single Choice:** each request corresponds to a single response message.
 
 ```swift
 swiftyGPT.chat(message: "Hi how are you ?") { response in
@@ -118,15 +133,15 @@ let message = response.choices.first?.message
 
 However, if you have requested a different number of choices, the array will have a larger size and you will have to manage the response in a custom way.
 
-# SwiftUI
+## Error Handling
 
-SwiftyGPT was born with the idea of integrating perfectly with SwiftUI, that's why a SwiftyGPT object is an ObservableObject that exposes some published variable like :
+In case of failure the methods return an error, it can be a system error in case something went wrong on the iOS side. For example, network-level issues. If instead the error is related to ChatGPT you will get a SwiftyGPTError.
 
 ```swift
-@Published var conversation: [SwiftyGPTMessage]
+if let error = error as? SwiftyGPTError {
+    print(error.message)
+}
 ```
-That enable you to trace all current session messages and update your UI.
-
 ---
 # License
-SwiftyCache is published under the Apache 2.0 license.
+SwiftyGPT is published under the Apache 2.0 license.
