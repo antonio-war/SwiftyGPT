@@ -7,22 +7,18 @@ let package = Package(
     name: "SwiftyGPT",
     platforms: [.macOS(.v13), .iOS(.v13)],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "SwiftyGPT",
             targets: ["SwiftyGPT"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/antonio-war/SwiftyHTTP", from: "0.1.4")
+        .package(url: "https://github.com/antonio-war/SwiftyHTTP", from: "0.1.4"),
+        .package(url: "https://github.com/antonio-war/SwiftyRanged", branch: "master")
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "SwiftyGPT",
-            dependencies: ["SwiftyHTTP"]),
+            dependencies: ["SwiftyHTTP", "SwiftyRanged"]),
         .testTarget(
             name: "SwiftyGPTTests",
             dependencies: ["SwiftyGPT", "SwiftyHTTP"]),

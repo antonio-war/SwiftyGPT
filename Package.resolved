@@ -8,6 +8,15 @@
         "revision" : "b4fe68fc801df31b68e8c53fc63b4575d7b264f9",
         "version" : "0.1.4"
       }
+    },
+    {
+      "identity" : "swiftyranged",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/antonio-war/SwiftyRanged",
+      "state" : {
+        "branch" : "master",
+        "revision" : "601b9cd15b10eb845f39037c7e22834cfa786cbc"
+      }
     }
   ],
   "version" : 2
