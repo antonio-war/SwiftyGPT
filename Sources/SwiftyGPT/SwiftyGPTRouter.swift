@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyHTTP
 
-enum SwiftyGPTRouter: SwiftyHTTPRouter {
+enum SwiftyGPTRouter: SwiftyHTTPRequest {
     
     case chat(String, SwiftyGPTRequest)
     
@@ -44,7 +44,7 @@ enum SwiftyGPTRouter: SwiftyHTTPRouter {
         []
     }
     
-    var body: SwiftyHTTPBody? {
+    var body: SwiftyHTTPRequestBody? {
         switch self {
             case .chat(_, let request):
                 return request

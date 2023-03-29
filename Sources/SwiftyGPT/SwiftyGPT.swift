@@ -22,12 +22,20 @@ public class SwiftyGPT: ObservableObject {
     
     public func chat(messages: [SwiftyGPTMessage], model: SwiftyGPTModel = .stable, @Ranged(0...2) temperature: Float = 1, choices: Int = 1, @Ranged(-2.0...2.0) presencePenalty: Float = 0, @Ranged(-2.0...2.0) frequencyPenalty: Float = 0, user: String? = nil, completion: @escaping (Result<SwiftyGPTResponse, Error>) -> ()) {
         let request = SwiftyGPTRequest(messages: messages, model: model, temperature: temperature, choices: choices, stream: false, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
-        SwiftyHTTP.request(with: SwiftyGPTRouter.chat(apiKey, request), body: SwiftyGPTResponse.self) { result in
+        SwiftyHTTP.request(with: SwiftyGPTRouter.chat(apiKey, request)) { result in
             switch result {
             case .success(let response):
-                self.conversation.append(contentsOf: request.messages)
-                self.conversation.append(contentsOf: response.body.choices.compactMap({ $0.message }))
-                completion(.success(response.body))
+                if response.statusCode == 200 {
+                    guard let body = try? JSONDecoder().decode(SwiftyGPTResponse.self, from: response.body) else {
+                        completion(.failure(URLError(.badServerResponse)))
+                        return
+                    }
+                    self.conversation.append(contentsOf: request.messages)
+                    self.conversation.append(contentsOf: body.choices.compactMap({ $0.message }))
+                    completion(.success(body))
+                } else {
+                    
+                }
             case .failure(let error):
                 completion(.failure(error))
             }
