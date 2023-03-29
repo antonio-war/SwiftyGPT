@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyHTTP
 
-public struct SwiftyGPTResponse: SwiftyHTTPBody {
+public struct SwiftyGPTResponse: SwiftyHTTPResponseBody {
     public let id, object: String
     public let created: TimeInterval
     public let model: SwiftyGPTModel

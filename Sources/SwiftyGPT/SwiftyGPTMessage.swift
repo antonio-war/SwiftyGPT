@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SwiftyGPTMessage: Codable, Identifiable, Datable {
+public struct SwiftyGPTMessage: Codable, Identifiable {
     public let id: UUID = UUID()
     public let date: Date = Date()
     public let role: SwiftyGPTRole
