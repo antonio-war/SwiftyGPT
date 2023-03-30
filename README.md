@@ -51,10 +51,10 @@ Chat is the main feature of SwiftyGPT, as you can guess it allows you to ask Cha
 
 ## Deep Version
 
-Deep versions allow you maximum over request creation. The main element of a request is a SwiftyGPTMessage.
+Deep versions allow you maximum over request creation. The main element of a request is a SwiftyGPTChatMessage.
 
 ```swift
-let message = SwiftyGPTMessage(role: .user, content: "Hi, how are you?")
+let message = SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")
 ```
 
 You can use role to instruct the model precisely as explained by the ChatGPT documentation and get the control you want.
@@ -65,7 +65,11 @@ swiftyGPT.chat(message: message) { result in
         case .success(let response):
             print(response)
         case .failure(let error):
-            print(error)
+            if let error = error as? SwiftyGPTError {
+                print(error.message)
+            } else {
+                print(error.localizedDescription)
+            }
     }
 }
 ```
@@ -77,22 +81,40 @@ swiftyGPT.chat(messages: messages) { result in
         case .success(let response):
             print(response)
         case .failure(let error):
-            print(error)
+            if let error = error as? SwiftyGPTError {
+                print(error.message)
+            } else {
+                print(error.localizedDescription)
+            }
     }
 }
 ```
 In both method you can specify some optional parameters like model, temperature, maxTokens and others established by OpenAI. 
 
 ```swift
-swiftyGPT.chat(message: SwiftyGPTMessage(role: .user, content: "Hi, how are you?"), temperature: 5, user: "Test")  { result in
+swiftyGPT.chat(message: SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?"), temperature: 5, user: "Test")  { result in
     switch result {
         case .success(let response):
             print(response)
         case .failure(let error):
-            print(error)
+            if let error = error as? SwiftyGPTError {
+                print(error.message)
+            } else {
+                print(error.localizedDescription)
+            }
     }
 }
 ```
+
+In case of success methods return a SwiftyGPTChatResponse object which is the entire transcript of ChatGPT HTTP response.
+To access the received message or messages you have to check the content of the 'choices' attribute. By default choices array size is one, so you can get the message in this way and read its content or other attributes.
+
+```swift
+let message = response.choices.first?.message
+```
+
+However, if you have requested a different number of choices, the array will have a larger size and you will have to manage the response in a custom way.
+
 
 ## High Version
 
@@ -108,10 +130,15 @@ swiftyGPT.chat(message: "Hi how are you ?") { response in
         case .success(let response):
             print(response)
         case .failure(let error):
-            print(error)
+            if let error = error as? SwiftyGPTError {
+                print(error.message)
+            } else {
+                print(error.localizedDescription)
+            }
     }    
 }
 ```
+In this case the method directly returns the message of the single choice in string format.
 
 ## Async/Await
 
@@ -121,21 +148,64 @@ All methods of the chat feature are also available in Async/Await version.
 let result: Result<String, Error> = await swiftyGPT.chat(message: "Hi how are you ?")
 ```
 
-## Response Handling
+---
 
-In case you use high level methods the response will be directly in string format.
-In Deep case instead methods return a SwiftyGPTResponse object which is the entire transcript of ChatGPT HTTP response.
-To access the received message or messages you have to check the content of the 'choices' attribute. By default choices array size is one, so you can get the message in this way and read its content or other attributes.
+# Image
+
+SwiftyGPT uses DALL-E to generate images from textual descriptions. You can describe an object or a scene in words, and SwiftyGPT can create a corresponding image of it.
+
+## Single Generation
+
+The easiest way to generate an image is to use the following method, that accept a prompt and a size. It has the limitation of generating only square images of the following sizes: 256x256, 512x512 and 1024x1024. Also in this case if necessary you can specify a user for each call.
 
 ```swift
-let message = response.choices.first?.message
+swiftyGPT.image(prompt: "Draw an unicorn", size: .x256) { result in
+    switch result {
+    case .success(let response):
+        let image = UIImage(data: response)
+    case .failure(let error):
+        if let error = error as? SwiftyGPTError {
+            print(error.message)
+        } else {
+            print(error.localizedDescription)
+        }
+    }
+}
+```
+If successful, the method returns an object of type Data so that you can build a UIImage if you use UIKit or an Image if you use SwiftUI, or make another use of it.
+
+## Multiple Generation
+
+In case you want to generate several different images starting from the same description, you can specify the choices parameter. In this case the method will return an array of Data.
+
+```swift
+swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256) { result in
+    switch result {
+    case .success(let response):
+        let images = response.compactMap({UIImage(data: $0)})
+    case .failure(let error):
+        if let error = error as? SwiftyGPTError {
+            print(error.message)
+        } else {
+            print(error.localizedDescription)
+        }
+    }
+}
 ```
 
-However, if you have requested a different number of choices, the array will have a larger size and you will have to manage the response in a custom way.
+## Async/Await
 
-## Error Handling
+All methods of the image feature are also available in Async/Await version.
 
-In case of failure the methods return an error, it can be a system error in case something went wrong on the iOS side. For example, network-level issues. If instead the error is related to ChatGPT you will get a SwiftyGPTError.
+```swift
+let result: Result<Data, Error> = await swiftyGPT.image(prompt: "Draw an unicorn", size: .x256)
+```
+
+---
+
+# Error Handling
+
+In case of failure methods return an error, it can be a system error in case something went wrong on the iOS side. For example, network-level issues or decoding issues. If instead the error is related to ChatGPT you will get a SwiftyGPTError.
 
 ```swift
 if let error = error as? SwiftyGPTError {
