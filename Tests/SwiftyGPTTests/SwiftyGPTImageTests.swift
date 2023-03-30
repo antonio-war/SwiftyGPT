@@ -9,7 +9,6 @@ import XCTest
 @testable import SwiftyGPT
 
 final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
-
     private var swiftyGPT: SwiftyGPT!
     
     override func setUpWithError() throws {
