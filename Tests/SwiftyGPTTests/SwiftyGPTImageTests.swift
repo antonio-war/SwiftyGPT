@@ -8,13 +8,13 @@
 import XCTest
 @testable import SwiftyGPT
 
-final class SwiftyGPTImageTests: XCTestCase {
+final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
 
     private var swiftyGPT: SwiftyGPT!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        swiftyGPT = SwiftyGPT(apiKey: "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")
+        swiftyGPT = SwiftyGPT(apiKey: try apiKey)
     }
 
     override func tearDownWithError() throws {

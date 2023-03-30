@@ -1,12 +1,12 @@
 import XCTest
 @testable import SwiftyGPT
 
-final class SwiftyGPTChatTests: XCTestCase {
+final class SwiftyGPTChatTests: XCTestCase, SwiftyGPTSecureTest {
     private var swiftyGPT: SwiftyGPT!
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        swiftyGPT = SwiftyGPT(apiKey: "")
+        swiftyGPT = SwiftyGPT(apiKey: try apiKey)
     }
 
     override func tearDownWithError() throws {
