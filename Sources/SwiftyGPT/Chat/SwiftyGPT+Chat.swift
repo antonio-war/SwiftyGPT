@@ -44,7 +44,6 @@ extension SwiftyGPT {
                 continuation.resume(returning: result)
             }
         }
-        
     }
     
     public func chat(message: SwiftyGPTChatMessage, model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, @SwiftyOptionalRanged(0...4096) maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTChatResponse, Error>) -> ()) {
