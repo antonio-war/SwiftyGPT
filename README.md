@@ -133,9 +133,15 @@ let message = response.choices.first?.message
 
 However, if you have requested a different number of choices, the array will have a larger size and you will have to manage the response in a custom way.
 
-## Error Handling
+---
 
-In case of failure the methods return an error, it can be a system error in case something went wrong on the iOS side. For example, network-level issues. If instead the error is related to ChatGPT you will get a SwiftyGPTError.
+# Image
+
+---
+
+# Error Handling
+
+In case of failure methods return an error, it can be a system error in case something went wrong on the iOS side. For example, network-level issues or decoding issues. If instead the error is related to ChatGPT you will get a SwiftyGPTError.
 
 ```swift
 if let error = error as? SwiftyGPTError {
