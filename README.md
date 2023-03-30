@@ -65,7 +65,11 @@ swiftyGPT.chat(message: message) { result in
         case .success(let response):
             print(response)
         case .failure(let error):
-            print(error)
+            if let error = error as? SwiftyGPTError {
+                print(error.message)
+            } else {
+                print(error.localizedDescription)
+            }
     }
 }
 ```
@@ -77,7 +81,11 @@ swiftyGPT.chat(messages: messages) { result in
         case .success(let response):
             print(response)
         case .failure(let error):
-            print(error)
+            if let error = error as? SwiftyGPTError {
+                print(error.message)
+            } else {
+                print(error.localizedDescription)
+            }
     }
 }
 ```
@@ -89,7 +97,11 @@ swiftyGPT.chat(message: SwiftyGPTMessage(role: .user, content: "Hi, how are you?
         case .success(let response):
             print(response)
         case .failure(let error):
-            print(error)
+            if let error = error as? SwiftyGPTError {
+                print(error.message)
+            } else {
+                print(error.localizedDescription)
+            }
     }
 }
 ```
@@ -108,7 +120,11 @@ swiftyGPT.chat(message: "Hi how are you ?") { response in
         case .success(let response):
             print(response)
         case .failure(let error):
-            print(error)
+            if let error = error as? SwiftyGPTError {
+                print(error.message)
+            } else {
+                print(error.localizedDescription)
+            }
     }    
 }
 ```
@@ -136,6 +152,28 @@ However, if you have requested a different number of choices, the array will hav
 ---
 
 # Image
+
+SwiftyGPT uses DALL-E to generate images from textual descriptions. You can describe an object or a scene in words, and SwiftyGPT can create a corresponding image of it.
+
+## Single Generation
+
+The easiest way to generate an image is to use the following method, that accept a prompt and a size. It has the limitation of generating only square images of the following sizes: 256x256, 512x512 and 1024x1024. Also in this case if necessary you can specify a user for each call.
+
+``swift
+swiftyGPT.image(prompt: "Draw an unicorn", size: .x256) { result in
+    switch result {
+    case .success(let response):
+        let image = UIImage(data: response)
+    case .failure(let error):
+        if let error = error as? SwiftyGPTError {
+            print(error.message)
+        } else {
+            print(error.localizedDescription)
+        }
+    }
+}
+```
+## Multiple Generation
 
 ---
 
