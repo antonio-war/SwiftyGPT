@@ -8,19 +8,19 @@
 import Foundation
 import SwiftyHTTP
 
-public struct SwiftyGPTImageResponse<ResponseData: SwiftyGPTImageResponseData>: SwiftyHTTPResponseBody {
-    public let created: TimeInterval
-    public let data: [ResponseData]
+struct SwiftyGPTImageResponse<ResponseData: SwiftyGPTImageResponseData>: SwiftyHTTPResponseBody {
+    let created: TimeInterval
+    let data: [ResponseData]
 }
 
-public protocol SwiftyGPTImageResponseData: Decodable {}
+protocol SwiftyGPTImageResponseData: Decodable {}
 
-public struct SwiftyGTPImageURLResponseData: SwiftyGPTImageResponseData {
-    public let url: String
+struct SwiftyGTPImageURLResponseData: SwiftyGPTImageResponseData {
+    let url: String
 }
 
-public struct SwiftyGPTB64ResponseData: SwiftyGPTImageResponseData {
-    public let b64: String
+struct SwiftyGPTB64ResponseData: SwiftyGPTImageResponseData {
+    let b64: String
     
     enum CodingKeys: String, CodingKey {
         case b64 = "b64_json"
