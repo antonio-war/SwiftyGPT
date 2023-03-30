@@ -93,4 +93,7 @@ public struct SwiftyGPT {
     public func chat(message: String, model: SwiftyGPTChatModel = .stable, user: String? = nil) async -> Result<String, Error> {
         await chat(messages: [message], model: model, user: user)
     }
+    
+    // MARK: - Image
+    
 }

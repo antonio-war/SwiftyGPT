@@ -12,14 +12,14 @@ public struct SwiftyGPTChatResponse: SwiftyHTTPResponseBody {
     public let id, object: String
     public let created: TimeInterval
     public let model: SwiftyGPTChatModel
-    public let usage: SwiftyGPTUsage
-    public let choices: [SwiftyGPTChoice]
+    public let usage: SwiftyGPTChatUsage
+    public let choices: [SwiftyGPTChatChoice]
 }
 
 // MARK: - Choice
-public struct SwiftyGPTChoice: Codable {
+public struct SwiftyGPTChatChoice: Codable {
     public let message: SwiftyGPTChatMessage
-    public let finishReason: SwiftyGPTFinishReason
+    public let finishReason: SwiftyGPTChatFinishReason
     public let index: Int
 
     enum CodingKeys: String, CodingKey {
@@ -30,7 +30,7 @@ public struct SwiftyGPTChoice: Codable {
 }
 
 // MARK: - Usage
-public struct SwiftyGPTUsage: Codable {
+public struct SwiftyGPTChatUsage: Codable {
     public let promptTokens, completionTokens, totalTokens: Int
 
     enum CodingKeys: String, CodingKey {
@@ -41,7 +41,7 @@ public struct SwiftyGPTUsage: Codable {
 }
 
 // MARK: - FinishReason
-public enum SwiftyGPTFinishReason: String, Codable {
+public enum SwiftyGPTChatFinishReason: String, Codable {
     case stop
     case length
     case contentFilter = "content_filter"

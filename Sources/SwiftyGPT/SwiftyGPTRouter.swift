@@ -11,7 +11,7 @@ import SwiftyHTTP
 enum SwiftyGPTRouter: SwiftyHTTPRequest {
     
     case chat(String, SwiftyGPTChatRequest)
-    case image(String, String)
+    case image(String, SwiftyGPTImageRequest)
     
     var baseURL: URL? {
         return URL(string: "https://api.openai.com")
@@ -53,8 +53,8 @@ enum SwiftyGPTRouter: SwiftyHTTPRequest {
         switch self {
             case .chat(_, let request):
                 return request
-            case .image(_, _):
-                return nil
+            case .image(_, let request):
+                return request
         }
     }
 }
