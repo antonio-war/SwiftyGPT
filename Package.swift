@@ -21,6 +21,9 @@ let package = Package(
             dependencies: ["SwiftyHTTP", "SwiftyRanged"]),
         .testTarget(
             name: "SwiftyGPTTests",
-            dependencies: ["SwiftyGPT", "SwiftyHTTP"]),
+            dependencies: ["SwiftyGPT", "SwiftyHTTP"],
+            resources: [
+                .copy("OpenAI-Info.plist")
+            ])
     ]
 )

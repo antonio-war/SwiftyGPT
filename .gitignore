@@ -8,4 +8,3 @@ DerivedData/
 .swiftpm/xcode/package.xcworkspace/contents.xcworkspacedata
 .swiftpm/xcode/package.xcworkspace/xcshareddata
 .netrc
-OpenAI-Info.plist

@@ -14,75 +14,133 @@ final class SwiftyGPTChatTests: XCTestCase, SwiftyGPTSecureTest {
         swiftyGPT = nil
     }
     
-    func testDefaultCompletion() {
+    func testDefaultCompletion() throws {
         let expectation = expectation(description: "DefaultChatCompletion")
-        var result: Result<SwiftyGPTChatResponse, Error>? = nil
-        swiftyGPT.chat(messages: [SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")]) { response in
-            result = response
+        swiftyGPT.chat(messages: [SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")]) { result in
+            switch result {
+            case .success(let response):
+                XCTAssertGreaterThanOrEqual(response.choices.count, 1)
+            case .failure(let error):
+                if let error = error as? SwiftyGPTError {
+                    XCTFail(error.message)
+                } else {
+                    XCTFail(error.localizedDescription)
+                }
+            }
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 30, handler: nil)
         
-        XCTAssertNotNil(result)
-        XCTAssertNoThrow(try result?.get())
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
     func testDefaultAsync() async {
         let result: Result<SwiftyGPTChatResponse, Error> = await swiftyGPT.chat(messages: [SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")])
-        XCTAssertNoThrow(try result.get())
+        switch result {
+        case .success(let response):
+            XCTAssertGreaterThanOrEqual(response.choices.count, 1)
+        case .failure(let error):
+            if let error = error as? SwiftyGPTError {
+                XCTFail(error.message)
+            } else {
+                XCTFail(error.localizedDescription)
+            }
+        }
     }
     
     func testSingleMessageCompletion() {
         let expectation = expectation(description: "SingleMessageCompletion")
-        var result: Result<SwiftyGPTChatResponse, Error>? = nil
-        swiftyGPT.chat(message: SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")) { response in
-            result = response
+        swiftyGPT.chat(message: SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")) { result in
+            switch result {
+            case .success(let response):
+                XCTAssertEqual(response.choices.count, 1)
+            case .failure(let error):
+                if let error = error as? SwiftyGPTError {
+                    XCTFail(error.message)
+                } else {
+                    XCTFail(error.localizedDescription)
+                }
+            }
             expectation.fulfill()
         }
-        waitForExpectations(timeout: 30, handler: nil)
         
-        XCTAssertNotNil(result)
-        XCTAssertNoThrow(try result?.get())
+        waitForExpectations(timeout: 30, handler: nil)
     }
     
     func testSingleMessageAsync() async {
         let result: Result<SwiftyGPTChatResponse, Error> = await swiftyGPT.chat(message: SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?"))
-        XCTAssertNoThrow(try result.get())
+        switch result {
+        case .success(let response):
+            XCTAssertEqual(response.choices.count, 1)
+        case .failure(let error):
+            if let error = error as? SwiftyGPTError {
+                XCTFail(error.message)
+            } else {
+                XCTFail(error.localizedDescription)
+            }
+        }
     }
     
     func testStringCompletion() {
         let expectation = expectation(description: "StringCompletion")
-        var result: Result<String, Error>? = nil
-        swiftyGPT.chat(messages: ["Hi how are you ?", "I'm SwiftyGPT"]) { response in
-            result = response
+        swiftyGPT.chat(messages: ["Hi how are you ?", "I'm SwiftyGPT"]) { result in
+            switch result {
+            case .success(let response):
+                XCTAssertNotEqual(response, "")
+            case .failure(let error):
+                if let error = error as? SwiftyGPTError {
+                    XCTFail(error.message)
+                } else {
+                    XCTFail(error.localizedDescription)
+                }
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: 30, handler: nil)
-        
-        XCTAssertNotNil(result)
-        XCTAssertNoThrow(try result?.get())
     }
     
     func testStringAsync() async {
         let result: Result<String, Error> = await swiftyGPT.chat(messages: ["Hi how are you ?", "I'm SwiftyGPT"])
-        XCTAssertNoThrow(try result.get())
+        switch result {
+        case .success(let response):
+            XCTAssertNotEqual(response, "")
+        case .failure(let error):
+            if let error = error as? SwiftyGPTError {
+                XCTFail(error.message)
+            } else {
+                XCTFail(error.localizedDescription)
+            }
+        }
     }
     
     func testSingleStringCompletion() {
         let expectation = expectation(description: "SingleStringCompletion")
-        var result: Result<String, Error>? = nil
-        swiftyGPT.chat(message: "Hi how are you ?") { response in
-            result = response
+        swiftyGPT.chat(message: "Hi how are you ?") { result in
+            switch result {
+            case .success(let response):
+                XCTAssertNotEqual(response, "")
+            case .failure(let error):
+                if let error = error as? SwiftyGPTError {
+                    XCTFail(error.message)
+                } else {
+                    XCTFail(error.localizedDescription)
+                }
+            }
             expectation.fulfill()
         }
         waitForExpectations(timeout: 30, handler: nil)
-        
-        XCTAssertNotNil(result)
-        XCTAssertNoThrow(try result?.get())
     }
     
     func testSingleStringAsync() async {
         let result: Result<String, Error> = await swiftyGPT.chat(message: "Hi how are you ?")
-        XCTAssertNoThrow(try result.get())
+        switch result {
+        case .success(let response):
+            XCTAssertNotEqual(response, "")
+        case .failure(let error):
+            if let error = error as? SwiftyGPTError {
+                XCTFail(error.message)
+            } else {
+                XCTFail(error.localizedDescription)
+            }
+        }
     }
 }
