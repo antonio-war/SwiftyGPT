@@ -16,8 +16,8 @@ final class SwiftyGPTChatTests: XCTestCase {
     
     func testDefaultCompletion() {
         let expectation = expectation(description: "DefaultChatCompletion")
-        var result: Result<SwiftyGPTResponse, Error>? = nil
-        swiftyGPT.chat(messages: [SwiftyGPTMessage(role: .user, content: "Hi, how are you?")]) { response in
+        var result: Result<SwiftyGPTChatResponse, Error>? = nil
+        swiftyGPT.chat(messages: [SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")]) { response in
             result = response
             expectation.fulfill()
         }
@@ -28,14 +28,14 @@ final class SwiftyGPTChatTests: XCTestCase {
     }
     
     func testDefaultAsync() async {
-        let result: Result<SwiftyGPTResponse, Error> = await swiftyGPT.chat(messages: [SwiftyGPTMessage(role: .user, content: "Hi, how are you?")])
+        let result: Result<SwiftyGPTChatResponse, Error> = await swiftyGPT.chat(messages: [SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")])
         XCTAssertNoThrow(try result.get())
     }
     
     func testSingleMessageCompletion() {
         let expectation = expectation(description: "SingleMessageCompletion")
-        var result: Result<SwiftyGPTResponse, Error>? = nil
-        swiftyGPT.chat(message: SwiftyGPTMessage(role: .user, content: "Hi, how are you?")) { response in
+        var result: Result<SwiftyGPTChatResponse, Error>? = nil
+        swiftyGPT.chat(message: SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")) { response in
             result = response
             expectation.fulfill()
         }
@@ -46,7 +46,7 @@ final class SwiftyGPTChatTests: XCTestCase {
     }
     
     func testSingleMessageAsync() async {
-        let result: Result<SwiftyGPTResponse, Error> = await swiftyGPT.chat(message: SwiftyGPTMessage(role: .user, content: "Hi, how are you?"))
+        let result: Result<SwiftyGPTChatResponse, Error> = await swiftyGPT.chat(message: SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?"))
         XCTAssertNoThrow(try result.get())
     }
     

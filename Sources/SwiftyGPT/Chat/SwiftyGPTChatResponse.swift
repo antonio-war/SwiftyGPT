@@ -1,5 +1,5 @@
 //
-//  SwiftyGPTResponse.swift
+//  SwiftyGPTChatResponse.swift
 //  
 //
 //  Created by Antonio Guerra on 27/03/23.
@@ -8,17 +8,17 @@
 import Foundation
 import SwiftyHTTP
 
-public struct SwiftyGPTResponse: SwiftyHTTPResponseBody {
+public struct SwiftyGPTChatResponse: SwiftyHTTPResponseBody {
     public let id, object: String
     public let created: TimeInterval
-    public let model: SwiftyGPTModel
+    public let model: SwiftyGPTChatModel
     public let usage: SwiftyGPTUsage
     public let choices: [SwiftyGPTChoice]
 }
 
 // MARK: - Choice
 public struct SwiftyGPTChoice: Codable {
-    public let message: SwiftyGPTMessage
+    public let message: SwiftyGPTChatMessage
     public let finishReason: SwiftyGPTFinishReason
     public let index: Int
 

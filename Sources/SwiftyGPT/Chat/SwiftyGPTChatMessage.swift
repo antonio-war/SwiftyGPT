@@ -1,5 +1,5 @@
 //
-//  SwiftyGPTMessage.swift
+//  SwiftyGPTChatMessage.swift
 //  
 //
 //  Created by Antonio Guerra on 27/03/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SwiftyGPTMessage: Codable, Identifiable {
+public struct SwiftyGPTChatMessage: Codable, Identifiable {
     public let id: UUID = UUID()
     public let date: Date = Date()
     public let role: SwiftyGPTRole
