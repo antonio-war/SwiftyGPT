@@ -173,6 +173,8 @@ swiftyGPT.image(prompt: "Draw an unicorn", size: .x256) { result in
     }
 }
 ```
+If successful, the method returns an object of type Data so that you can build a UIImage if you use UIKit or an Image if you use SwiftUI, or make another use of it.
+
 ## Multiple Generation
 
 ---
