@@ -159,7 +159,7 @@ SwiftyGPT uses DALL-E to generate images from textual descriptions. You can desc
 
 The easiest way to generate an image is to use the following method, that accept a prompt and a size. It has the limitation of generating only square images of the following sizes: 256x256, 512x512 and 1024x1024. Also in this case if necessary you can specify a user for each call.
 
-``swift
+```swift
 swiftyGPT.image(prompt: "Draw an unicorn", size: .x256) { result in
     switch result {
     case .success(let response):
