@@ -106,6 +106,16 @@ swiftyGPT.chat(message: SwiftyGPTMessage(role: .user, content: "Hi, how are you?
 }
 ```
 
+In case of success methods return a SwiftyGPTChatResponse object which is the entire transcript of ChatGPT HTTP response.
+To access the received message or messages you have to check the content of the 'choices' attribute. By default choices array size is one, so you can get the message in this way and read its content or other attributes.
+
+```swift
+let message = response.choices.first?.message
+```
+
+However, if you have requested a different number of choices, the array will have a larger size and you will have to manage the response in a custom way.
+
+
 ## High Version
 
 If you don't need a lot of control on your requests you can use High Versions methods that works with simple Strings. Obviously this brings some limitations :
@@ -128,6 +138,7 @@ swiftyGPT.chat(message: "Hi how are you ?") { response in
     }    
 }
 ```
+In this case the method directly returns the message of the single choice in string format.
 
 ## Async/Await
 
@@ -136,18 +147,6 @@ All methods of the chat feature are also available in Async/Await version.
 ```swift
 let result: Result<String, Error> = await swiftyGPT.chat(message: "Hi how are you ?")
 ```
-
-## Response Handling
-
-In case you use high level methods the response will be directly in string format.
-In Deep case instead methods return a SwiftyGPTResponse object which is the entire transcript of ChatGPT HTTP response.
-To access the received message or messages you have to check the content of the 'choices' attribute. By default choices array size is one, so you can get the message in this way and read its content or other attributes.
-
-```swift
-let message = response.choices.first?.message
-```
-
-However, if you have requested a different number of choices, the array will have a larger size and you will have to manage the response in a custom way.
 
 ---
 
