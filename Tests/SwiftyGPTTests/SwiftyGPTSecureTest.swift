@@ -14,13 +14,10 @@ protocol SwiftyGPTSecureTest {
 extension SwiftyGPTSecureTest {
     var apiKey: String {
         get throws {
-            guard let filePath = Bundle.module.path(forResource: "OpenAI-Info", ofType: "plist") else {
+            guard let filePath = Bundle.module.path(forResource: "OpenAI-Info", ofType: "plist"), let plist = NSDictionary(contentsOfFile: filePath), let apiKey = plist.value(forKey: "API_KEY") as? String else {
                 throw URLError(.badURL)
             }
-            
-            print(filePath)
-            
-            return ""
+            return apiKey
         }
     }
 }
