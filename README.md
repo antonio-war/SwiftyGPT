@@ -177,6 +177,31 @@ If successful, the method returns an object of type Data so that you can build a
 
 ## Multiple Generation
 
+In case you want to generate several different images starting from the same description, you can specify the choices parameter. In this case the method will return an array of Data.
+
+```swift
+swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256) { result in
+    switch result {
+    case .success(let response):
+        let images = response.compactMap({UIImage(data: $0)})
+    case .failure(let error):
+        if let error = error as? SwiftyGPTError {
+            print(error.message)
+        } else {
+            print(error.localizedDescription)
+        }
+    }
+}
+```
+
+## Async/Await
+
+All methods of the image feature are also available in Async/Await version.
+
+```swift
+let result: Result<Data, Error> = await swiftyGPT.image(prompt: "Draw an unicorn", size: .x256)
+```
+
 ---
 
 # Error Handling
