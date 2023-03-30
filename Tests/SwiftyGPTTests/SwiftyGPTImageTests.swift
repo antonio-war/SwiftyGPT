@@ -40,4 +40,39 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
         let image = UIImage(data: data)
         XCTAssertNotNil(image)
     }
+    
+    func testDefaultAsync() async throws {
+        let result: Result<[Data], Error> = await swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256)
+        XCTAssertNoThrow(try result.get())
+        XCTAssertEqual(try result.get().count, 2)
+        
+        let data = try result.get().first!
+        let image = UIImage(data: data)
+        XCTAssertNotNil(image)
+    }
+    
+    func testSingleCompletion() throws {
+        let expectation = expectation(description: "SingleImageCompletion")
+        var result: Result<Data, Error>? = nil
+        swiftyGPT.image(prompt: "Draw an unicorn", size: .x256) { response in
+            result = response
+            expectation.fulfill()
+        }
+        waitForExpectations(timeout: 30, handler: nil)
+        
+        XCTAssertNotNil(result)
+        XCTAssertNoThrow(try result?.get())
+                
+        let data = try result!.get()
+        let image = UIImage(data: data)
+        XCTAssertNotNil(image)
+    }
+    
+    func testSingleAsync() async throws {
+        let result: Result<Data, Error> = await swiftyGPT.image(prompt: "Draw an unicorn", size: .x256)
+        XCTAssertNoThrow(try result.get())
+        let data = try result.get()
+        let image = UIImage(data: data)
+        XCTAssertNotNil(image)
+    }
 }
