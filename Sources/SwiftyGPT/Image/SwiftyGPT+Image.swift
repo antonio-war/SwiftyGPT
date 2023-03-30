@@ -12,9 +12,9 @@ import SwiftyRanged
 // MARK: - Image
 extension SwiftyGPT {
     
-    public func image(prompt: String, @SwiftyRanged(1...10) quantity: Int, size: SwiftyGPTImageSize? = nil, user: String? = nil, completion: @escaping (Result<[Data], Error>) -> ()) {
+    public func image(prompt: String, @SwiftyRanged(1...10) choices: Int, size: SwiftyGPTImageSize? = nil, user: String? = nil, completion: @escaping (Result<[Data], Error>) -> ()) {
         
-        let request = SwiftyGPTImageRequest(prompt: prompt, quantity: quantity, size: size, responseFormat: .b64, user: user)
+        let request = SwiftyGPTImageRequest(prompt: prompt, choices: choices, size: size, responseFormat: .b64, user: user)
         SwiftyHTTP.request(with: SwiftyGPTRouter.image(apiKey, request)) { result in
             switch result {
             case .success(let response):
@@ -37,17 +37,17 @@ extension SwiftyGPT {
         }
     }
     
-    public func image(prompt: String, @SwiftyRanged(1...10) quantity: Int, size: SwiftyGPTImageSize? = nil, user: String? = nil) async -> Result<[Data], Error> {
+    public func image(prompt: String, @SwiftyRanged(1...10) choices: Int, size: SwiftyGPTImageSize? = nil, user: String? = nil) async -> Result<[Data], Error> {
         
         return await withCheckedContinuation { continuation in
-            image(prompt: prompt, quantity: quantity, size: size, user: user) { result in
+            image(prompt: prompt, choices: choices, size: size, user: user) { result in
                 continuation.resume(returning: result)
             }
         }
     }
     
     public func image(prompt: String, size: SwiftyGPTImageSize? = nil, user: String? = nil, completion: @escaping (Result<Data, Error>) -> ()) {
-        image(prompt: prompt, quantity: 1, size: size, user: user) { result in
+        image(prompt: prompt, choices: 1, size: size, user: user) { result in
             switch result {
             case .success(let images):
                 if let image = images.first {

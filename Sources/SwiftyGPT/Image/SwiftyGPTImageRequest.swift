@@ -10,14 +10,14 @@ import SwiftyHTTP
 
 public struct SwiftyGPTImageRequest: SwiftyHTTPRequestBody {
     public let prompt: String
-    public let quantity: Int?
+    public let choices: Int?
     public let size: SwiftyGPTImageSize?
     public let responseFormat: SwiftyGPTImageResponseFormat?
     public let user: String?
     
     enum CodingKeys: String, CodingKey {
         case prompt
-        case quantity = "n"
+        case choices = "n"
         case size
         case responseFormat = "response_format"
         case user

@@ -25,7 +25,7 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
     func testDefaultCompletion() throws {
         let expectation = expectation(description: "DefaultImageCompletion")
         var result: Result<[Data], Error>? = nil
-        swiftyGPT.image(prompt: "Draw an unicorn", quantity: 2, size: .x256) { response in
+        swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256) { response in
             result = response
             expectation.fulfill()
         }
