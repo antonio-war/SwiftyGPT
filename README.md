@@ -51,10 +51,10 @@ Chat is the main feature of SwiftyGPT, as you can guess it allows you to ask Cha
 
 ## Deep Version
 
-Deep versions allow you maximum over request creation. The main element of a request is a SwiftyGPTMessage.
+Deep versions allow you maximum over request creation. The main element of a request is a SwiftyGPTChatMessage.
 
 ```swift
-let message = SwiftyGPTMessage(role: .user, content: "Hi, how are you?")
+let message = SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?")
 ```
 
 You can use role to instruct the model precisely as explained by the ChatGPT documentation and get the control you want.
@@ -92,7 +92,7 @@ swiftyGPT.chat(messages: messages) { result in
 In both method you can specify some optional parameters like model, temperature, maxTokens and others established by OpenAI. 
 
 ```swift
-swiftyGPT.chat(message: SwiftyGPTMessage(role: .user, content: "Hi, how are you?"), temperature: 5, user: "Test")  { result in
+swiftyGPT.chat(message: SwiftyGPTChatMessage(role: .user, content: "Hi, how are you?"), temperature: 5, user: "Test")  { result in
     switch result {
         case .success(let response):
             print(response)
