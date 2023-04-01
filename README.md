@@ -5,7 +5,7 @@
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fantonio-war%2FSwiftyGPT%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/antonio-war/SwiftyGPT)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fantonio-war%2FSwiftyGPT%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/antonio-war/SwiftyGPT)
 
-SwiftyGPT is a simple and lightweight wrapper around OpenAI API.
+SwiftyGPT is a simple and lightweight wrapper around OpenAI API which exposes services provided by ChatGPT and Dall-e.
 It was born with the aim of provide a Swift like interface around all OpenAI capabilities, so you can make requestes and get responses with minimal coding effort.
 
 - **Easy to use:** no configuration needed, SwiftyGPT is ready to go, you just need an API Key.
