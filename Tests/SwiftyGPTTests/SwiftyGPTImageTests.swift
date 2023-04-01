@@ -13,7 +13,7 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        swiftyGPT = SwiftyGPT(apiKey: try apiKey)
+        swiftyGPT = SwiftyGPT(apiKey: apiKey)
     }
 
     override func tearDownWithError() throws {
@@ -25,8 +25,7 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
         let expectation = expectation(description: "DefaultImageCompletion")
         swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256) { result in
             switch result {
-            case .success(let response):
-                let images = response.compactMap({UIImage(data: $0)})
+            case .success(let images):
                 XCTAssertEqual(images.count, 2)
             case .failure(let error):
                 if let error = error as? SwiftyGPTError {
@@ -41,10 +40,9 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
     }
     
     func testDefaultAsync() async throws {
-        let result: Result<[Data], Error> = await swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256)
+        let result: Result<[UIImage], Error> = await swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256)
         switch result {
-        case .success(let response):
-            let images = response.compactMap({UIImage(data: $0)})
+        case .success(let images):
             XCTAssertEqual(images.count, 2)
         case .failure(let error):
             if let error = error as? SwiftyGPTError {
@@ -59,8 +57,7 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
         let expectation = expectation(description: "SingleImageCompletion")
         swiftyGPT.image(prompt: "Draw an unicorn", size: .x256) { result in
             switch result {
-            case .success(let response):
-                let image = UIImage(data: response)
+            case .success(let image):
                 XCTAssertNotNil(image)
             case .failure(let error):
                 if let error = error as? SwiftyGPTError {
@@ -75,10 +72,9 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
     }
     
     func testSingleAsync() async throws {
-        let result: Result<Data, Error> = await swiftyGPT.image(prompt: "Draw an unicorn", size: .x256)
+        let result: Result<UIImage, Error> = await swiftyGPT.image(prompt: "Draw an unicorn", size: .x256)
         switch result {
-        case .success(let response):
-            let image = UIImage(data: response)
+        case .success(let image):
             XCTAssertNotNil(image)
         case .failure(let error):
             if let error = error as? SwiftyGPTError {

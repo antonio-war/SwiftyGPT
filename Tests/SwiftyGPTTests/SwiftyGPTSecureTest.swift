@@ -8,14 +8,14 @@
 import Foundation
 
 protocol SwiftyGPTSecureTest {
-    var apiKey: String { get throws }
+    var apiKey: String { get }
 }
 
 extension SwiftyGPTSecureTest {
     var apiKey: String {
-        get throws {
+        get {
             guard let filePath = Bundle.module.path(forResource: "OpenAI-Info", ofType: "plist"), let plist = NSDictionary(contentsOfFile: filePath), let apiKey = plist.value(forKey: "API_KEY") as? String else {
-                throw URLError(.badURL)
+                return ""
             }
             return apiKey
         }

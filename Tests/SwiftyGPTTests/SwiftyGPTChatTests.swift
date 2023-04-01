@@ -6,7 +6,7 @@ final class SwiftyGPTChatTests: XCTestCase, SwiftyGPTSecureTest {
     
     override func setUpWithError() throws {
         try super.setUpWithError()
-        swiftyGPT = SwiftyGPT(apiKey: try apiKey)
+        swiftyGPT = SwiftyGPT(apiKey: apiKey)
     }
 
     override func tearDownWithError() throws {

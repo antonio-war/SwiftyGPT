@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import UIKit
 import SwiftyHTTP
 import SwiftyRanged
 
 // MARK: - Image
 extension SwiftyGPT {
     
-    public func image(prompt: String, @SwiftyRanged(1...10) choices: Int, size: SwiftyGPTImageSize? = nil, user: String? = nil, completion: @escaping (Result<[Data], Error>) -> ()) {
+    public func image(prompt: String, @SwiftyRanged(1...10) choices: Int, size: SwiftyGPTImageSize? = nil, user: String? = nil, completion: @escaping (Result<[UIImage], Error>) -> ()) {
         
         let request = SwiftyGPTImageRequest(prompt: prompt, choices: choices, size: size, responseFormat: .b64, user: user)
-        SwiftyHTTP.request(with: SwiftyGPTRouter.image(apiKey, request)) { result in
+        SwiftyHTTP.request(SwiftyGPTRouter.image(apiKey, request)) { result in
             switch result {
             case .success(let response):
                 if response.statusCode == 200 {
@@ -23,7 +24,7 @@ extension SwiftyGPT {
                         completion(.failure(URLError(.badServerResponse)))
                         return
                     }
-                    completion(.success(body.data.compactMap({ Data(base64Encoded: $0.b64) })))
+                    completion(.success(body.data.compactMap({ Data(base64Encoded: $0.b64) }).compactMap({ UIImage(data: $0)})))
                 } else {
                     guard let error = try? JSONDecoder().decode(SwiftyGPTError.self, from: response.body) else {
                         completion(.failure(URLError(.badServerResponse)))
@@ -37,7 +38,7 @@ extension SwiftyGPT {
         }
     }
     
-    public func image(prompt: String, @SwiftyRanged(1...10) choices: Int, size: SwiftyGPTImageSize? = nil, user: String? = nil) async -> Result<[Data], Error> {
+    public func image(prompt: String, @SwiftyRanged(1...10) choices: Int, size: SwiftyGPTImageSize? = nil, user: String? = nil) async -> Result<[UIImage], Error> {
         
         return await withCheckedContinuation { continuation in
             image(prompt: prompt, choices: choices, size: size, user: user) { result in
@@ -46,7 +47,7 @@ extension SwiftyGPT {
         }
     }
     
-    public func image(prompt: String, size: SwiftyGPTImageSize? = nil, user: String? = nil, completion: @escaping (Result<Data, Error>) -> ()) {
+    public func image(prompt: String, size: SwiftyGPTImageSize? = nil, user: String? = nil, completion: @escaping (Result<UIImage, Error>) -> ()) {
         image(prompt: prompt, choices: 1, size: size, user: user) { result in
             switch result {
             case .success(let images):
@@ -61,7 +62,7 @@ extension SwiftyGPT {
         }
     }
     
-    public func image(prompt: String, size: SwiftyGPTImageSize? = nil, user: String? = nil) async -> Result<Data, Error> {
+    public func image(prompt: String, size: SwiftyGPTImageSize? = nil, user: String? = nil) async -> Result<UIImage, Error> {
         return await withCheckedContinuation { continuation in
             image(prompt: prompt, size: size, user: user) { result in
                 continuation.resume(returning: result)

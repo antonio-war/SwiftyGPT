@@ -15,7 +15,7 @@ extension SwiftyGPT {
     public func chat(messages: [SwiftyGPTChatMessage], model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, @SwiftyOptionalRanged(0...4096) maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTChatResponse, Error>) -> ()) {
         
         let request = SwiftyGPTChatRequest(messages: messages, model: model, temperature: temperature, choices: choices, stream: false, maxTokens: maxTokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
-        SwiftyHTTP.request(with: SwiftyGPTRouter.chat(apiKey, request)) { result in
+        SwiftyHTTP.request(SwiftyGPTRouter.chat(apiKey, request)) { result in
             switch result {
             case .success(let response):
                 if response.statusCode == 200 {

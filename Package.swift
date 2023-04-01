@@ -12,7 +12,7 @@ let package = Package(
             targets: ["SwiftyGPT"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/antonio-war/SwiftyHTTP", from: "0.1.4"),
+        .package(url: "https://github.com/antonio-war/SwiftyHTTP", from: "0.1.5"),
         .package(url: "https://github.com/antonio-war/SwiftyRanged", from: "1.0.0")
     ],
     targets: [
