@@ -161,8 +161,8 @@ The easiest way to generate an image is to use the following method, that accept
 ```swift
 swiftyGPT.image(prompt: "Draw an unicorn", size: .x256) { result in
     switch result {
-    case .success(let response):
-        let image = UIImage(data: response)
+    case .success(let image):
+        print(image
     case .failure(let error):
         if let error = error as? SwiftyGPTError {
             print(error.message)
@@ -172,7 +172,7 @@ swiftyGPT.image(prompt: "Draw an unicorn", size: .x256) { result in
     }
 }
 ```
-If successful, the method returns an object of type Data so that you can build a UIImage if you use UIKit or an Image if you use SwiftUI, or make another use of it.
+If successful, the method returns an UIImage that you can use directly in UIKit or wrap with an Image if you use SwiftUI.
 
 ## Multiple Generation
 
@@ -181,8 +181,8 @@ In case you want to generate several different images starting from the same des
 ```swift
 swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256) { result in
     switch result {
-    case .success(let response):
-        let images = response.compactMap({UIImage(data: $0)})
+    case .success(let images):
+        print(images)
     case .failure(let error):
         if let error = error as? SwiftyGPTError {
             print(error.message)
@@ -198,7 +198,7 @@ swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256) { result in
 All methods of the image feature are also available in Async/Await version.
 
 ```swift
-let result: Result<Data, Error> = await swiftyGPT.image(prompt: "Draw an unicorn", size: .x256)
+let result: Result<UIImage, Error> = await swiftyGPT.image(prompt: "Draw an unicorn", size: .x256)
 ```
 
 ---
