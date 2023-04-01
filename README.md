@@ -162,7 +162,7 @@ The easiest way to generate an image is to use the following method, that accept
 swiftyGPT.image(prompt: "Draw an unicorn", size: .x256) { result in
     switch result {
     case .success(let image):
-        print(image
+        print(image)
     case .failure(let error):
         if let error = error as? SwiftyGPTError {
             print(error.message)
