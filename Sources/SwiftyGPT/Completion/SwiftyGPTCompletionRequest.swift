@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyHTTP
 
-public struct SwiftyGPTCompletionRequest: SwiftyHTTPRequestBody {
+public struct SwiftyGPTCompletionRequest: SwiftyGPTRequest {
     public let prompt: String
     public let model: SwiftyGPTCompletionModel
     public let suffix: String?

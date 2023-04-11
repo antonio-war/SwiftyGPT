@@ -8,7 +8,7 @@
 import Foundation
 import SwiftyHTTP
 
-public struct SwiftyGPTChatRequest: SwiftyHTTPRequestBody {
+public struct SwiftyGPTChatRequest: SwiftyGPTRequest {
     public let messages: [SwiftyGPTChatMessage]
     public let model: SwiftyGPTChatModel
     public let temperature: Float?

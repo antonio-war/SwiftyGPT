@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SwiftyGPTCompletionModel: String, Codable {
+public enum SwiftyGPTCompletionModel: String, SwiftyGPTModel {
     
     case ada
     case text_ada_001 = "text-ada-001"
