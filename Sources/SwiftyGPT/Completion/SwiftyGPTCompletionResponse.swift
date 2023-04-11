@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct SwiftyGPTCompletionResponse: SwiftyGPTResponse {
-    var id: String
-    var object: String
-    var created: TimeInterval
-    var usage: SwiftyGPTUsage
-    var model: SwiftyGPTCompletionModel
-    var choices: [SwiftyGPTCompletionChoice]
+public struct SwiftyGPTCompletionResponse: SwiftyGPTResponse {
+    public let id: String
+    public let object: String
+    public let created: TimeInterval
+    public let usage: SwiftyGPTUsage
+    public let model: SwiftyGPTCompletionModel
+    public let choices: [SwiftyGPTCompletionChoice]
 }
 
 // MARK: - Choice
