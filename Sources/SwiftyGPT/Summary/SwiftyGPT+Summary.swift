@@ -10,7 +10,7 @@ import Foundation
 extension SwiftyGPT {
     
     public func summary(text: String, language: SwiftyGPTLanguage? = nil, user: String? = nil, completion: @escaping (Result<String, Error>) -> ()) {
-        self.completion(prompt: prompt(text: text, language: language), model: .text_davinci_003, maxTokens: tokens(text: text), temperature: 0.3, presencePenalty: 0.0, frequencyPenalty: 0.0, user: user) { result in
+        self.completion(prompt: prompt(text: text, language: language), model: .text_davinci_003, temperature: 0.3, presencePenalty: 0.0, frequencyPenalty: 0.0, user: user) { result in
             switch result {
                 case .success(let response):
                     if let text = response.choices.first?.text {
@@ -37,13 +37,5 @@ extension SwiftyGPT {
             return "Summarize this text for a second-grade student: \n\(text.trimmingCharacters(in: .whitespacesAndNewlines))"
         }
         return "Summarize this \(language.rawValue.capitalized) text for a second-grade student: \n\(text.trimmingCharacters(in: .whitespacesAndNewlines))"
-    }
-    
-    private func tokens(text: String) -> Int {
-        if text.components(separatedBy: .whitespaces).count < 5 {
-            return text.components(separatedBy: .whitespaces).count
-        } else {
-            return text.components(separatedBy: .whitespaces).count + Int(Float(text.components(separatedBy: .whitespaces).count) / 1.5)
-        }
     }
 }
