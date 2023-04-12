@@ -23,7 +23,7 @@ let package = Package(
             name: "SwiftyGPTTests",
             dependencies: ["SwiftyGPT", "SwiftyHTTP"],
             resources: [
-                .copy("OpenAI-Info.plist")
+                .copy("Utils/OpenAI-Info.plist")
             ])
     ]
 )
