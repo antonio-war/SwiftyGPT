@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SwiftyGPTChatModel: String, Codable {
+public enum SwiftyGPTChatModel: String, SwiftyGPTModel {
     case gpt4 = "gpt-4"
     case gpt4_0314 = "gpt-4-0314"
     case gpt4_32k = "gpt-4-32k"

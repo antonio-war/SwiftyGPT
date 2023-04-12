@@ -12,6 +12,7 @@ enum SwiftyGPTRouter: SwiftyHTTPRequest {
     
     case chat(String, SwiftyGPTChatRequest)
     case image(String, SwiftyGPTImageRequest)
+    case completion(String, SwiftyGPTCompletionRequest)
     
     var baseURL: URL? {
         return URL(string: "https://api.openai.com")
@@ -23,6 +24,8 @@ enum SwiftyGPTRouter: SwiftyHTTPRequest {
             return "/v1/chat/completions"
         case .image:
             return "/v1/images/generations"
+        case .completion:
+            return "/v1/completions"
         }
     }
     
@@ -32,12 +35,14 @@ enum SwiftyGPTRouter: SwiftyHTTPRequest {
             return .post
         case .image:
             return .post
+        case .completion:
+            return .post
         }
     }
     
     var headers: [SwiftyHTTPHeader] {
         switch self {
-        case .chat(let apiKey, _), .image(let apiKey, _):
+        case .chat(let apiKey, _), .image(let apiKey, _), .completion(let apiKey, _):
             return [
                 SwiftyHTTPHeader.contentType(.application(.json)),
                 SwiftyHTTPHeader.authorization(.bearer(apiKey))
@@ -54,6 +59,8 @@ enum SwiftyGPTRouter: SwiftyHTTPRequest {
             case .chat(_, let request):
                 return request
             case .image(_, let request):
+                return request
+            case .completion(_, let request):
                 return request
         }
     }

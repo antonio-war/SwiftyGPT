@@ -10,7 +10,7 @@ import Foundation
 public struct SwiftyGPTChatMessage: Codable, Identifiable {
     public let id: UUID = UUID()
     public let date: Date = Date()
-    public let role: SwiftyGPTRole
+    public let role: SwiftyGPTChatRole
     public let content: String
     
     enum CodingKeys: String, CodingKey {
@@ -18,7 +18,7 @@ public struct SwiftyGPTChatMessage: Codable, Identifiable {
         case content
     }
     
-    public init(role: SwiftyGPTRole, content: String) {
+    public init(role: SwiftyGPTChatRole, content: String) {
         self.role = role
         self.content = content
     }
@@ -27,11 +27,4 @@ public struct SwiftyGPTChatMessage: Codable, Identifiable {
         self.role = .user
         self.content = content
     }
-}
-
-// MARK: - Role
-public enum SwiftyGPTRole: String, Codable {
-    case system
-    case user
-    case assistant
 }
