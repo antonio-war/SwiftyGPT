@@ -42,6 +42,7 @@ final class SwiftyGPTSummaryTests: SwiftyGPTTestCase {
         let result: Result<String, Error> = await swiftyGPT.summary(text: text, language: .italian)
         switch result {
         case .success(let response):
+            print(response)
             XCTAssertLessThan(response.count, text.count)
         case .failure(let error):
             if let error = error as? SwiftyGPTError {

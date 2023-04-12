@@ -9,4 +9,6 @@ import Foundation
 
 protocol SwiftyGPTModel: Codable {
     static var stable: Self { get }
+    
+    var maxTokens: Int { get }
 }

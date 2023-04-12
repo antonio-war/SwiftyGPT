@@ -25,4 +25,27 @@ public enum SwiftyGPTCompletionModel: String, SwiftyGPTModel {
     public static var stable: SwiftyGPTCompletionModel {
         .text_davinci_003
     }
+    
+    var maxTokens: Int {
+        switch self {
+        case .ada:
+            return 2_048
+        case .text_ada_001:
+            return 2_048
+        case .babbage:
+            return 2_048
+        case .text_babbage_001:
+            return 2_048
+        case .curie:
+            return 2_048
+        case .text_curie_001:
+            return 2_048
+        case .davinci:
+            return 2_048
+        case .text_davinci_002:
+            return 4_096
+        case .text_davinci_003:
+            return 4_094
+        }
+    }
 }
