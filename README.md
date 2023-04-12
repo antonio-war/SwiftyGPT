@@ -222,8 +222,8 @@ swiftyGPT.completion(prompt: "Say \"Hello\" in italian", model: .text_davinci_00
 }
 ```
 
-In case of success methods return a SwiftyGPTCompletionResponse object which is the entire transcript of ChatGPT HTTP response.
-To get the concrete completion response text you have to check the content of the 'choices' attribute.
+In case of success methods return a SwiftyGPTCompletionResponse object which is the entire transcript of HTTP response.
+To get the concrete response text you have to check the content of the 'choices' attribute.
 
 ```swift
 let text = response.choices.first?.text
