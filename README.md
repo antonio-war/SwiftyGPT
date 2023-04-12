@@ -5,7 +5,7 @@
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fantonio-war%2FSwiftyGPT%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/antonio-war/SwiftyGPT)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fantonio-war%2FSwiftyGPT%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/antonio-war/SwiftyGPT)
 
-SwiftyGPT is a simple and lightweight wrapper around OpenAI API.
+SwiftyGPT is a simple and lightweight wrapper around OpenAI API which exposes services provided by ChatGPT and DALL-E.
 It was born with the aim of provide a Swift like interface around all OpenAI capabilities, so you can make requestes and get responses with minimal coding effort.
 
 - **Easy to use:** no configuration needed, SwiftyGPT is ready to go, you just need an API Key.
@@ -199,6 +199,42 @@ All methods of the image feature are also available in Async/Await version.
 
 ```swift
 let result: Result<UIImage, Error> = await swiftyGPT.image(prompt: "Draw an unicorn", size: .x256)
+```
+---
+
+# Completion
+
+SwiftyGPT also provides methods for creating completions using models like Davinci or Babbage. Given a prompt, the model will return one or more predicted completions based on the 'choices' parameters which you have already seen before.
+Also in this case it is obviously possible to set some parameters in such a way as to best condition our response.
+
+```swift
+swiftyGPT.completion(prompt: "Say \"Hello\" in italian", model: .text_davinci_003) { result in
+    switch result {
+    case .success(let response):
+        print(response)
+    case .failure(let error):
+        if let error = error as? SwiftyGPTError {
+            print(error.message)
+        } else {
+            print(error.localizedDescription)
+        }
+    }
+}
+```
+
+In case of success methods return a SwiftyGPTCompletionResponse object which is the entire transcript of HTTP response.
+To get the concrete response text you have to check the content of the 'choices' attribute.
+
+```swift
+let text = response.choices.first?.text
+```
+
+## Async/Await
+
+All methods of the completion feature are also available in Async/Await version.
+
+```swift
+let result: Result<SwiftyGPTCompletionResponse, Error> = await swiftyGPT.completion(prompt: "Say \"Hello\" in italian")
 ```
 
 ---
