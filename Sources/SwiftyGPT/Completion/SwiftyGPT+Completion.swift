@@ -23,7 +23,10 @@ extension SwiftyGPT {
                         completion(.failure(URLError(.badServerResponse)))
                         return
                     }
-                    completion(.success(body))
+                    
+                    let formattedBody = SwiftyGPTCompletionResponse(id: body.id, object: body.object, created: body.created, usage: body.usage, model: body.model, choices: body.choices.map { SwiftyGPTCompletionChoice(finishReason: $0.finishReason, index: $0.index, text: $0.text.trimmingCharacters(in: .whitespacesAndNewlines), logprobs: $0.logprobs)})
+                    
+                    completion(.success(formattedBody))
                 } else {
                     guard let error = try? JSONDecoder().decode(SwiftyGPTError.self, from: response.body) else {
                         completion(.failure(URLError(.badServerResponse)))

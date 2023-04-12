@@ -27,6 +27,7 @@ final class SwiftyGPTCompletionTests: XCTestCase, SwiftyGPTSecureTest {
         swiftyGPT.completion(prompt: "Say \"Hello\" in italian") { result in
             switch result {
             case .success(let response):
+                print(response.choices.first?.text)
                 XCTAssertGreaterThanOrEqual(response.choices.count, 1)
             case .failure(let error):
                 if let error = error as? SwiftyGPTError {
