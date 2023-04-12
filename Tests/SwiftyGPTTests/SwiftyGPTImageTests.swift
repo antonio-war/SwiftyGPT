@@ -20,7 +20,8 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
         try super.tearDownWithError()
         swiftyGPT = nil
     }
-
+    
+    #if canImport(UIKit)
     func testDefaultCompletion() throws {
         let expectation = expectation(description: "DefaultImageCompletion")
         swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256) { result in
@@ -84,4 +85,5 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
             }
         }
     }
+    #endif
 }
