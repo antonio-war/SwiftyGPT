@@ -204,7 +204,7 @@ let result: Result<UIImage, Error> = await swiftyGPT.image(prompt: "Draw an unic
 
 # Completion
 
-SwiftyGPT also provides methods for creating completions using models like Davinci or Babbage. Given a prompt, the model will return one or more predicted completions based on the 'choices' parameters which we have already seen before.
+SwiftyGPT also provides methods for creating completions using models like Davinci or Babbage. Given a prompt, the model will return one or more predicted completions based on the 'choices' parameters which you have already seen before.
 Also in this case it is obviously possible to set some parameters in such a way as to best condition our response.
 
 ```swift
