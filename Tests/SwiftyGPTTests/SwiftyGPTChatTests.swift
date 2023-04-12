@@ -1,18 +1,7 @@
 import XCTest
 @testable import SwiftyGPT
 
-final class SwiftyGPTChatTests: XCTestCase, SwiftyGPTSecureTest {
-    private var swiftyGPT: SwiftyGPT!
-    
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        swiftyGPT = SwiftyGPT(apiKey: apiKey)
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        swiftyGPT = nil
-    }
+final class SwiftyGPTChatTests: SwiftyGPTTestCase {
     
     func testDefaultCompletion() throws {
         let expectation = expectation(description: "DefaultChatCompletion")
