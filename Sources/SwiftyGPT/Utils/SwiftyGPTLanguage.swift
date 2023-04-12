@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SwiftyGPTLanguage: String, Codable {
+public enum SwiftyGPTLanguage: String {
     case afrikaans
     case arabic
     case armenian
