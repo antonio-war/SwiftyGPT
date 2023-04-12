@@ -12,10 +12,10 @@ final class SwiftyGPTTranslationTests: SwiftyGPTTestCase {
     
     func testDefaultCompletion() throws {
         let expectation = expectation(description: "DefaultCompletion")
-        swiftyGPT.translation(text: "Hello", from: .english, to: .italian) { result in
+        swiftyGPT.translation(text: "Hi, how are you ?", from: .english, to: .italian) { result in
             switch result {
             case .success(let response):
-                XCTAssertEqual(response.lowercased(), "ciao")
+                XCTAssertEqual(response.lowercased(), "ciao, come stai?")
             case .failure(let error):
                 if let error = error as? SwiftyGPTError {
                     XCTFail(error.message)

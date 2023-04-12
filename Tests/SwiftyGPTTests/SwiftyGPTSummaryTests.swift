@@ -10,17 +10,17 @@ import XCTest
 
 final class SwiftyGPTSummaryTests: SwiftyGPTTestCase {
     
-    let text = """
-        Jupiter is the fifth planet from the Sun and the largest in the Solar System. It is a gas giant with a mass one-thousandth that of the Sun, but two-and-a-half times that of all the other planets in the Solar System combined. Jupiter is one of the brightest objects visible to the naked eye in the night sky, and has been known to ancient civilizations since before recorded history. It is named after the Roman god Jupiter.[19] When viewed from Earth, Jupiter can be bright enough for its reflected light to cast visible shadows,[20] and is on average the third-brightest natural object in the night sky after the Moon and Venus.
-    """
-    
     func testDefaultCompletion() throws {
         let expectation = expectation(description: "DefaultCompletion")
         
-        swiftyGPT.summary(text: text, language: .english) { result in
+        let text = """
+            La mia istruttrice di nuoto Elke W. aveva un cane barbone bianco, piuttosto grande per la sua razza, di nome Martino. Lei stessa ammetteva che era un cane stupido e fifone, pieno di difetti che lei amava elencare anche a interlocutori occasionali o a perfetti sconosciuti che incontrava per strada. Martino aveva paura, tra le altre cose, degli oggetti appuntiti, delle oche (un cane barbone che aveva paura della oche!) e di entrare nei furgoni dalla parte posteriore. In compenso appena poteva si buttava nell’acqua a nuotare e non si faceva scoraggiare dalla stagione avversa e dalla veemenza dei flutti, talché un giorno di marzo fu proprio la padrona a dover entrare nell’acqua gelata fino alla vita e trascinarlo fuori dal mare per il collare, dopo che il povero Martino era stato sul punto di soccombere. Lo coperse di contumelie, un po’ in italiano e un po’ in dialetto, mentre lui uggiolava sotto un massaggio vigoroso a colpi di plaid.
+        """
+        
+        swiftyGPT.summary(text: text, language: .italian) { result in
             switch result {
             case .success(let response):
-                XCTAssertLessThan(response.count, self.text.count)
+                XCTAssertLessThan(response.count, text.count)
             case .failure(let error):
                 if let error = error as? SwiftyGPTError {
                     XCTFail(error.message)
@@ -35,10 +35,14 @@ final class SwiftyGPTSummaryTests: SwiftyGPTTestCase {
     }
     
     func testDefaultAsync() async throws {
-        let result: Result<String, Error> = await swiftyGPT.summary(text: text, language: .english)
+        let text = """
+            La mia istruttrice di nuoto Elke W. aveva un cane barbone bianco, piuttosto grande per la sua razza, di nome Martino. Lei stessa ammetteva che era un cane stupido e fifone, pieno di difetti che lei amava elencare anche a interlocutori occasionali o a perfetti sconosciuti che incontrava per strada. Martino aveva paura, tra le altre cose, degli oggetti appuntiti, delle oche (un cane barbone che aveva paura della oche!) e di entrare nei furgoni dalla parte posteriore. In compenso appena poteva si buttava nell’acqua a nuotare e non si faceva scoraggiare dalla stagione avversa e dalla veemenza dei flutti, talché un giorno di marzo fu proprio la padrona a dover entrare nell’acqua gelata fino alla vita e trascinarlo fuori dal mare per il collare, dopo che il povero Martino era stato sul punto di soccombere. Lo coperse di contumelie, un po’ in italiano e un po’ in dialetto, mentre lui uggiolava sotto un massaggio vigoroso a colpi di plaid.
+        """
+        
+        let result: Result<String, Error> = await swiftyGPT.summary(text: text, language: .italian)
         switch result {
         case .success(let response):
-            XCTAssertLessThan(response.count, self.text.count)
+            XCTAssertLessThan(response.count, text.count)
         case .failure(let error):
             if let error = error as? SwiftyGPTError {
                 XCTFail(error.message)
