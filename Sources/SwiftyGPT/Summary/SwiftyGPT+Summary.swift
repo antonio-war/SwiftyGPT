@@ -24,7 +24,7 @@ extension SwiftyGPT {
         }
     }
     
-    public func translation(text: String, language: SwiftyGPTLanguage? = nil, user: String? = nil) async -> Result<String, Error> {
+    public func summary(text: String, language: SwiftyGPTLanguage? = nil, user: String? = nil) async -> Result<String, Error> {
         return await withCheckedContinuation { continuation in
             summary(text: text, language: language) { result in
                 continuation.resume(returning: result)
