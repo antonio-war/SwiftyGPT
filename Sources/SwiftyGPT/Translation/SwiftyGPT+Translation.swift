@@ -10,7 +10,6 @@ import Foundation
 extension SwiftyGPT {
     
     public func translation(text: String, from: SwiftyGPTLanguage? = nil, to: SwiftyGPTLanguage, user: String? = nil, completion: @escaping (Result<String, Error>) -> ()) {
-        
         self.completion(prompt: prompt(text: text, from: from, to: to), model: .text_davinci_003, temperature: 0.3, presencePenalty: 0.0, frequencyPenalty: 0.0, user: user) { result in
             switch result {
                 case .success(let response):
