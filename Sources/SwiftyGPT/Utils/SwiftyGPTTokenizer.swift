@@ -22,6 +22,6 @@ public struct SwiftyGPTTokenizer {
             wrapped.setLanguage(language)
         }
         
-        return Int(Float(wrapped.tokens(for: text.startIndex..<text.endIndex).count) * 1.5)
+        return Int(Float(wrapped.tokens(for: text.startIndex..<text.endIndex).count) * 2.3)
     }
 }

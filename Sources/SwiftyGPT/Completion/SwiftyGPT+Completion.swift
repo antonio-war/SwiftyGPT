@@ -14,9 +14,9 @@ extension SwiftyGPT {
     
     public func completion(prompt: String, model: SwiftyGPTCompletionModel = .stable, suffix: String? = nil, maxTokens: Int? = nil, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, @SwiftyOptionalRanged(1...5) logprobs: Int? = nil, echo: Bool? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTCompletionResponse, Error>) -> ()) {
         
-        let minimumTokens = SwiftyGPTTokenizer().tokenize(prompt)
-        let maximumTokens = model.maxTokens-minimumTokens
-        @SwiftyRanged(minimumTokens...(maximumTokens)) var maxTokens = maxTokens ?? maximumTokens
+        let lowerBound = SwiftyGPTTokenizer().tokenize(prompt)
+        let upperBound = model.maxTokens-lowerBound
+        @SwiftyRanged(lowerBound...upperBound) var maxTokens = maxTokens ?? upperBound
         
         let request = SwiftyGPTCompletionRequest(prompt: prompt, model: model, suffix: suffix, maxTokens: maxTokens, temperature: temperature, choices: choices, stream: false, logprobs: logprobs, echo: echo, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
         SwiftyHTTP.request(SwiftyGPTRouter.completion(apiKey, request)) { result in

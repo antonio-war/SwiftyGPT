@@ -27,6 +27,7 @@ final class SwiftyGPTTokenizerTest: XCTestCase {
         """
         
         let count = tokenizer.tokenize(text, language: .italian)
+        print(count)
         XCTAssertGreaterThan(count, 160)
     }
 }
