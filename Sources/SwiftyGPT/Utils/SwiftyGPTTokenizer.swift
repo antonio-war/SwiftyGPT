@@ -1,0 +1,28 @@
+//
+//  SwiftyGPTTokenizer.swift
+//  
+//
+//  Created by Antonio Guerra on 13/04/23.
+//
+
+import Foundation
+import NaturalLanguage
+
+@MainActor
+struct SwiftyGPTTokenizer {
+    private let wrapped: NLTokenizer
+    
+    init() {
+        wrapped = NLTokenizer(unit: .word)
+    }
+    
+    func tokenize(_ text: String, language: SwiftyGPTLanguage?) {
+        wrapped.string = text
+        
+        if let language = language?.naturalLanguage {
+            wrapped.setLanguage(language)
+        }
+        
+        print(wrapped.tokens(for: text.startIndex..<text.endIndex))
+    }
+}
