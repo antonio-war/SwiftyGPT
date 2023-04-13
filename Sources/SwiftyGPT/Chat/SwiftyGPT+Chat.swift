@@ -12,7 +12,7 @@ import SwiftyRanged
 // MARK: - Chat
 extension SwiftyGPT {
     
-    public func chat(messages: [SwiftyGPTChatMessage], model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, @SwiftyOptionalRanged(0...4096) maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTChatResponse, Error>) -> ()) {
+    public func chat(messages: [SwiftyGPTChatMessage], model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTChatResponse, Error>) -> ()) {
         
         let request = SwiftyGPTChatRequest(messages: messages, model: model, temperature: temperature, choices: choices, stream: false, maxTokens: maxTokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
         SwiftyHTTP.request(SwiftyGPTRouter.chat(apiKey, request)) { result in
@@ -37,7 +37,7 @@ extension SwiftyGPT {
         }
     }
     
-    public func chat(messages: [SwiftyGPTChatMessage], model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, @SwiftyOptionalRanged(0...4096) maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil) async -> Result<SwiftyGPTChatResponse, Error> {
+    public func chat(messages: [SwiftyGPTChatMessage], model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil) async -> Result<SwiftyGPTChatResponse, Error> {
         
         return await withCheckedContinuation { continuation in
             chat(messages: messages, model: model, temperature: temperature, choices: choices, maxTokens: maxTokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user) { result in
@@ -46,11 +46,11 @@ extension SwiftyGPT {
         }
     }
     
-    public func chat(message: SwiftyGPTChatMessage, model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, @SwiftyOptionalRanged(0...4096) maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTChatResponse, Error>) -> ()) {
+    public func chat(message: SwiftyGPTChatMessage, model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTChatResponse, Error>) -> ()) {
         chat(messages: [message], model: model, temperature: temperature, choices: choices, maxTokens: maxTokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user, completion: completion)
     }
 
-    public func chat(message: SwiftyGPTChatMessage, model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, @SwiftyOptionalRanged(0...4096) maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil) async -> Result<SwiftyGPTChatResponse, Error> {
+    public func chat(message: SwiftyGPTChatMessage, model: SwiftyGPTChatModel = .stable, @SwiftyOptionalRanged(0...2) temperature: Float? = nil, choices: Int? = nil, maxTokens: Int? = nil, @SwiftyOptionalRanged(-2...2) presencePenalty: Float? = nil, @SwiftyOptionalRanged(-2...2) frequencyPenalty: Float? = nil, user: String? = nil) async -> Result<SwiftyGPTChatResponse, Error> {
         
         await chat(messages: [message], model: model, temperature: temperature, choices: choices, maxTokens: maxTokens, presencePenalty: presencePenalty, frequencyPenalty: frequencyPenalty, user: user)
     }
