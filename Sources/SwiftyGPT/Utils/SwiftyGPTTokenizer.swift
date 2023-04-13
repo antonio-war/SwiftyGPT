@@ -15,7 +15,7 @@ public struct SwiftyGPTTokenizer {
         wrapped = NLTokenizer(unit: .word)
     }
     
-    func tokenize(_ text: String, language: SwiftyGPTLanguage?) -> Int {
+    func tokenize(_ text: String, language: SwiftyGPTLanguage? = nil) -> Int {
         wrapped.string = text
         
         if let language = language?.naturalLanguage {
