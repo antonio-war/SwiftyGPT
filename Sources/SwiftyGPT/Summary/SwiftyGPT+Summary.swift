@@ -33,9 +33,10 @@ extension SwiftyGPT {
     }
     
     private func prompt(text: String, language: SwiftyGPTLanguage? = nil) -> String {
-        guard let language else {
-            return "Summarize this text for a second-grade student: \n\(text.trimmingCharacters(in: .whitespacesAndNewlines))"
+        let text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard let language = language?.rawValue.capitalized else {
+            return "Summarize this text for a second-grade student: \n\(text)"
         }
-        return "Summarize this \(language.rawValue.capitalized) text for a second-grade student: \n\(text.trimmingCharacters(in: .whitespacesAndNewlines))"
+        return "Summarize this \(language) text for a second-grade student: \n\(text)"
     }
 }

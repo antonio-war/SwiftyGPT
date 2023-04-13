@@ -33,9 +33,11 @@ extension SwiftyGPT {
     }
     
     private func prompt(text: String, from: SwiftyGPTLanguage? = nil, to: SwiftyGPTLanguage) -> String {
-        guard let from else {
-            return "Translate this into \(to.rawValue.capitalized): \n\(text.trimmingCharacters(in: .whitespacesAndNewlines))"
+        let text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        let to = to.rawValue.capitalized
+        guard let from = from?.rawValue.capitalized else {
+            return "Translate this into \(to): \n\(text)"
         }
-        return "Translate this from \(from.rawValue.capitalized) into \(to.rawValue.capitalized): \n\(text.trimmingCharacters(in: .whitespacesAndNewlines))"
+        return "Translate this from \(from) into \(to): \n\(text)"
     }
 }
