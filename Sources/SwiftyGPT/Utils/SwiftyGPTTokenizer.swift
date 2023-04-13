@@ -8,21 +8,20 @@
 import Foundation
 import NaturalLanguage
 
-@MainActor
-struct SwiftyGPTTokenizer {
+public struct SwiftyGPTTokenizer {
     private let wrapped: NLTokenizer
     
     init() {
         wrapped = NLTokenizer(unit: .word)
     }
     
-    func tokenize(_ text: String, language: SwiftyGPTLanguage?) {
+    func tokenize(_ text: String, language: SwiftyGPTLanguage?) -> Int {
         wrapped.string = text
         
         if let language = language?.naturalLanguage {
             wrapped.setLanguage(language)
         }
         
-        print(wrapped.tokens(for: text.startIndex..<text.endIndex))
+        return Int(Float(wrapped.tokens(for: text.startIndex..<text.endIndex).count) * 1.5)
     }
 }
