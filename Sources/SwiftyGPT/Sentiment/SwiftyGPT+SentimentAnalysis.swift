@@ -1,5 +1,5 @@
 //
-//  SwiftyGPT+SentimentAnalysis.swift
+//  SwiftyGPT+Sentiment.swift
 //  
 //
 //  Created by Antonio Guerra on 13/04/23.
@@ -9,7 +9,7 @@ import Foundation
 
 extension SwiftyGPT {
     
-    public func sentimentAnalysis(text: String, language: SwiftyGPTLanguage? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTSentiment, Error>) -> ()) {
+    public func sentiment(text: String, language: SwiftyGPTLanguage? = nil, user: String? = nil, completion: @escaping (Result<SwiftyGPTSentiment, Error>) -> ()) {
         self.completion(prompt: prompt(text: text, language: language), model: .text_davinci_003, temperature: 0.0, presencePenalty: 0.0, frequencyPenalty: 0.5, user: user) { result in
             switch result {
                 case .success(let response):
@@ -24,9 +24,9 @@ extension SwiftyGPT {
         }
     }
     
-    public func sentimentAnalysis(text: String, language: SwiftyGPTLanguage? = nil, user: String? = nil) async -> Result<SwiftyGPTSentiment, Error> {
+    public func sentiment(text: String, language: SwiftyGPTLanguage? = nil, user: String? = nil) async -> Result<SwiftyGPTSentiment, Error> {
         return await withCheckedContinuation { continuation in
-            sentimentAnalysis(text: text, language: language, user: user) { result in
+            sentiment(text: text, language: language, user: user) { result in
                 continuation.resume(returning: result)
             }
         }
