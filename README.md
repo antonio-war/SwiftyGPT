@@ -45,7 +45,7 @@ let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
 ---
 
 # Features
-
+SwiftyGPT is a very large framework, it provides numerous features that are constantly updated...
 - [**Chat**](Documentation/CHAT.md)
 - [**Completion**](Documentation/COMPLETION.md)
 - [**Image Generation**](Documentation/IMAGE.md)
