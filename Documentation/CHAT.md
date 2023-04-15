@@ -1,6 +1,7 @@
 # Chat
 
-Chat is the main feature of SwiftyGPT, as you can guess it allows you to ask ChatGPT for something. There are several method that you can use to reach the same goal.
+Chat is the first and main feature of SwiftyGPT, it consists of creating a conversation with **ChatGPT**.
+The goal is to provide all the features of this AI Chat Assistant through a very simple interface, therefore SwiftyGPT provides multiple methods for achieving the same purpose.
 
 ## Deep Version
 
