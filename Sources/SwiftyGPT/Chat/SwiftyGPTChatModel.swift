@@ -18,4 +18,21 @@ public enum SwiftyGPTChatModel: String, SwiftyGPTModel {
     public static var stable: SwiftyGPTChatModel {
         gpt3_5_turbo
     }
+    
+    var maxTokens: Int {
+        switch self {
+        case .gpt4:
+            return 8_192
+        case .gpt4_0314:
+            return 8_192
+        case .gpt4_32k:
+            return 8_192
+        case .gpt4_32k_0314:
+            return 8_192
+        case .gpt3_5_turbo:
+            return 4_096
+        case .gpt3_5_turbo_0301:
+            return 4_096
+        }
+    }
 }

@@ -8,7 +8,8 @@
 import Foundation
 
 public struct SwiftyGPTError: Error, Decodable {
-    let message, type, code: String
+    let message, type: String
+    let code: String?
     
     enum WrapperCodingKeys: CodingKey {
         case error
@@ -25,6 +26,6 @@ public struct SwiftyGPTError: Error, Decodable {
         let container = try wrapper.nestedContainer(keyedBy: CodingKeys.self, forKey: .error)
         self.message = try container.decode(String.self, forKey: .message)
         self.type = try container.decode(String.self, forKey: .type)
-        self.code = try container.decode(String.self, forKey: .code)
+        self.code = try container.decode(String?.self, forKey: .code)
     }
 }

@@ -1,5 +1,5 @@
 //
-//  SwiftyGPTCompletionTests.swift
+//  SwiftyGPTTranslationTests.swift
 //  
 //
 //  Created by Antonio Guerra on 12/04/23.
@@ -8,14 +8,14 @@
 import XCTest
 @testable import SwiftyGPT
 
-final class SwiftyGPTCompletionTests: SwiftyGPTTestCase {
+final class SwiftyGPTTranslationTests: SwiftyGPTTestCase {
     
     func testDefaultCompletion() throws {
         let expectation = expectation(description: "DefaultCompletion")
-        swiftyGPT.completion(prompt: "Say \"Hello\" in italian") { result in
+        swiftyGPT.translation(text: "Hi, how are you ?", from: .english, to: .italian) { result in
             switch result {
             case .success(let response):
-                XCTAssertGreaterThanOrEqual(response.choices.count, 1)
+                XCTAssertEqual(response.lowercased(), "ciao, come stai?")
             case .failure(let error):
                 if let error = error as? SwiftyGPTError {
                     XCTFail(error.message)
@@ -25,15 +25,14 @@ final class SwiftyGPTCompletionTests: SwiftyGPTTestCase {
             }
             expectation.fulfill()
         }
-        
         waitForExpectations(timeout: 30, handler: nil)
     }
     
     func testDefaultAsync() async throws {
-        let result: Result<SwiftyGPTCompletionResponse, Error> = await swiftyGPT.completion(prompt: "Say \"Hello\" in italian")
+        let result: Result<String, Error> = await swiftyGPT.translation(text: "Hello", from: .english, to: .italian)
         switch result {
         case .success(let response):
-            XCTAssertGreaterThanOrEqual(response.choices.count, 1)
+            XCTAssertEqual(response.lowercased(), "ciao")
         case .failure(let error):
             if let error = error as? SwiftyGPTError {
                 XCTFail(error.message)

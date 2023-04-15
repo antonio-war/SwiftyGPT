@@ -8,7 +8,6 @@
 import Foundation
 import SwiftyHTTP
 import SwiftyRanged
-import UIKit
 
 public struct SwiftyGPT {
     

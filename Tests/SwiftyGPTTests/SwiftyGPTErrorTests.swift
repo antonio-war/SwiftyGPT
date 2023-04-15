@@ -16,12 +16,12 @@ final class SwiftyGPTErrorTests: XCTestCase {
         try super.setUpWithError()
         jsonString = """
             {
-                "error": {
-                    "message": "Incorrect API key provided: sk-zVAMH****************************************o25x. You can find your API key at https://platform.openai.com/account/api-keys.",
-                    "type": "invalid_request_error",
-                    "param": null,
-                    "code": "invalid_api_key"
-                }
+              "error": {
+                "message": "This model's maximum context length is 4097 tokens, however you requested 4451 tokens (357 in your prompt; 4094 for the completion). Please reduce your prompt; or completion length.",
+                "type": "invalid_request_error",
+                "param": null,
+                "code": null
+              }
             }
         """
     }

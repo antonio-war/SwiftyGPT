@@ -8,19 +8,9 @@
 import XCTest
 @testable import SwiftyGPT
 
-final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
-    private var swiftyGPT: SwiftyGPT!
+final class SwiftyGPTImageTests: SwiftyGPTTestCase {
     
-    override func setUpWithError() throws {
-        try super.setUpWithError()
-        swiftyGPT = SwiftyGPT(apiKey: apiKey)
-    }
-
-    override func tearDownWithError() throws {
-        try super.tearDownWithError()
-        swiftyGPT = nil
-    }
-
+    #if canImport(UIKit)
     func testDefaultCompletion() throws {
         let expectation = expectation(description: "DefaultImageCompletion")
         swiftyGPT.image(prompt: "Draw an unicorn", choices: 2, size: .x256) { result in
@@ -84,4 +74,5 @@ final class SwiftyGPTImageTests: XCTestCase, SwiftyGPTSecureTest {
             }
         }
     }
+    #endif
 }
