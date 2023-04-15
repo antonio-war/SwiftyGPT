@@ -50,6 +50,8 @@ let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
 - [**Image Generation**](Documentation/IMAGE.md)
 - [**Grammar Correction**](Documentation/CORRECTION.md)
 - [**Language Translation**](Documentation/TRANSLATION.md)
+- [**Sentiment Analysis**](Documentation/SENTIMENT.md)
+- [**Text Summary**](Documentation/SUMMARY.md)
 ---
 
 # Error Handling
