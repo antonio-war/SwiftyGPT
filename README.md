@@ -48,7 +48,8 @@ let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
 - [**Chat**](Documentation/CHAT.md)
 - [**Completion**](Documentation/COMPLETION.md)
 - [**Image Generation**](Documentation/IMAGE.md)
-
+- [**Grammar Correction**](Documentation/CORRECTION.md)
+- [**Language Translation**](Documentation/TRANSLATION.md)
 ---
 
 # Error Handling
