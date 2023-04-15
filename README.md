@@ -37,7 +37,7 @@ Then click **Add Package**.
 
 # Setting Up
 
-The first thing you need to do is to create a SwiftyGPT instance.
+The first step to using SwiftyGPT is to create an instance, you an use the same to access all features.
 
 ```swift
 let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
@@ -45,6 +45,8 @@ let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
 ---
 
 # Features
+
+- Chat
 
 ---
 
