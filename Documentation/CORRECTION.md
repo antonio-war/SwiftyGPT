@@ -1,4 +1,4 @@
-# Correction
+# Grammar Correction
 
 This feature allows you to make grammar corrections in a text written in one of the supported languages.
 <br />
