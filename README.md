@@ -48,6 +48,7 @@ let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
 
 - [**Chat**](Documentation/CHAT.md)
 - [**Completion**](Documentation/COMPLETION.md)
+- [**Image**](Documentation/IMAGE.md)
 
 ---
 
