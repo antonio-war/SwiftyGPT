@@ -46,7 +46,7 @@ let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
 
 # Features
 
-- Chat
+- [this subtext](Documentation/CHAT.md)
 
 ---
 
