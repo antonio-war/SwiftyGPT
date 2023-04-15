@@ -1,4 +1,4 @@
-# Image
+# Image Generation
 
 SwiftyGPT uses DALL-E to generate images from textual descriptions. You can describe an object or a scene in words, and SwiftyGPT can create a corresponding image of it.
 
