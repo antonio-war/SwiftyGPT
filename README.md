@@ -52,9 +52,6 @@ let swiftyGPT = SwiftyGPT(apiKey: "YOUR_API_KEY")
 
 ---
 
-
----
-
 # Error Handling
 
 In case of failure methods return an error, it can be a system error in case something went wrong on the iOS side. For example, network-level issues or decoding issues. If instead the error is related to ChatGPT you will get a SwiftyGPTError.
