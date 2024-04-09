@@ -26,6 +26,7 @@ let package = Package(
         .testTarget(
             name: "SwiftyGPTTests",
             dependencies: [
+                "SwiftyGPT"
             ]
         )
     ]
