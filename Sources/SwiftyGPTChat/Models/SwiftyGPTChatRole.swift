@@ -1,5 +1,5 @@
 //
-//  SwiftyGPTRole.swift
+//  SwiftyGPTChatRole.swift
 //
 //
 //  Created by Antonio Guerra on 09/04/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SwiftyGPTRole: String {
+public enum SwiftyGPTChatRole: String {
     case system
     case user
     case assistant

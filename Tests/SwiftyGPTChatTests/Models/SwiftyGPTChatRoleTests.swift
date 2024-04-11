@@ -1,32 +1,32 @@
 //
-//  SwiftyGPTRoleTests.swift
+//  SwiftyGPTChatRoleTests.swift
 //  
 //
 //  Created by Antonio Guerra on 09/04/24.
 //
 
-@testable import SwiftyGPT
+@testable import SwiftyGPTChat
 import XCTest
 
-final class SwiftyGPTRoleTests: XCTestCase {
+final class SwiftyGPTChatRoleTests: XCTestCase {
     
     func testSystemInitFromRawValue() throws {
-        let role = try XCTUnwrap(SwiftyGPTRole(rawValue: "system"))
+        let role = try XCTUnwrap(SwiftyGPTChatRole(rawValue: "system"))
         XCTAssertEqual(role, .system)
     }
     
     func testUserInitFromRawValue() throws {
-        let role = try XCTUnwrap(SwiftyGPTRole(rawValue: "user"))
+        let role = try XCTUnwrap(SwiftyGPTChatRole(rawValue: "user"))
         XCTAssertEqual(role, .user)
     }
     
     func testAssistantInitFromRawValue() throws {
-        let role = try XCTUnwrap(SwiftyGPTRole(rawValue: "assistant"))
+        let role = try XCTUnwrap(SwiftyGPTChatRole(rawValue: "assistant"))
         XCTAssertEqual(role, .assistant)
     }
     
     func testToolInitFromRawValue() throws {
-        let role = try XCTUnwrap(SwiftyGPTRole(rawValue: "tool"))
+        let role = try XCTUnwrap(SwiftyGPTChatRole(rawValue: "tool"))
         XCTAssertEqual(role, .tool)
     }
 }

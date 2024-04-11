@@ -12,21 +12,21 @@ let package = Package(
     products: [
         .library(
             name: "SwiftyGPT",
-            targets: ["SwiftyGPT"]
+            targets: ["SwiftyGPTChat"]
         ),
     ],
     dependencies: [
     ],
     targets: [
         .target(
-            name: "SwiftyGPT",
+            name: "SwiftyGPTChat",
             dependencies: [
             ]
         ),
         .testTarget(
-            name: "SwiftyGPTTests",
+            name: "SwiftyGPTChatTests",
             dependencies: [
-                "SwiftyGPT"
+                "SwiftyGPTChat"
             ]
         )
     ]
