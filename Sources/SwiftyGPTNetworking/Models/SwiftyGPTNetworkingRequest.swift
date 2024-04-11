@@ -12,6 +12,7 @@ protocol SwiftyGPTNetworkingRequest {
     var path: String { get }
     var url: URL { get throws }
     var method: SwiftyGPTNetworkingMethod { get }
+    var headers: [String: String] { get }
     var body: Data? { get }
     var cachePolicy: URLRequest.CachePolicy { get }
     var timeout: TimeInterval { get }
@@ -33,6 +34,7 @@ extension SwiftyGPTNetworkingRequest {
             var request = try URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeout)
             request.httpMethod = method.rawValue
             request.httpBody = body
+            request.allHTTPHeaderFields = headers
             return request
         }
     }

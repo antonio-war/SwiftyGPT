@@ -32,6 +32,7 @@ final class SwiftyGPTNetworkingClientTests: XCTestCase {
         let path: String = "10"
         let method: SwiftyGPTNetworkingMethod = .get
         let body: Data? = nil
+        let headers: [String : String] = [:]
         let cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         let timeout: TimeInterval = 60
     }
