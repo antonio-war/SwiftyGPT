@@ -21,7 +21,6 @@ final class SwiftyGPTNetworkingClientTests: XCTestCase {
     }
 
     func testSend() async throws {
-        let url = try XCTUnwrap(URL(string: "https://picsum.photos/10"))
         let request = TestSwiftyGPTNetworkingRequest()
         let response = try await client.send(request: request)
         XCTAssertEqual(response.statusCode, 200)
@@ -29,8 +28,8 @@ final class SwiftyGPTNetworkingClientTests: XCTestCase {
     }
     
     private struct TestSwiftyGPTNetworkingRequest: SwiftyGPTNetworkingRequest {
-        let endpoint: URL? = URL(string: "https://picsum.photos")
-        let path: String = "/10"
+        let endpoint: URL? = URL(string: "https://picsum.photos/")
+        let path: String = "10"
         let cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         let timeout: TimeInterval = 60
     }
