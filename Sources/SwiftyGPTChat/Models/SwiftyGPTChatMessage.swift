@@ -39,7 +39,7 @@ struct SwiftyGPTAssistantMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .assistant
     let content: String?
     let name: String?
-    // TODO: Add tool_calls
+    // TODO: add tool_calls
     
     init(content: String? = nil, name: String? = nil) {
         self.content = content
@@ -50,7 +50,7 @@ struct SwiftyGPTAssistantMessage: SwiftyGPTChatMessage {
 struct SwiftyGPTToolMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .tool
     let content: String
-    // TODO: Add tool_call_id
+    // TODO: add tool_call_id
     
     init(content: String) {
         self.content = content
