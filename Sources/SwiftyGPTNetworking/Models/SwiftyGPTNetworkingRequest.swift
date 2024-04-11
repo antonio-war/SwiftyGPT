@@ -22,7 +22,7 @@ protocol SwiftyGPTNetworkingRequest {
 extension SwiftyGPTNetworkingRequest {
     var url: URL {
         get throws {
-            guard let endpoint, let url = URL(string: path, relativeTo: endpoint) else {
+            guard let endpoint, let scheme = endpoint.scheme, scheme.lowercased().hasPrefix("http"), let url = URL(string: path, relativeTo: endpoint) else {
                 throw URLError(.badURL)
             }
             return url

@@ -28,8 +28,24 @@ final class SwiftyGPTNetworkingRequestTests: XCTestCase {
         try XCTAssertEqual(request.underlyingRequest.timeoutInterval, request.timeout)
     }
         
+    func testInitWhenRequestIsInvalid() {
+        let request = InvalidTestSwiftyGPTNetworkingRequest()
+        try XCTAssertThrowsError(request.url)
+        try XCTAssertThrowsError(request.underlyingRequest)
+    }
+    
     private struct TestSwiftyGPTNetworkingRequest: SwiftyGPTNetworkingRequest {
         let endpoint: URL? = URL(string: "https://picsum.photos/")
+        let path: String = "10"
+        let method: SwiftyGPTNetworkingMethod = .get
+        let body: Data? = Data()
+        let headers: [String : String] = ["Key":"Value"]
+        let cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        let timeout: TimeInterval = 60
+    }
+    
+    private struct InvalidTestSwiftyGPTNetworkingRequest: SwiftyGPTNetworkingRequest {
+        let endpoint: URL? = URL(string: "file://picsum.photos/")
         let path: String = "10"
         let method: SwiftyGPTNetworkingMethod = .get
         let body: Data? = Data()
