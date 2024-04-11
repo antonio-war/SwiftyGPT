@@ -13,7 +13,7 @@ struct SwiftyGPTChatResponse: Identifiable, Decodable {
     let created: Date
     let model: SwiftyGPTChatModel
     let fingerprint: String
-    let object: String
+    let object: String = "chat.completion"
     // TODO: add usage
     
     enum CodingKeys: String, CodingKey {
@@ -21,6 +21,5 @@ struct SwiftyGPTChatResponse: Identifiable, Decodable {
         case created
         case model
         case fingerprint = "system_fingerprint"
-        case object
     }
 }
