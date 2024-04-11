@@ -1,5 +1,5 @@
 //
-//  SwiftyGPTChatRequest.swift
+//  SwiftyGPTChatRequestBody.swift
 //
 //
 //  Created by Antonio Guerra on 11/04/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SwiftyGPTChatRequest {
+struct SwiftyGPTChatRequestBody {
     let model: SwiftyGPTChatModel
     let messages: [SwiftyGPTChatMessage]
     let frequencyPenalty: Double?

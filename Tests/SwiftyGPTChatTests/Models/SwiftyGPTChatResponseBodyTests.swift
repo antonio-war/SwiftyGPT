@@ -1,5 +1,5 @@
 //
-//  SwiftyGPTChatResponseTests.swift
+//  SwiftyGPTChatResponseBodyTests.swift
 //  
 //
 //  Created by Antonio Guerra on 11/04/24.
@@ -8,7 +8,7 @@
 @testable import SwiftyGPTChat
 import XCTest
 
-final class SwiftyGPTChatResponseTests: XCTestCase {
+final class SwiftyGPTChatResponseBodyTests: XCTestCase {
     
     func testDecoding() throws {
         let json = """
@@ -36,7 +36,7 @@ final class SwiftyGPTChatResponseTests: XCTestCase {
         """
         let data = try XCTUnwrap(json.data(using: .utf8))
         let decoder = JSONDecoder()
-        let response = try decoder.decode(SwiftyGPTChatResponse.self, from: data)
+        let response = try decoder.decode(SwiftyGPTChatResponseBody.self, from: data)
         XCTAssertEqual(response.id, "chatcmpl-123")
         XCTAssertEqual(response.object, "chat.completion")
         XCTAssertEqual(response.created, Date(timeIntervalSince1970: 1677652288))

@@ -1,5 +1,5 @@
 //
-//  SwiftyGPTChatResponse.swift
+//  SwiftyGPTChatResponseBody.swift
 //  
 //
 //  Created by Antonio Guerra on 11/04/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SwiftyGPTChatResponse: Identifiable, Decodable {
+struct SwiftyGPTChatResponseBody: Identifiable, Decodable {
     let id: String
     // TODO: add choices
     let created: Date
