@@ -21,12 +21,24 @@ let package = Package(
         .target(
             name: "SwiftyGPTChat",
             dependencies: [
+                "SwiftyGPTNetworking"
             ]
         ),
         .testTarget(
             name: "SwiftyGPTChatTests",
             dependencies: [
                 "SwiftyGPTChat"
+            ]
+        ),
+        .target(
+            name: "SwiftyGPTNetworking",
+            dependencies: [
+            ]
+        ),
+        .testTarget(
+            name: "SwiftyGPTNetworkingTests",
+            dependencies: [
+                "SwiftyGPTNetworking"
             ]
         )
     ]
