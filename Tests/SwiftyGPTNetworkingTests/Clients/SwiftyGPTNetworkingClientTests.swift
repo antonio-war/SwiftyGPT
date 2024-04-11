@@ -30,6 +30,8 @@ final class SwiftyGPTNetworkingClientTests: XCTestCase {
     private struct TestSwiftyGPTNetworkingRequest: SwiftyGPTNetworkingRequest {
         let endpoint: URL? = URL(string: "https://picsum.photos/")
         let path: String = "10"
+        let method: SwiftyGPTNetworkingMethod = .get
+        let body: Data? = nil
         let cachePolicy: URLRequest.CachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         let timeout: TimeInterval = 60
     }

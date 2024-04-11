@@ -11,6 +11,8 @@ protocol SwiftyGPTNetworkingRequest {
     var endpoint: URL? { get }
     var path: String { get }
     var url: URL { get throws }
+    var method: SwiftyGPTNetworkingMethod { get }
+    var body: Data? { get }
     var cachePolicy: URLRequest.CachePolicy { get }
     var timeout: TimeInterval { get }
     var underlyingRequest: URLRequest { get throws }
@@ -28,7 +30,10 @@ extension SwiftyGPTNetworkingRequest {
     
     var underlyingRequest: URLRequest {
         get throws {
-            return try URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeout)
+            var request = try URLRequest(url: url, cachePolicy: cachePolicy, timeoutInterval: timeout)
+            request.httpMethod = method.rawValue
+            request.httpBody = body
+            return request
         }
     }
 }

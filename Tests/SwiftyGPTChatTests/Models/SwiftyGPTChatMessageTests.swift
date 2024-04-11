@@ -65,4 +65,10 @@ final class SwiftyGPTChatMessageTests: XCTestCase {
         XCTAssertEqual(message.content, nil)
         XCTAssertEqual(message.name, "Test")
     }
+    
+    func testToolMessageInit() throws {
+        let message = SwiftyGPTToolMessage(content: "Test")
+        XCTAssertEqual(message.role, .tool)
+        XCTAssertEqual(message.content, "Test")
+    }
 }
