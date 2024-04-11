@@ -22,4 +22,12 @@ struct SwiftyGPTChatResponse: Identifiable, Decodable {
         case model
         case fingerprint = "system_fingerprint"
     }
+    
+    init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.id = try container.decode(String.self, forKey: .id)
+        self.created = try Date(timeIntervalSince1970: container.decode(TimeInterval.self, forKey: .created))
+        self.model = try container.decode(SwiftyGPTChatModel.self, forKey: .model)
+        self.fingerprint = try container.decode(String.self, forKey: .fingerprint)
+    }
 }
