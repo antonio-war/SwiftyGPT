@@ -105,7 +105,7 @@ struct SwiftyGPTToolMessage: SwiftyGPTChatMessage {
     }
 }
 
-enum SwiftyGPTChatEncodedMessage: Encodable {
+enum SwiftyGPTChatCodableMessage: Encodable {
     case system(SwiftyGPTSystemMessage)
     case user(SwiftyGPTUserMessage)
     case assistant(SwiftyGPTAssistantMessage)
