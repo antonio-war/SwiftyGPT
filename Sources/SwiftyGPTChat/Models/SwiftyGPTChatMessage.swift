@@ -8,29 +8,27 @@
 import Foundation
 
 enum SwiftyGPTChatMessage: Encodable {
-    case system(SwiftyGPTSystemMessageContent)
-    case user(SwiftyGPTUserMessageContent)
-    case assistant(SwiftyGPTAssistantMessageContent)
-    case tool(SwiftyGPTToolMessageContent)
+    case system(SwiftyGPTSystemMessage)
+    case user(SwiftyGPTUserMessage)
+    case assistant(SwiftyGPTAssistantMessage)
+    case tool(SwiftyGPTToolMessage)
     
     func encode(to encoder: any Encoder) throws {
         var singleContainer = encoder.singleValueContainer()
         switch self {
-        case .system(let content):
-            try singleContainer.encode(content)
-        case .user(let content):
-            try singleContainer.encode(content)
-        case .assistant(let content):
-            try singleContainer.encode(content)
-        case .tool(let content):
-            try singleContainer.encode(content)
+        case .system(let message):
+            try singleContainer.encode(message)
+        case .user(let message):
+            try singleContainer.encode(message)
+        case .assistant(let message):
+            try singleContainer.encode(message)
+        case .tool(let message):
+            try singleContainer.encode(message)
         }
     }
-    
-    protocol Content: Encodable {}
 }
 
-struct SwiftyGPTSystemMessageContent: SwiftyGPTChatMessage.Content {
+struct SwiftyGPTSystemMessage: Encodable {
     let role: SwiftyGPTChatRole = .system
     let content: String
     let name: String?
@@ -54,7 +52,7 @@ struct SwiftyGPTSystemMessageContent: SwiftyGPTChatMessage.Content {
     }
 }
 
-struct SwiftyGPTUserMessageContent: SwiftyGPTChatMessage.Content {
+struct SwiftyGPTUserMessage: Encodable {
     let role: SwiftyGPTChatRole = .user
     let content: String
     let name: String?
@@ -78,7 +76,7 @@ struct SwiftyGPTUserMessageContent: SwiftyGPTChatMessage.Content {
     }
 }
 
-struct SwiftyGPTAssistantMessageContent: SwiftyGPTChatMessage.Content {
+struct SwiftyGPTAssistantMessage: Encodable {
     let role: SwiftyGPTChatRole = .assistant
     let content: String?
     let name: String?
@@ -103,7 +101,7 @@ struct SwiftyGPTAssistantMessageContent: SwiftyGPTChatMessage.Content {
     }
 }
 
-struct SwiftyGPTToolMessageContent: SwiftyGPTChatMessage.Content {
+struct SwiftyGPTToolMessage: Encodable {
     let role: SwiftyGPTChatRole = .tool
     let content: String
     // TODO: add tool_call_id
