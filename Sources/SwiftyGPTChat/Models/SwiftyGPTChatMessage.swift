@@ -1,5 +1,5 @@
 //
-//  SwiftyGPTChatEncodedMessage.swift
+//  SwiftyGPTChatMessage.swift
 //
 //
 //  Created by Antonio Guerra on 11/04/24.
