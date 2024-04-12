@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct SwiftyGPTChatRequestBody {
+struct SwiftyGPTChatRequestBody: Encodable {
     let model: SwiftyGPTChatModel
-    let messages: [SwiftyGPTChatMessage]
+//    let messages: [SwiftyGPTChatMessage]
     let frequencyPenalty: Double?
     // TODO: add logit_bias
     let logprobs: Bool?
@@ -25,4 +25,19 @@ struct SwiftyGPTChatRequestBody {
     let nucleusSampling: Double?
     // TODO: add tools
     let user: String?
+            
+    enum CodingKeys: CodingKey {
+        case model
+//        case messages
+        case frequencyPenalty
+        case logprobs
+        case topLogprobs
+        case maxTokens
+        case choices
+        case presencePenalty
+        case seed
+        case temperature
+        case nucleusSampling
+        case user
+    }
 }
