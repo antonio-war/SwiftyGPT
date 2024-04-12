@@ -1,5 +1,5 @@
 //
-//  SwiftyGPTChatMessage.swift
+//  SwiftyGPTChatEncodedMessage.swift
 //
 //
 //  Created by Antonio Guerra on 11/04/24.
@@ -7,28 +7,11 @@
 
 import Foundation
 
-enum SwiftyGPTChatMessage: Encodable {
-    case system(SwiftyGPTSystemMessage)
-    case user(SwiftyGPTUserMessage)
-    case assistant(SwiftyGPTAssistantMessage)
-    case tool(SwiftyGPTToolMessage)
-    
-    func encode(to encoder: any Encoder) throws {
-        var singleContainer = encoder.singleValueContainer()
-        switch self {
-        case .system(let message):
-            try singleContainer.encode(message)
-        case .user(let message):
-            try singleContainer.encode(message)
-        case .assistant(let message):
-            try singleContainer.encode(message)
-        case .tool(let message):
-            try singleContainer.encode(message)
-        }
-    }
+protocol SwiftyGPTChatMessage: Encodable {
+    var role: SwiftyGPTChatRole { get }
 }
 
-struct SwiftyGPTSystemMessage: Encodable {
+struct SwiftyGPTSystemMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .system
     let content: String
     let name: String?
@@ -52,7 +35,7 @@ struct SwiftyGPTSystemMessage: Encodable {
     }
 }
 
-struct SwiftyGPTUserMessage: Encodable {
+struct SwiftyGPTUserMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .user
     let content: String
     let name: String?
@@ -76,7 +59,7 @@ struct SwiftyGPTUserMessage: Encodable {
     }
 }
 
-struct SwiftyGPTAssistantMessage: Encodable {
+struct SwiftyGPTAssistantMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .assistant
     let content: String?
     let name: String?
@@ -101,7 +84,7 @@ struct SwiftyGPTAssistantMessage: Encodable {
     }
 }
 
-struct SwiftyGPTToolMessage: Encodable {
+struct SwiftyGPTToolMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .tool
     let content: String
     // TODO: add tool_call_id
@@ -119,5 +102,26 @@ struct SwiftyGPTToolMessage: Encodable {
     enum CodingKeys: CodingKey {
         case role
         case content
+    }
+}
+
+enum SwiftyGPTChatEncodedMessage: Encodable {
+    case system(SwiftyGPTSystemMessage)
+    case user(SwiftyGPTUserMessage)
+    case assistant(SwiftyGPTAssistantMessage)
+    case tool(SwiftyGPTToolMessage)
+    
+    func encode(to encoder: any Encoder) throws {
+        var singleContainer = encoder.singleValueContainer()
+        switch self {
+        case .system(let message):
+            try singleContainer.encode(message)
+        case .user(let message):
+            try singleContainer.encode(message)
+        case .assistant(let message):
+            try singleContainer.encode(message)
+        case .tool(let message):
+            try singleContainer.encode(message)
+        }
     }
 }

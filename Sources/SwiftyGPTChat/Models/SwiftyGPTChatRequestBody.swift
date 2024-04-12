@@ -26,9 +26,26 @@ struct SwiftyGPTChatRequestBody: Encodable {
     // TODO: add tools
     let user: String?
         
+    var encodedMessages: [SwiftyGPTChatEncodedMessage] {
+        return messages.compactMap {
+            switch $0 {
+            case let message as SwiftyGPTSystemMessage:
+                return .system(message)
+            case let message as SwiftyGPTUserMessage:
+                return .user(message)
+            case let message as SwiftyGPTAssistantMessage:
+                return .assistant(message)
+            case let message as SwiftyGPTToolMessage:
+                return .tool(message)
+            default:
+                return .none
+            }
+        }
+    }
+        
     enum CodingKeys: CodingKey {
         case model
-        case messages
+//        case messages
         case frequencyPenalty
         case logprobs
         case topLogprobs
