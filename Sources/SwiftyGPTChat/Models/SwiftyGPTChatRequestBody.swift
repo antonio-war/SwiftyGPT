@@ -8,19 +8,21 @@
 import Foundation
 
 struct SwiftyGPTChatRequestBody: Encodable {
-    let messages: [SwiftyGPTChatMessage]
+    let messages: [any SwiftyGPTChatMessage]
     let model: SwiftyGPTChatModel
     let frequencyPenalty: Double?
     // TODO: add logit_bias
-    let logProbability: LogProbability?
+    let logprobs: Bool?
+    let topLogprobs: Int?
     let maxTokens: Int?
-    let choices: Int?
+    let n: Int?
     let presencePenalty: Double?
     // TODO: add response_format
     let seed: Int?
     // TODO: add stop
     // TODO: add stream
-    let sampling: Sampling?
+    let temperature: Double?
+    let topP: Double?
     // TODO: add tools
     let user: String?
         
@@ -41,43 +43,35 @@ struct SwiftyGPTChatRequestBody: Encodable {
         }
     }
      
+    init(messages: [any SwiftyGPTChatMessage], model: SwiftyGPTChatModel, frequencyPenalty: Double? = 0, logprobs: Bool? = false, topLogprobs: Int? = nil, maxTokens: Int? = nil, n: Int? = 1, presencePenalty: Double? = 0, seed: Int? = nil, temperature: Double? = 1, topP: Double? = 1, user: String? = nil) {
+        self.messages = messages
+        self.model = model
+        self.frequencyPenalty = frequencyPenalty
+        self.logprobs = logprobs
+        self.topLogprobs = topLogprobs
+        self.maxTokens = maxTokens
+        self.n = n
+        self.presencePenalty = presencePenalty
+        self.seed = seed
+        self.temperature = temperature
+        self.topP = topP
+        self.user = user
+    }
+    
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(model, forKey: .model)
         try container.encode(codableMessages, forKey: .messages)
         try container.encodeIfPresent(frequencyPenalty, forKey: .frequencyPenalty)
-        if let logProbability {
-            switch logProbability {
-                case .enabled(let value):
-                    try container.encode(true, forKey: .logprobs)
-                    try container.encode(value, forKey: .topLogprobs)
-                case .disabled:
-                    try container.encode(false, forKey: .logprobs)
-            }
-        }
+        try container.encodeIfPresent(logprobs, forKey: .logprobs)
+        try container.encodeIfPresent(topLogprobs, forKey: .topLogprobs)
         try container.encodeIfPresent(maxTokens, forKey: .maxTokens)
-        try container.encodeIfPresent(choices, forKey: .choices)
+        try container.encodeIfPresent(n, forKey: .n)
         try container.encodeIfPresent(presencePenalty, forKey: .presencePenalty)
         try container.encodeIfPresent(seed, forKey: .seed)
-        if let sampling {
-            switch sampling {
-            case .temperature(let value):
-                try container.encode(value, forKey: .temperature)
-            case .nucleus(let value):
-                try container.encode(value, forKey: .nucleus)
-            }
-        }
+        try container.encodeIfPresent(temperature, forKey: .temperature)
+        try container.encodeIfPresent(topP, forKey: .topP)
         try container.encodeIfPresent(user, forKey: .user)
-    }
-
-    enum LogProbability {
-        case enabled(Int)
-        case disabled
-    }
-    
-    enum Sampling {
-        case temperature(Double)
-        case nucleus(Double)
     }
     
     enum CodingKeys: String, CodingKey {
@@ -87,11 +81,11 @@ struct SwiftyGPTChatRequestBody: Encodable {
         case logprobs
         case topLogprobs = "top_logprobs"
         case maxTokens = "max_tokens"
-        case choices = "n"
+        case n = "n"
         case presencePenalty = "presence_penalty"
         case seed
         case temperature
-        case nucleus = "top_p"
+        case topP = "top_p"
         case user
     }
 }

@@ -38,31 +38,17 @@ final class SwiftyGPTChatMessageTests: XCTestCase {
         XCTAssertEqual(message.name, "Test")
     }
     
-    func testAssistantMessageInitWhenContentIsNil() throws {
-        let message = SwiftyGPTAssistantMessage()
-        XCTAssertEqual(message.role, .assistant)
-        XCTAssertEqual(message.content, nil)
-        XCTAssertEqual(message.name, nil)
-    }
-    
-    func testUserMessageInitWhenContentIsNotNil() throws {
+    func testAssistantMessageInitWhenNameIsNil() throws {
         let message = SwiftyGPTAssistantMessage(content: "Test")
         XCTAssertEqual(message.role, .assistant)
         XCTAssertEqual(message.content, "Test")
         XCTAssertEqual(message.name, nil)
     }
     
-    func testAssistantMessageInitWhenNameIsNil() throws {
-        let message = SwiftyGPTAssistantMessage()
-        XCTAssertEqual(message.role, .assistant)
-        XCTAssertEqual(message.content, nil)
-        XCTAssertEqual(message.name, nil)
-    }
-    
     func testAssistantMessageInitWhenNameIsNotNil() throws {
-        let message = SwiftyGPTAssistantMessage(name: "Test")
+        let message = SwiftyGPTAssistantMessage(content: "Test", name: "Test")
         XCTAssertEqual(message.role, .assistant)
-        XCTAssertEqual(message.content, nil)
+        XCTAssertEqual(message.content, "Test")
         XCTAssertEqual(message.name, "Test")
     }
     

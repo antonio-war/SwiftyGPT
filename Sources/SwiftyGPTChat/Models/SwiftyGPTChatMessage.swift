@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SwiftyGPTChatMessage: Encodable {
+protocol SwiftyGPTChatMessage: Equatable, Encodable {
     var role: SwiftyGPTChatRole { get }
 }
 
@@ -61,11 +61,12 @@ struct SwiftyGPTUserMessage: SwiftyGPTChatMessage {
 
 struct SwiftyGPTAssistantMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .assistant
-    let content: String?
+    // TODO: maybe need to manage better content or tool_calls
+    let content: String
     let name: String?
     // TODO: add tool_calls
 
-    init(content: String? = nil, name: String? = nil) {
+    init(content: String, name: String? = nil) {
         self.content = content
         self.name = name
     }
@@ -73,7 +74,7 @@ struct SwiftyGPTAssistantMessage: SwiftyGPTChatMessage {
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.role, forKey: .role)
-        try container.encodeIfPresent(self.content, forKey: .content)
+        try container.encode(self.content, forKey: .content)
         try container.encodeIfPresent(self.name, forKey: .name)
     }
     
@@ -105,7 +106,7 @@ struct SwiftyGPTToolMessage: SwiftyGPTChatMessage {
     }
 }
 
-enum SwiftyGPTChatCodableMessage: Encodable {
+enum SwiftyGPTChatCodableMessage: Equatable, Encodable {
     case system(SwiftyGPTSystemMessage)
     case user(SwiftyGPTUserMessage)
     case assistant(SwiftyGPTAssistantMessage)
@@ -122,6 +123,21 @@ enum SwiftyGPTChatCodableMessage: Encodable {
             try singleContainer.encode(message)
         case .tool(let message):
             try singleContainer.encode(message)
+        }
+    }
+    
+    static func == (lhs: SwiftyGPTChatCodableMessage, rhs: SwiftyGPTChatCodableMessage) -> Bool {
+        switch (lhs, rhs) {
+        case (.system(let lhsMessage), .system(let rhsMessage)):
+            return lhsMessage == rhsMessage
+        case (.user(let lhsMessage), .user(let rhsMessage)):
+            return lhsMessage == rhsMessage
+        case (.assistant(let lhsMessage), .assistant(let rhsMessage)):
+            return lhsMessage == rhsMessage
+        case (.tool(let lhsMessage), .tool(let rhsMessage)):
+            return lhsMessage == rhsMessage
+        default:
+            return false
         }
     }
 }
