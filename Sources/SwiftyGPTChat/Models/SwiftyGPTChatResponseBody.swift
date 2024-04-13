@@ -7,13 +7,14 @@
 
 import Foundation
 
-struct SwiftyGPTChatResponseBody: Identifiable {
+struct SwiftyGPTChatResponseBody: Identifiable, Decodable {
     let id: String
     // TODO: add choices
     let created: Date
     let model: SwiftyGPTChatModel
     let fingerprint: String
-    let object: String = "chat.completion"
+    // TODO: object can be an enum ?
+    let object: String
     // TODO: add usage
     
     enum CodingKeys: String, CodingKey {
@@ -21,5 +22,6 @@ struct SwiftyGPTChatResponseBody: Identifiable {
         case created
         case model
         case fingerprint = "system_fingerprint"
+        case object
     }
 }

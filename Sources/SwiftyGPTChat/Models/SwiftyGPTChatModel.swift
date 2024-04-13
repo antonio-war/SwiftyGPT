@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SwiftyGPTChatModel: String, Encodable {
+enum SwiftyGPTChatModel: String, Codable {
     case gpt3_5_turbo = "gpt-3.5-turbo"
     case gpt3_5_turbo_16k = "gpt-3.5-turbo-16k"
     case gpt3_5_turbo_16k_0613 = "gpt-3.5-turbo-16k-0613"
