@@ -11,7 +11,7 @@ import XCTest
 final class SwiftyGPTNetworkingRequestTests: XCTestCase {
 
     func testInit() throws {
-        let request = TestSwiftyGPTNetworkingRequest()
+        let request = SwiftyGPTNetworkingTestRequest()
         XCTAssertEqual(request.endpoint, URL(string: "https://picsum.photos/"))
         XCTAssertEqual(request.path, "10")
         XCTAssertEqual(request.method, .get)
@@ -29,12 +29,12 @@ final class SwiftyGPTNetworkingRequestTests: XCTestCase {
     }
         
     func testInitWhenRequestIsInvalid() {
-        let request = InvalidTestSwiftyGPTNetworkingRequest()
+        let request = SwiftyGPTNetworkingInvalidRequest()
         try XCTAssertThrowsError(request.url)
         try XCTAssertThrowsError(request.underlyingRequest)
     }
     
-    private struct TestSwiftyGPTNetworkingRequest: SwiftyGPTNetworkingRequest {
+    private struct SwiftyGPTNetworkingTestRequest: SwiftyGPTNetworkingRequest {
         let endpoint: URL? = URL(string: "https://picsum.photos/")
         let path: String = "10"
         let method: SwiftyGPTNetworkingMethod = .get
@@ -44,7 +44,7 @@ final class SwiftyGPTNetworkingRequestTests: XCTestCase {
         let timeout: TimeInterval = 60
     }
     
-    private struct InvalidTestSwiftyGPTNetworkingRequest: SwiftyGPTNetworkingRequest {
+    private struct SwiftyGPTNetworkingInvalidRequest: SwiftyGPTNetworkingRequest {
         let endpoint: URL? = URL(string: "file://picsum.photos/")
         let path: String = "10"
         let method: SwiftyGPTNetworkingMethod = .get

@@ -21,13 +21,13 @@ final class SwiftyGPTNetworkingClientTests: XCTestCase {
     }
 
     func testSend() async throws {
-        let request = TestSwiftyGPTNetworkingRequest()
+        let request = SwiftyGPTNetworkingTestRequest()
         let response = try await client.send(request: request)
         XCTAssertEqual(response.statusCode, 200)
         let _ = try XCTUnwrap(UIImage(data: response.body))
     }
     
-    private struct TestSwiftyGPTNetworkingRequest: SwiftyGPTNetworkingRequest {
+    private struct SwiftyGPTNetworkingTestRequest: SwiftyGPTNetworkingRequest {
         let endpoint: URL? = URL(string: "https://picsum.photos/")
         let path: String = "10"
         let method: SwiftyGPTNetworkingMethod = .get
