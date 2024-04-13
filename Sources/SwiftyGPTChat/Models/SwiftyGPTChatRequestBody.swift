@@ -29,13 +29,13 @@ struct SwiftyGPTChatRequestBody: Encodable {
     var codableMessages: [SwiftyGPTChatCodableMessage] {
         return messages.compactMap {
             switch $0 {
-            case let message as SwiftyGPTSystemMessage:
+            case let message as SwiftyGPTChatSystemMessage:
                 return .system(message)
-            case let message as SwiftyGPTUserMessage:
+            case let message as SwiftyGPTChatUserMessage:
                 return .user(message)
-            case let message as SwiftyGPTAssistantMessage:
+            case let message as SwiftyGPTChatAssistantMessage:
                 return .assistant(message)
-            case let message as SwiftyGPTToolMessage:
+            case let message as SwiftyGPTChatToolMessage:
                 return .tool(message)
             default:
                 return .none

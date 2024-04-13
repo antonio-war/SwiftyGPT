@@ -12,17 +12,17 @@ final class SwiftyGPTChatRequestBodyTests: XCTestCase {
     
     func testCodableMessages() {
         let requestBody = SwiftyGPTChatRequestBody(messages: [
-            SwiftyGPTSystemMessage(content: "Test"),
-            SwiftyGPTAssistantMessage(content: "Test"),
-            SwiftyGPTUserMessage(content: "Test"),
-            SwiftyGPTToolMessage(content: "Test")
+            SwiftyGPTChatSystemMessage(content: "Test"),
+            SwiftyGPTChatAssistantMessage(content: "Test"),
+            SwiftyGPTChatUserMessage(content: "Test"),
+            SwiftyGPTChatToolMessage(content: "Test")
         ], model: .gpt3_5_turbo)
         
         XCTAssertEqual(requestBody.codableMessages.count, 4)
-        XCTAssertEqual(requestBody.codableMessages[0], .system(SwiftyGPTSystemMessage(content: "Test")))
-        XCTAssertEqual(requestBody.codableMessages[1], .assistant(SwiftyGPTAssistantMessage(content: "Test")))
-        XCTAssertEqual(requestBody.codableMessages[2], .user(SwiftyGPTUserMessage(content: "Test")))
-        XCTAssertEqual(requestBody.codableMessages[3], .tool(SwiftyGPTToolMessage(content: "Test")))
+        XCTAssertEqual(requestBody.codableMessages[0], .system(SwiftyGPTChatSystemMessage(content: "Test")))
+        XCTAssertEqual(requestBody.codableMessages[1], .assistant(SwiftyGPTChatAssistantMessage(content: "Test")))
+        XCTAssertEqual(requestBody.codableMessages[2], .user(SwiftyGPTChatUserMessage(content: "Test")))
+        XCTAssertEqual(requestBody.codableMessages[3], .tool(SwiftyGPTChatToolMessage(content: "Test")))
     }
     
     func testCodableMessagesWhenTypeIsUnknown() {

@@ -11,7 +11,7 @@ protocol SwiftyGPTChatMessage: Equatable, Encodable {
     var role: SwiftyGPTChatRole { get }
 }
 
-struct SwiftyGPTSystemMessage: SwiftyGPTChatMessage {
+struct SwiftyGPTChatSystemMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .system
     let content: String
     let name: String?
@@ -35,7 +35,7 @@ struct SwiftyGPTSystemMessage: SwiftyGPTChatMessage {
     }
 }
 
-struct SwiftyGPTUserMessage: SwiftyGPTChatMessage {
+struct SwiftyGPTChatUserMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .user
     let content: String
     let name: String?
@@ -59,7 +59,7 @@ struct SwiftyGPTUserMessage: SwiftyGPTChatMessage {
     }
 }
 
-struct SwiftyGPTAssistantMessage: SwiftyGPTChatMessage {
+struct SwiftyGPTChatAssistantMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .assistant
     // TODO: maybe need to manage better content or tool_calls
     let content: String
@@ -85,7 +85,7 @@ struct SwiftyGPTAssistantMessage: SwiftyGPTChatMessage {
     }
 }
 
-struct SwiftyGPTToolMessage: SwiftyGPTChatMessage {
+struct SwiftyGPTChatToolMessage: SwiftyGPTChatMessage {
     let role: SwiftyGPTChatRole = .tool
     let content: String
     // TODO: add tool_call_id
@@ -107,10 +107,10 @@ struct SwiftyGPTToolMessage: SwiftyGPTChatMessage {
 }
 
 enum SwiftyGPTChatCodableMessage: Equatable, Encodable {
-    case system(SwiftyGPTSystemMessage)
-    case user(SwiftyGPTUserMessage)
-    case assistant(SwiftyGPTAssistantMessage)
-    case tool(SwiftyGPTToolMessage)
+    case system(SwiftyGPTChatSystemMessage)
+    case user(SwiftyGPTChatUserMessage)
+    case assistant(SwiftyGPTChatAssistantMessage)
+    case tool(SwiftyGPTChatToolMessage)
     
     func encode(to encoder: any Encoder) throws {
         var singleContainer = encoder.singleValueContainer()
