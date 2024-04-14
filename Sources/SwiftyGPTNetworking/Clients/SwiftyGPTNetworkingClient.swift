@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct SwiftyGPTNetworkingClient {
+public struct SwiftyGPTNetworkingClient {
     private let session: URLSession
     
-    init(session: URLSession) {
+    public init(session: URLSession) {
         self.session = session
     }
     
-    func send(request: SwiftyGPTNetworkingRequest) async throws -> SwiftyGPTNetworkingResponse {
+    public func send(request: SwiftyGPTNetworkingRequest) async throws -> SwiftyGPTNetworkingResponse {
         let (body, underlyingResponse) = try await session.data(for: request.underlyingRequest)
         guard let underlyingResponse = underlyingResponse as? HTTPURLResponse else {
             throw URLError(.badServerResponse)

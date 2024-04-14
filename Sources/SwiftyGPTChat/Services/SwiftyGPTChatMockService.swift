@@ -8,14 +8,13 @@
 import Foundation
 
 struct SwiftyGPTChatMockService: SwiftyGPTChatService {
-    
     private let responseBody: SwiftyGPTChatResponseBody
     
     init(responseBody: SwiftyGPTChatResponseBody) {
         self.responseBody = responseBody
     }
     
-    func send(_ request: SwiftyGPTChatRequestBody) async throws -> SwiftyGPTChatResponseBody {
+    func request(body: SwiftyGPTChatRequestBody) async throws -> SwiftyGPTChatResponseBody {
         return responseBody
     }
 }

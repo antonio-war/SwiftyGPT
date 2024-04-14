@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SwiftyGPTNetworkingMethod: String {
+public enum SwiftyGPTNetworkingMethod: String {
     case get = "GET"
     case post = "POST"
     case put = "PUT"

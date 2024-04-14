@@ -42,21 +42,6 @@ struct SwiftyGPTChatRequestBody: Encodable {
             }
         }
     }
-     
-    init(messages: [any SwiftyGPTChatMessage], model: SwiftyGPTChatModel, frequencyPenalty: Double? = 0, logprobs: Bool? = false, topLogprobs: Int? = nil, maxTokens: Int? = nil, n: Int? = 1, presencePenalty: Double? = 0, seed: Int? = nil, temperature: Double? = 1, topP: Double? = 1, user: String? = nil) {
-        self.messages = messages
-        self.model = model
-        self.frequencyPenalty = frequencyPenalty
-        self.logprobs = logprobs
-        self.topLogprobs = topLogprobs
-        self.maxTokens = maxTokens
-        self.n = n
-        self.presencePenalty = presencePenalty
-        self.seed = seed
-        self.temperature = temperature
-        self.topP = topP
-        self.user = user
-    }
     
     func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)

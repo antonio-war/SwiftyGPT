@@ -6,12 +6,32 @@
 //
 
 import Foundation
+import SwiftyGPTNetworking
 
 struct SwiftyGPTChatNetworkingService: SwiftyGPTChatService {
+    private let client: SwiftyGPTNetworkingClient
+    private let encoder: JSONEncoder
+    private let decoder: JSONDecoder
     private let apiKey: String
     private let organization: String?
     
-    func send(_ request: SwiftyGPTChatRequestBody) async throws -> SwiftyGPTChatResponseBody {
-        return SwiftyGPTChatResponseBody(id: "", created: Date(), model: .gpt3_5_turbo, fingerprint: "", object: "")
+    init(client: SwiftyGPTNetworkingClient = SwiftyGPTNetworkingClient(session: URLSession.shared), encoder: JSONEncoder = JSONEncoder(), decoder: JSONDecoder = JSONDecoder(), apiKey: String, organization: String?) {
+        self.client = client
+        self.encoder = encoder
+        self.decoder = decoder
+        self.apiKey = apiKey
+        self.organization = organization
+    }
+    
+    func request(body: SwiftyGPTChatRequestBody) async throws -> SwiftyGPTChatResponseBody {
+        let body = try JSONEncoder().encode(body)
+        let request = SwiftyGPTChatRequest(apiKey: apiKey, organization: organization, body: body)
+        let response = try await client.send(request: request)
+        switch response.statusCode {
+        case 200..<300:
+            return try decoder.decode(SwiftyGPTChatResponseSuccessBody.self, from: response.body)
+        default:
+            return try decoder.decode(SwiftyGPTChatResponseFailureBody.self, from: response.body)
+        }
     }
 }

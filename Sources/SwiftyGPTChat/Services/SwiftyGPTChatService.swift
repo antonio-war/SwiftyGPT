@@ -8,5 +8,5 @@
 import Foundation
 
 protocol SwiftyGPTChatService {
-    func send(_ request: SwiftyGPTChatRequestBody) async throws -> SwiftyGPTChatResponseBody
+    func request(body: SwiftyGPTChatRequestBody) async throws -> SwiftyGPTChatResponseBody
 }

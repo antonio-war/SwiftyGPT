@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct SwiftyGPTNetworkingResponse {
-    var underlyingResponse: HTTPURLResponse
-    var body: Data
+public struct SwiftyGPTNetworkingResponse {
+    public var underlyingResponse: HTTPURLResponse
+    public var body: Data
     
-    var statusCode: Int {
+    public var statusCode: Int {
         return underlyingResponse.statusCode
     }
 }
