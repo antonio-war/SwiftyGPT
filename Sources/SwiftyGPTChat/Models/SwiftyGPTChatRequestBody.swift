@@ -26,6 +26,21 @@ struct SwiftyGPTChatRequestBody: Encodable {
     // TODO: add tools
     let user: String?
         
+    init(messages: [any SwiftyGPTChatMessage], model: SwiftyGPTChatModel, frequencyPenalty: Double? = nil, logprobs: Bool? = nil, topLogprobs: Int? = nil, maxTokens: Int? = nil, n: Int? = nil, presencePenalty: Double? = nil, seed: Int? = nil, temperature: Double? = nil, topP: Double? = nil, user: String? = nil) {
+        self.messages = messages
+        self.model = model
+        self.frequencyPenalty = frequencyPenalty
+        self.logprobs = logprobs
+        self.topLogprobs = topLogprobs
+        self.maxTokens = maxTokens
+        self.n = n
+        self.presencePenalty = presencePenalty
+        self.seed = seed
+        self.temperature = temperature
+        self.topP = topP
+        self.user = user
+    }
+    
     var codableMessages: [SwiftyGPTChatCodableMessage] {
         return messages.compactMap {
             switch $0 {

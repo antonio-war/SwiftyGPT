@@ -23,7 +23,7 @@ struct SwiftyGPTChatNetworkingService: SwiftyGPTChatService {
         self.organization = organization
     }
     
-    func request(body: SwiftyGPTChatRequestBody) async throws -> SwiftyGPTChatResponseBody {
+    func request(body: SwiftyGPTChatRequestBody) async throws -> any SwiftyGPTChatResponseBody {
         let body = try JSONEncoder().encode(body)
         let request = SwiftyGPTChatRequest(apiKey: apiKey, organization: organization, body: body)
         let response = try await client.send(request: request)

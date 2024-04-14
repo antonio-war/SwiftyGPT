@@ -7,16 +7,16 @@
 
 import Foundation
 
-protocol SwiftyGPTChatResponseBody: Decodable {}
+public protocol SwiftyGPTChatResponseBody: Decodable, Equatable {}
 
-struct SwiftyGPTChatResponseSuccessBody: SwiftyGPTChatResponseBody, Identifiable {
-    let id: String
+public struct SwiftyGPTChatResponseSuccessBody: SwiftyGPTChatResponseBody, Identifiable {
+    public let id: String
     // TODO: add choices
-    let created: TimeInterval
-    let model: SwiftyGPTChatModel
-    let fingerprint: String
+    public let created: TimeInterval
+    public let model: SwiftyGPTChatModel
+    public let fingerprint: String
     // TODO: object can be an enum ?
-    let object: String
+    public let object: String
     // TODO: add usage
     
     enum CodingKeys: String, CodingKey {
@@ -28,5 +28,5 @@ struct SwiftyGPTChatResponseSuccessBody: SwiftyGPTChatResponseBody, Identifiable
     }
 }
 
-struct SwiftyGPTChatResponseFailureBody: SwiftyGPTChatResponseBody, Decodable {
+public struct SwiftyGPTChatResponseFailureBody: SwiftyGPTChatResponseBody, Decodable {
 }
