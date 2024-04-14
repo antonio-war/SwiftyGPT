@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SwiftyGPTChatResponse {
+enum SwiftyGPTChatResponse: Equatable {
     case success(body: SwiftyGPTChatResponseSuccessBody)
     case failure(body: SwiftyGPTChatResponseFailureBody)
 }

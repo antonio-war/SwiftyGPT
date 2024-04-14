@@ -125,19 +125,4 @@ enum SwiftyGPTChatCodableMessage: Equatable, Encodable {
             try singleContainer.encode(message)
         }
     }
-    
-    static func == (lhs: SwiftyGPTChatCodableMessage, rhs: SwiftyGPTChatCodableMessage) -> Bool {
-        switch (lhs, rhs) {
-        case (.system(let lhsMessage), .system(let rhsMessage)):
-            return lhsMessage == rhsMessage
-        case (.user(let lhsMessage), .user(let rhsMessage)):
-            return lhsMessage == rhsMessage
-        case (.assistant(let lhsMessage), .assistant(let rhsMessage)):
-            return lhsMessage == rhsMessage
-        case (.tool(let lhsMessage), .tool(let rhsMessage)):
-            return lhsMessage == rhsMessage
-        default:
-            return false
-        }
-    }
 }
