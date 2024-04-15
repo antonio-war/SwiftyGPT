@@ -15,7 +15,7 @@ struct SwiftyGPTChatNetworkingService: SwiftyGPTChatService {
     private let apiKey: String
     private let organization: String?
     
-    init(client: SwiftyGPTNetworkingClient = SwiftyGPTNetworkingClient(session: URLSession.shared), encoder: JSONEncoder = JSONEncoder(), decoder: JSONDecoder = JSONDecoder(), apiKey: String, organization: String?) {
+    init(client: SwiftyGPTNetworkingClient = SwiftyGPTNetworkingClient(session: URLSession.shared), encoder: JSONEncoder = JSONEncoder(), decoder: JSONDecoder = JSONDecoder(), apiKey: String, organization: String? = nil) {
         self.client = client
         self.encoder = encoder
         self.decoder = decoder

@@ -11,17 +11,17 @@ protocol SwiftyGPTChatMessage: Equatable, Encodable {
     var role: SwiftyGPTChatRole { get }
 }
 
-struct SwiftyGPTChatSystemMessage: SwiftyGPTChatMessage {
-    let role: SwiftyGPTChatRole = .system
-    let content: String
-    let name: String?
+public struct SwiftyGPTChatSystemMessage: SwiftyGPTChatMessage {
+    public let role: SwiftyGPTChatRole = .system
+    public let content: String
+    public let name: String?
     
-    init(content: String, name: String? = nil) {
+    public init(content: String, name: String? = nil) {
         self.content = content
         self.name = name
     }
             
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(role, forKey: .role)
         try container.encode(content, forKey: .content)
