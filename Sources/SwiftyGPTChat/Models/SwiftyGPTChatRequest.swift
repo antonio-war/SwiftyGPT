@@ -13,7 +13,7 @@ struct SwiftyGPTChatRequest: SwiftyGPTNetworkingRequest {
     private let organization: String?
     internal let body: Data?
     
-    init(apiKey: String, organization: String?, body: Data) {
+    init(apiKey: String, organization: String? = nil, body: Data) {
         self.apiKey = apiKey
         self.organization = organization
         self.body = body
