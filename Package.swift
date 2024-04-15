@@ -12,7 +12,9 @@ let package = Package(
     products: [
         .library(
             name: "SwiftyGPT",
-            targets: ["SwiftyGPTChat"]
+            targets: [
+                "SwiftyGPTChat",
+            ]
         ),
     ],
     dependencies: [

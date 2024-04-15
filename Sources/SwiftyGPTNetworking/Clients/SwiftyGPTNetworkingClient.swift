@@ -17,7 +17,7 @@ public struct SwiftyGPTNetworkingClient {
     public func send(request: SwiftyGPTNetworkingRequest) async throws -> SwiftyGPTNetworkingResponse {
         let (body, underlyingResponse) = try await session.data(for: request.underlyingRequest)
         guard let underlyingResponse = underlyingResponse as? HTTPURLResponse else {
-            throw URLError(.badServerResponse)
+            throw URLError(.cannotParseResponse)
         }
         return SwiftyGPTNetworkingResponse(underlyingResponse: underlyingResponse, body: body)
     }

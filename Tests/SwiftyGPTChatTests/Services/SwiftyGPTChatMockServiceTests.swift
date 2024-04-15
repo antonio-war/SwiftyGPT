@@ -17,6 +17,8 @@ final class SwiftyGPTChatMockServiceTests: XCTestCase {
         let genericResponseBody = try await service.request(body: requestBody)
         let successResponseBody = try XCTUnwrap(genericResponseBody as? SwiftyGPTChatResponseSuccessBody)
         XCTAssertEqual(mockedResponseBody, successResponseBody)
+        XCTAssertEqual(service.requestCallCount, 1)
+        XCTAssertTrue(service.requestCalled)
     }
 }
 

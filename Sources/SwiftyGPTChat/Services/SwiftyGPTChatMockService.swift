@@ -7,9 +7,14 @@
 
 import Foundation
 
-struct SwiftyGPTChatMockService: SwiftyGPTChatService {
+class SwiftyGPTChatMockService: SwiftyGPTChatService {
     private let responseBody: any SwiftyGPTChatResponseBody
     private let duration: TimeInterval
+    
+    private (set) var requestCallCount: Int = 0
+    var requestCalled: Bool {
+        return requestCallCount > 0
+    }
     
     init(responseBody: any SwiftyGPTChatResponseBody, duration: TimeInterval = 0.0) {
         self.responseBody = responseBody
@@ -18,6 +23,7 @@ struct SwiftyGPTChatMockService: SwiftyGPTChatService {
     
     func request(body: SwiftyGPTChatRequestBody) async throws -> any SwiftyGPTChatResponseBody {
         try await Task.sleep(nanoseconds: UInt64(duration) * 1_000_000_000)
+        requestCallCount += 1
         return responseBody
     }
 }
