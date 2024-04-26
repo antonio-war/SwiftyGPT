@@ -9,11 +9,11 @@ import Foundation
 import SwiftyGPTNetworking
 
 struct SwiftyGPTChatNetworkingService: SwiftyGPTChatService {
-    private let client: SwiftyGPTNetworkingClient
-    private let encoder: JSONEncoder
-    private let decoder: JSONDecoder
-    private let apiKey: String
-    private let organization: String?
+    let client: SwiftyGPTNetworkingClient
+    let encoder: JSONEncoder
+    let decoder: JSONDecoder
+    let apiKey: String
+    let organization: String?
     
     init(client: SwiftyGPTNetworkingClient = SwiftyGPTNetworkingClient(session: URLSession.shared), encoder: JSONEncoder = JSONEncoder(), decoder: JSONDecoder = JSONDecoder(), apiKey: String, organization: String? = nil) {
         self.client = client

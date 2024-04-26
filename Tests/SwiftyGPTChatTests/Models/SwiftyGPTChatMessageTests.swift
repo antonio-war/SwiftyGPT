@@ -74,6 +74,14 @@ final class SwiftyGPTChatMessageTests: XCTestCase {
         XCTAssertEqual(encodedString, expectedString)
     }
     
+    func testUserMessageEncodeWhenNameIsNotNil() throws {
+        let message = SwiftyGPTChatUserMessage(content: "Test", name: "Test")
+        let encodedMessage = try encoder.encode(message)
+        let encodedString = String(data: encodedMessage, encoding: .utf8)
+        let expectedString = "{\"content\":\"Test\",\"name\":\"Test\",\"role\":\"user\"}"
+        XCTAssertEqual(encodedString, expectedString)
+    }
+    
     func testAssistantMessageInitWhenNameIsNil() throws {
         let message = SwiftyGPTChatAssistantMessage(content: "Test")
         XCTAssertEqual(message.role, .assistant)
@@ -88,9 +96,65 @@ final class SwiftyGPTChatMessageTests: XCTestCase {
         XCTAssertEqual(message.name, "Test")
     }
     
+    func testAssistanteMessageEncodeWhenNameIsNil() throws {
+        let message = SwiftyGPTChatAssistantMessage(content: "Test")
+        let encodedMessage = try encoder.encode(message)
+        let encodedString = String(data: encodedMessage, encoding: .utf8)
+        let expectedString = "{\"content\":\"Test\",\"role\":\"assistant\"}"
+        XCTAssertEqual(encodedString, expectedString)
+    }
+    
+    func testAssistantMessageEncodeWhenNameIsNotNil() throws {
+        let message = SwiftyGPTChatAssistantMessage(content: "Test", name: "Test")
+        let encodedMessage = try encoder.encode(message)
+        let encodedString = String(data: encodedMessage, encoding: .utf8)
+        let expectedString = "{\"content\":\"Test\",\"name\":\"Test\",\"role\":\"assistant\"}"
+        XCTAssertEqual(encodedString, expectedString)
+    }
+    
     func testToolMessageInit() throws {
         let message = SwiftyGPTChatToolMessage(content: "Test")
         XCTAssertEqual(message.role, .tool)
         XCTAssertEqual(message.content, "Test")
+    }
+    
+    func testToolMessageEncode() throws {
+        let message = SwiftyGPTChatToolMessage(content: "Test")
+        let encodedMessage = try encoder.encode(message)
+        let encodedString = String(data: encodedMessage, encoding: .utf8)
+        let expectedString = "{\"content\":\"Test\",\"role\":\"tool\"}"
+        XCTAssertEqual(encodedString, expectedString)
+    }
+    
+    func testCodableMessageEncodeWhenRoleIsSystem() throws {
+        let message = SwiftyGPTChatCodableMessage.system(SwiftyGPTChatSystemMessage(content: "Test"))
+        let encodedMessage = try encoder.encode(message)
+        let encodedString = String(data: encodedMessage, encoding: .utf8)
+        let expectedString = "{\"content\":\"Test\",\"role\":\"system\"}"
+        XCTAssertEqual(encodedString, expectedString)
+    }
+    
+    func testCodableMessageEncodeWhenRoleIsUser() throws {
+        let message = SwiftyGPTChatCodableMessage.user(SwiftyGPTChatUserMessage(content: "Test"))
+        let encodedMessage = try encoder.encode(message)
+        let encodedString = String(data: encodedMessage, encoding: .utf8)
+        let expectedString = "{\"content\":\"Test\",\"role\":\"user\"}"
+        XCTAssertEqual(encodedString, expectedString)
+    }
+    
+    func testCodableMessageEncodeWhenRoleIsAssistant() throws {
+        let message = SwiftyGPTChatCodableMessage.assistant(SwiftyGPTChatAssistantMessage(content: "Test"))
+        let encodedMessage = try encoder.encode(message)
+        let encodedString = String(data: encodedMessage, encoding: .utf8)
+        let expectedString = "{\"content\":\"Test\",\"role\":\"assistant\"}"
+        XCTAssertEqual(encodedString, expectedString)
+    }
+    
+    func testCodableMessageEncodeWhenRoleIsTool() throws {
+        let message = SwiftyGPTChatCodableMessage.tool(SwiftyGPTChatToolMessage(content: "Test"))
+        let encodedMessage = try encoder.encode(message)
+        let encodedString = String(data: encodedMessage, encoding: .utf8)
+        let expectedString = "{\"content\":\"Test\",\"role\":\"tool\"}"
+        XCTAssertEqual(encodedString, expectedString)
     }
 }

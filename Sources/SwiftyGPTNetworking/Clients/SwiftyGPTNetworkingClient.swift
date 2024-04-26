@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct SwiftyGPTNetworkingClient {
+public struct SwiftyGPTNetworkingClient: Equatable {
     private let session: URLSession
     
-    public init(session: URLSession) {
+    public init(session: URLSession = URLSession.shared) {
         self.session = session
     }
     
