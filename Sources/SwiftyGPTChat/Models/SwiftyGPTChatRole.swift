@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SwiftyGPTChatRole: String, Encodable {
+public enum SwiftyGPTChatRole: String, Encodable, Decodable {
     case system
     case user
     case assistant

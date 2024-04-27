@@ -11,20 +11,21 @@ public protocol SwiftyGPTChatResponseBody: Decodable, Equatable {}
 
 public struct SwiftyGPTChatResponseSuccessBody: SwiftyGPTChatResponseBody, Identifiable {
     public let id: String
-    // TODO: add choices
+    public let choices: [SwiftyGPTChatResponseChoice]
     public let created: TimeInterval
     public let model: SwiftyGPTChatModel
     public let fingerprint: String
-    // TODO: object can be an enum ?
-    public let object: String
-    // TODO: add usage
+    public let object: SwiftyGPTChatResponseObject
+    public let usage: SwiftyGPTChatResponseTokenUsage
     
     enum CodingKeys: String, CodingKey {
         case id
+        case choices
         case created
         case model
         case fingerprint = "system_fingerprint"
         case object
+        case usage
     }
 }
 
