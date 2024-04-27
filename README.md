@@ -12,6 +12,21 @@
 - **Mockable**: SwiftyGPT employs protocol-oriented programming to guarantee testability and maintainability. It already exposes some mock objects that can be seamlessly utilized in testing or SwiftUI previews, eliminating the need for actual API calls. 
 
 ---
+# Recommendations
+
+To ensure security and flexibility, we recommend loading your OpenAI API key using environment variables instead of hardcoding it directly into your source code. This approach offers several advantages:
+- **Security**: Storing sensitive information like API keys in environment variables helps prevent accidental exposure of credentials, reducing the risk of unauthorized access to your API resources.
+- **Flexibility**: By using environment variables, you can easily switch between different API keys or update them without modifying your code. This flexibility is especially useful in development, testing, and deployment scenarios.
+- **Best Practice**: Utilizing environment variables for configuration is considered a best practice in software development, promoting cleaner and more maintainable codebases.
+
+Here's a simple example of how you can load your OpenAI API key from an environment variable in Swift:
+```swift
+guard let apiKey = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] else {
+    fatalError("Missing OpenAI API key. Please set the OPENAI_API_KEY environment variable.")
+}
+```
+
+---
 # Support the Project
 Your generous donations help sustain and improve this project. Here's why supporting us is important:
 1. **Covering API Costs**: Accessing certain features or services may require a paid API key. Your donations help cover the cost of maintaining these subscriptions, ensuring uninterrupted access to essential functionalities.
