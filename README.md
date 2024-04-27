@@ -10,3 +10,7 @@ Designed with simplicity and ease of use in mind, SwiftyGPT eliminates the need 
 With SwiftyGPT, customization is at your fingertips. Whether you want to fine-tune parameters like model selection, temperature, or simply rely on default values, SwiftyGPT offers flexibility to suit your needs.<br>
 Not just functional but elegant, SwiftyGPT proves a smooth and intuitive user experience.<br>
 Say goodbye to cumbersome coding and hello to effortless interaction with OpenAI's capabilities!<br>
+
+---
+# License
+SwiftyGPT is published under the MIT license.
