@@ -10,6 +10,7 @@
 		C1122F3E2BDD7B980076E6E8 /* ExplorerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1122F3D2BDD7B980076E6E8 /* ExplorerApp.swift */; };
 		C1122F402BDD7B980076E6E8 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1122F3F2BDD7B980076E6E8 /* ContentView.swift */; };
 		C1122F422BDD7B990076E6E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1122F412BDD7B990076E6E8 /* Assets.xcassets */; };
+		C188BCCB2BDD84BB0057B93E /* SwiftyGPTChat in Frameworks */ = {isa = PBXBuildFile; productRef = C188BCCA2BDD84BB0057B93E /* SwiftyGPTChat */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -17,6 +18,7 @@
 		C1122F3D2BDD7B980076E6E8 /* ExplorerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorerApp.swift; sourceTree = "<group>"; };
 		C1122F3F2BDD7B980076E6E8 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C1122F412BDD7B990076E6E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C188BCC92BDD84AB0057B93E /* SwiftyGPT */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftyGPT; path = ..; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -24,6 +26,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C188BCCB2BDD84BB0057B93E /* SwiftyGPTChat in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -33,6 +36,7 @@
 		C1122F312BDD7B980076E6E8 = {
 			isa = PBXGroup;
 			children = (
+				C188BCC92BDD84AB0057B93E /* SwiftyGPT */,
 				C1122F3C2BDD7B980076E6E8 /* Explorer */,
 				C1122F3B2BDD7B980076E6E8 /* Products */,
 			);
@@ -72,6 +76,9 @@
 			dependencies = (
 			);
 			name = Explorer;
+			packageProductDependencies = (
+				C188BCCA2BDD84BB0057B93E /* SwiftyGPTChat */,
+			);
 			productName = Explorer;
 			productReference = C1122F3A2BDD7B980076E6E8 /* Explorer.app */;
 			productType = "com.apple.product-type.application";
@@ -100,6 +107,9 @@
 				Base,
 			);
 			mainGroup = C1122F312BDD7B980076E6E8;
+			packageReferences = (
+				C188BCC62BDD847F0057B93E /* XCRemoteSwiftPackageReference "SwiftyGPT" */,
+			);
 			productRefGroup = C1122F3B2BDD7B980076E6E8 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -275,7 +285,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = it.antoniowar.swiftygpt.explorer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiftygpt.explorer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -310,7 +320,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = it.antoniowar.swiftygpt.explorer;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swiftygpt.explorer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -344,6 +354,24 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C188BCC62BDD847F0057B93E /* XCRemoteSwiftPackageReference "SwiftyGPT" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/antonio-war/SwiftyGPT";
+			requirement = {
+				branch = develop;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C188BCCA2BDD84BB0057B93E /* SwiftyGPTChat */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SwiftyGPTChat;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C1122F322BDD7B980076E6E8 /* Project object */;
 }
