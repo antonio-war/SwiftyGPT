@@ -5,25 +5,43 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftyGPT",
-    platforms: [.macOS(.v13), .iOS(.v13)],
+    platforms: [
+        .macOS(.v13),
+        .iOS(.v13)
+    ],
     products: [
         .library(
             name: "SwiftyGPT",
-            targets: ["SwiftyGPT"]),
+            targets: [
+                "SwiftyGPTChat",
+            ]
+        ),
     ],
     dependencies: [
-        .package(url: "https://github.com/antonio-war/SwiftyHTTP", from: "0.1.5"),
-        .package(url: "https://github.com/antonio-war/SwiftyRanged", from: "1.0.0")
     ],
     targets: [
         .target(
-            name: "SwiftyGPT",
-            dependencies: ["SwiftyHTTP", "SwiftyRanged"]),
+            name: "SwiftyGPTChat",
+            dependencies: [
+                "SwiftyGPTNetworking"
+            ]
+        ),
         .testTarget(
-            name: "SwiftyGPTTests",
-            dependencies: ["SwiftyGPT", "SwiftyHTTP"],
-            resources: [
-                .copy("Utils/OpenAI-Info.plist")
-            ])
+            name: "SwiftyGPTChatTests",
+            dependencies: [
+                "SwiftyGPTChat"
+            ]
+        ),
+        .target(
+            name: "SwiftyGPTNetworking",
+            dependencies: [
+            ]
+        ),
+        .testTarget(
+            name: "SwiftyGPTNetworkingTests",
+            dependencies: [
+                "SwiftyGPTNetworking"
+            ]
+        )
     ]
 )
