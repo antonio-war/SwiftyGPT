@@ -24,4 +24,23 @@ public struct SwiftyGPTChatResponseChoice: Decodable, Equatable {
             return message
         }
     }
+    
+    init(index: Int, codableMessage: SwiftyGPTChatCodableMessage, finishReason: SwiftyGPTChatResponseFinishReason) {
+        self.index = index
+        self.codableMessage = codableMessage
+        self.finishReason = finishReason
+    }
+    
+    public init(from decoder: any Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.index = try container.decode(Int.self, forKey: .index)
+        self.codableMessage = try container.decode(SwiftyGPTChatCodableMessage.self, forKey: .message)
+        self.finishReason = try container.decode(SwiftyGPTChatResponseFinishReason.self, forKey: .finishReason)
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case index
+        case message
+        case finishReason = "finish_reason"
+    }
 }
