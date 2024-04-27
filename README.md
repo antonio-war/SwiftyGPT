@@ -38,5 +38,9 @@ Every donation, no matter how small, makes a big difference. Thank you for consi
 <a href="https://www.buymeacoffee.com/antoniowar" target="_blank"><img src="https://github.com/appcraftstudio/buymeacoffee/raw/master/Images/snapshot-bmc-button.png" alt="Buy Me A Coffee" height="40"></a>
 
 ---
+# Note
+The content of this README.md file has been automatically generated using SwiftyGPT.
+
+---
 # License
 SwiftyGPT is published under the MIT license.
