@@ -37,5 +37,6 @@ final class SwiftyGPTChatNetworkingServiceTests: XCTestCase {
         let requestBody = SwiftyGPTChatRequestBody(messages: [SwiftyGPTChatUserMessage(content: "Hello world!")], model: .gpt3_5_turbo, n: 1)
         let responseBody = try await service.request(body: requestBody)
         let failureBody = try XCTUnwrap(responseBody as? SwiftyGPTChatResponseFailureBody)
+        XCTAssertEqual(failureBody.error.type, "invalid_request_error")
     }
 }

@@ -30,4 +30,5 @@ public struct SwiftyGPTChatResponseSuccessBody: SwiftyGPTChatResponseBody, Ident
 }
 
 public struct SwiftyGPTChatResponseFailureBody: SwiftyGPTChatResponseBody, Decodable {
+    let error: SwiftyGPTChatResponseError
 }
