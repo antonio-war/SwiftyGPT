@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SwiftyGPTChatResponseFinishReason: String, Decodable {
+public enum SwiftyGPTChatResponseFinishReason: String, Decodable {
     case stop
     case lenght
     case contentFilter = "content_filter"
