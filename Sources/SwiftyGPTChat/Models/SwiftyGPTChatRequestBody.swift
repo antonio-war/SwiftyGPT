@@ -11,13 +11,13 @@ struct SwiftyGPTChatRequestBody: Encodable {
     let messages: [any SwiftyGPTChatMessage]
     let model: SwiftyGPTChatModel
     let frequencyPenalty: Double?
-    // TODO: add logit_bias
+    let logitBias: [Int: Int]?
     let logprobs: Bool?
     let topLogprobs: Int?
     let maxTokens: Int?
     let n: Int?
     let presencePenalty: Double?
-    // TODO: add response_format
+    let responseFormat: SwiftyGPTChatResponseFormat?
     let seed: Int?
     // TODO: add stop
     // TODO: add stream
@@ -26,15 +26,17 @@ struct SwiftyGPTChatRequestBody: Encodable {
     // TODO: add tools
     let user: String?
         
-    init(messages: [any SwiftyGPTChatMessage], model: SwiftyGPTChatModel, frequencyPenalty: Double? = nil, logprobs: Bool? = nil, topLogprobs: Int? = nil, maxTokens: Int? = nil, n: Int? = nil, presencePenalty: Double? = nil, seed: Int? = nil, temperature: Double? = nil, topP: Double? = nil, user: String? = nil) {
+    init(messages: [any SwiftyGPTChatMessage], model: SwiftyGPTChatModel, frequencyPenalty: Double? = nil, logitBias: [Int: Int]? = nil, logprobs: Bool? = nil, topLogprobs: Int? = nil, maxTokens: Int? = nil, n: Int? = nil, presencePenalty: Double? = nil, responseFormat: SwiftyGPTChatResponseFormat? = nil, seed: Int? = nil, temperature: Double? = nil, topP: Double? = nil, user: String? = nil) {
         self.messages = messages
         self.model = model
         self.frequencyPenalty = frequencyPenalty
+        self.logitBias = logitBias
         self.logprobs = logprobs
         self.topLogprobs = topLogprobs
         self.maxTokens = maxTokens
         self.n = n
         self.presencePenalty = presencePenalty
+        self.responseFormat = responseFormat
         self.seed = seed
         self.temperature = temperature
         self.topP = topP
