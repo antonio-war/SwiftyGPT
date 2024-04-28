@@ -7,11 +7,13 @@
 
 import Foundation
 
-protocol SwiftyGPTChatMessage: Equatable, Encodable, Decodable {
+public protocol SwiftyGPTChatMessage: Identifiable, Equatable, Encodable, Decodable, Hashable {
+    var id: UUID { get }
     var role: SwiftyGPTChatRole { get }
 }
 
 public struct SwiftyGPTChatSystemMessage: SwiftyGPTChatMessage {
+    public let id: UUID = UUID()
     public let role: SwiftyGPTChatRole = .system
     public let content: String
     public let name: String?
@@ -41,23 +43,24 @@ public struct SwiftyGPTChatSystemMessage: SwiftyGPTChatMessage {
     }
 }
 
-struct SwiftyGPTChatUserMessage: SwiftyGPTChatMessage {
-    let role: SwiftyGPTChatRole = .user
-    let content: String
-    let name: String?
+public struct SwiftyGPTChatUserMessage: SwiftyGPTChatMessage {
+    public let id: UUID = UUID()
+    public let role: SwiftyGPTChatRole = .user
+    public let content: String
+    public let name: String?
 
-    init(content: String, name: String? = nil) {
+    public init(content: String, name: String? = nil) {
         self.content = content
         self.name = name
     }
     
-    init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.content = try container.decode(String.self, forKey: .content)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
     }
     
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(role, forKey: .role)
         try container.encode(content, forKey: .content)
@@ -71,25 +74,26 @@ struct SwiftyGPTChatUserMessage: SwiftyGPTChatMessage {
     }
 }
 
-struct SwiftyGPTChatAssistantMessage: SwiftyGPTChatMessage {
-    let role: SwiftyGPTChatRole = .assistant
+public struct SwiftyGPTChatAssistantMessage: SwiftyGPTChatMessage {
+    public let id: UUID = UUID()
+    public let role: SwiftyGPTChatRole = .assistant
     // TODO: content will be optional once tool_calls parameter will be supported
-    let content: String
-    let name: String?
+    public let content: String
+    public let name: String?
     // TODO: add tool_calls parameter support
 
-    init(content: String, name: String? = nil) {
+    public init(content: String, name: String? = nil) {
         self.content = content
         self.name = name
     }
 
-    init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.content = try container.decode(String.self, forKey: .content)
         self.name = try container.decodeIfPresent(String.self, forKey: .name)
     }
     
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.role, forKey: .role)
         try container.encode(self.content, forKey: .content)
@@ -103,21 +107,22 @@ struct SwiftyGPTChatAssistantMessage: SwiftyGPTChatMessage {
     }
 }
 
-struct SwiftyGPTChatToolMessage: SwiftyGPTChatMessage {
-    let role: SwiftyGPTChatRole = .tool
-    let content: String
+public struct SwiftyGPTChatToolMessage: SwiftyGPTChatMessage {
+    public let id: UUID = UUID()
+    public let role: SwiftyGPTChatRole = .tool
+    public let content: String
     // TODO: add tool_call_id
 
-    init(content: String) {
+    public init(content: String) {
         self.content = content
     }
 
-    init(from decoder: any Decoder) throws {
+    public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.content = try container.decode(String.self, forKey: .content)
     }
     
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(self.role, forKey: .role)
         try container.encode(self.content, forKey: .content)
@@ -134,7 +139,7 @@ enum SwiftyGPTChatCodableMessage: Equatable, Encodable, Decodable {
     case user(SwiftyGPTChatUserMessage)
     case assistant(SwiftyGPTChatAssistantMessage)
     case tool(SwiftyGPTChatToolMessage)
-    
+        
     init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let singleContainer = try decoder.singleValueContainer()

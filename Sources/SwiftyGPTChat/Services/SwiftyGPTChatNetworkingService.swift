@@ -8,14 +8,14 @@
 import Foundation
 import SwiftyGPTNetworking
 
-struct SwiftyGPTChatNetworkingService: SwiftyGPTChatService {
-    let client: SwiftyGPTNetworkingClient
-    let encoder: JSONEncoder
-    let decoder: JSONDecoder
-    let apiKey: String
-    let organization: String?
+public struct SwiftyGPTChatNetworkingService: SwiftyGPTChatService {
+    public let client: SwiftyGPTNetworkingClient
+    public let encoder: JSONEncoder
+    public let decoder: JSONDecoder
+    public let apiKey: String
+    public let organization: String?
     
-    init(client: SwiftyGPTNetworkingClient = SwiftyGPTNetworkingClient(session: URLSession.shared), encoder: JSONEncoder = JSONEncoder(), decoder: JSONDecoder = JSONDecoder(), apiKey: String, organization: String? = nil) {
+    public init(client: SwiftyGPTNetworkingClient = SwiftyGPTNetworkingClient(session: URLSession.shared), encoder: JSONEncoder = JSONEncoder(), decoder: JSONDecoder = JSONDecoder(), apiKey: String, organization: String? = nil) {
         self.client = client
         self.encoder = encoder
         self.decoder = decoder
@@ -23,7 +23,7 @@ struct SwiftyGPTChatNetworkingService: SwiftyGPTChatService {
         self.organization = organization
     }
     
-    func request(body: SwiftyGPTChatRequestBody) async throws -> any SwiftyGPTChatResponseBody {
+    public func request(body: SwiftyGPTChatRequestBody) async throws -> any SwiftyGPTChatResponseBody {
         let body = try JSONEncoder().encode(body)
         let request = SwiftyGPTChatRequest(apiKey: apiKey, organization: organization, body: body)
         let response = try await client.send(request: request)
