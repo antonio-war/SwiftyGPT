@@ -76,6 +76,22 @@ Execute the request using the defined messages and a high degree of customizatio
 ```swift
    let response = try await manager.send(messages: messages, model: .gpt3_5_turbo, frequencyPenalty: 0.5)
 ```
+### Response handling
+If successful, by default the response message is found within the first choice received. But this may vary based on the type of request you make.
+In case of failure, however, the response body always contains an error describing what went wrong.
+
+```swift
+   switch response {
+      case .success(let body):
+         if let receivedMessage = body.choices.first?.message {
+            messages.append(receivedMessage)
+         } else {
+            print("Oops, there are no available choices!")
+         }
+       case .failure(let body):
+         print(body.error)
+    }
+```
 ---
 # Exploration
 Uncover the limitless possibilities of SwiftGPT as you embark on a journey of discovery through the innovative [Explorer](https://github.com/antonio-war/SwiftyGPT/tree/develop/Explorer) app.<br>
