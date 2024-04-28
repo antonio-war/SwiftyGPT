@@ -8,9 +8,15 @@
 import Foundation
 
 public struct SwiftyGPTChatResponseTokenUsage: Decodable, Equatable {
-    let completion: Int
-    let prompt: Int
-    let total: Int
+    public let completion: Int
+    public let prompt: Int
+    public let total: Int
+    
+    public init(completion: Int, prompt: Int, total: Int) {
+        self.completion = completion
+        self.prompt = prompt
+        self.total = total
+    }
     
     enum CodingKeys: String, CodingKey {
         case completion = "completion_tokens"

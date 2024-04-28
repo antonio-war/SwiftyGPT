@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SwiftyGPTChatResponseFormat: String, Encodable {
+public enum SwiftyGPTChatResponseFormat: String, Encodable {
     case text = "text"
     case json = "json_object"
     
@@ -15,7 +15,7 @@ enum SwiftyGPTChatResponseFormat: String, Encodable {
         case type
     }
     
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(rawValue, forKey: .type)
     }
