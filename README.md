@@ -61,7 +61,21 @@ Create a SwiftyGPTChatManager instance using the defined service.
 ```swift
    let manager = SwiftyGPTChatManager(service: service)
 ```
+### Prompt engineering
+Create your prompt using the various message types available.
 
+```swift
+   let messages: [any SwiftyGPTChatMessage] = [
+       SwiftyGPTChatSystemMessage(content: "You are Victor from Fallout New Vegas"),
+       SwiftyGPTChatUserMessage(content: "What's your name ?")
+   ]
+```
+### Request execution
+Execute the request using the defined messages and a high degree of customization for all available parameters.
+
+```swift
+   let response = try await manager.send(messages: messages, model: .gpt3_5_turbo, frequencyPenalty: 0.5)
+```
 ---
 # Exploration
 Uncover the limitless possibilities of SwiftGPT as you embark on a journey of discovery through the innovative [Explorer](https://github.com/antonio-war/SwiftyGPT/tree/develop/Explorer) app.<br>
