@@ -13,8 +13,8 @@
 
 ---
 # Explore
-Explore SwiftGPT's capabilities with Explorer app that showcases some of the most popular use cases and provides practical examples of how to utilize it in your projects.<br>
-Whether you're interested in generating text, having conversations, or summarizing documents, Explorer demonstrates the power and versatility of SwiftGPT.
+Discover the full potential of SwiftGPT through the [Explorer](https://github.com/antonio-war/SwiftyGPT/tree/develop/Explorer) app.<br>
+Explore popular use cases and practical examples for seamless integration into your projects.
 
 ---
 # Recommendations
@@ -44,7 +44,7 @@ Every donation, no matter how small, makes a big difference. Thank you for consi
 
 ---
 # Note
-The content of this README.md file has been automatically generated using SwiftyGPT.
+The content of this file has been automatically generated using SwiftyGPT.
 
 ---
 # License
