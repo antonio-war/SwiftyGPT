@@ -11,6 +11,7 @@
 		C1122F422BDD7B990076E6E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C1122F412BDD7B990076E6E8 /* Assets.xcassets */; };
 		C13399A42BDE461600BAF2B8 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C13399A32BDE461600BAF2B8 /* ChatView.swift */; };
 		C188BCCB2BDD84BB0057B93E /* SwiftyGPTChat in Frameworks */ = {isa = PBXBuildFile; productRef = C188BCCA2BDD84BB0057B93E /* SwiftyGPTChat */; };
+		C1FB23572BDE5664008F1C5F /* MessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1FB23562BDE5664008F1C5F /* MessageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +20,7 @@
 		C1122F412BDD7B990076E6E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C13399A32BDE461600BAF2B8 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		C188BCC92BDD84AB0057B93E /* SwiftyGPT */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftyGPT; path = ..; sourceTree = "<group>"; };
+		C1FB23562BDE5664008F1C5F /* MessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,17 +65,10 @@
 		C13399A52BDE496F00BAF2B8 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				C13399A62BDE497700BAF2B8 /* Views */,
+				C13399A32BDE461600BAF2B8 /* ChatView.swift */,
+				C1FB23562BDE5664008F1C5F /* MessageView.swift */,
 			);
 			path = Chat;
-			sourceTree = "<group>";
-		};
-		C13399A62BDE497700BAF2B8 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				C13399A32BDE461600BAF2B8 /* ChatView.swift */,
-			);
-			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -151,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1FB23572BDE5664008F1C5F /* MessageView.swift in Sources */,
 				C13399A42BDE461600BAF2B8 /* ChatView.swift in Sources */,
 				C1122F3E2BDD7B980076E6E8 /* ExplorerApp.swift in Sources */,
 			);

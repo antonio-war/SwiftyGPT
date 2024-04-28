@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SwiftyGPTChatResponseError: Decodable, Equatable {
+public struct SwiftyGPTChatResponseError: Decodable, Equatable, Error {
     public let type: String
     public let message: String
     

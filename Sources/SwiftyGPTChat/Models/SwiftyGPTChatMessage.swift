@@ -7,11 +7,13 @@
 
 import Foundation
 
-public protocol SwiftyGPTChatMessage: Equatable, Encodable, Decodable {
+public protocol SwiftyGPTChatMessage: Identifiable, Equatable, Encodable, Decodable, Hashable {
+    var id: UUID { get }
     var role: SwiftyGPTChatRole { get }
 }
 
 public struct SwiftyGPTChatSystemMessage: SwiftyGPTChatMessage {
+    public let id: UUID = UUID()
     public let role: SwiftyGPTChatRole = .system
     public let content: String
     public let name: String?
@@ -42,6 +44,7 @@ public struct SwiftyGPTChatSystemMessage: SwiftyGPTChatMessage {
 }
 
 public struct SwiftyGPTChatUserMessage: SwiftyGPTChatMessage {
+    public let id: UUID = UUID()
     public let role: SwiftyGPTChatRole = .user
     public let content: String
     public let name: String?
@@ -72,6 +75,7 @@ public struct SwiftyGPTChatUserMessage: SwiftyGPTChatMessage {
 }
 
 public struct SwiftyGPTChatAssistantMessage: SwiftyGPTChatMessage {
+    public let id: UUID = UUID()
     public let role: SwiftyGPTChatRole = .assistant
     // TODO: content will be optional once tool_calls parameter will be supported
     public let content: String
@@ -104,6 +108,7 @@ public struct SwiftyGPTChatAssistantMessage: SwiftyGPTChatMessage {
 }
 
 public struct SwiftyGPTChatToolMessage: SwiftyGPTChatMessage {
+    public let id: UUID = UUID()
     public let role: SwiftyGPTChatRole = .tool
     public let content: String
     // TODO: add tool_call_id

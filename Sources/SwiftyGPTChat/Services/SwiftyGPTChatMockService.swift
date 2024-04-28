@@ -22,7 +22,7 @@ public class SwiftyGPTChatMockService: SwiftyGPTChatService {
     }
     
     public func request(body: SwiftyGPTChatRequestBody) async throws -> any SwiftyGPTChatResponseBody {
-        try await Task.sleep(nanoseconds: UInt64(duration) * 1_000_000_000)
+        try await Task.sleep(nanoseconds: UInt64(duration * 1_000_000_000))
         requestCallCount += 1
         return responseBody
     }
