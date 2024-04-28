@@ -12,7 +12,10 @@ import SwiftyGPTChat
 struct ExplorerApp: App {
     var body: some Scene {
         WindowGroup {
-            ChatView(environment: environment)
+            NavigationStack {
+                ChatView(environment: environment)
+                    .navigationTitle("Chat")
+            }
         }
     }
     

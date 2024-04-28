@@ -88,7 +88,7 @@ struct ChatView: View {
                     throw body.error
                 }
             } catch {
-                print(error)
+                messages.append(SwiftyGPTChatSystemMessage(content: "Oops, something went wrong!"))
             }
         }
     }
