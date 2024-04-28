@@ -7,21 +7,21 @@
 
 import Foundation
 
-class SwiftyGPTChatMockService: SwiftyGPTChatService {
-    private let responseBody: any SwiftyGPTChatResponseBody
-    private let duration: TimeInterval
+public class SwiftyGPTChatMockService: SwiftyGPTChatService {
+    let responseBody: any SwiftyGPTChatResponseBody
+    let duration: TimeInterval
     
-    private (set) var requestCallCount: Int = 0
-    var requestCalled: Bool {
+    private (set) public var requestCallCount: Int = 0
+    public var requestCalled: Bool {
         return requestCallCount > 0
     }
     
-    init(responseBody: any SwiftyGPTChatResponseBody, duration: TimeInterval = 0.0) {
+    public init(responseBody: any SwiftyGPTChatResponseBody, duration: TimeInterval = 0.0) {
         self.responseBody = responseBody
         self.duration = duration
     }
     
-    func request(body: SwiftyGPTChatRequestBody) async throws -> any SwiftyGPTChatResponseBody {
+    public func request(body: SwiftyGPTChatRequestBody) async throws -> any SwiftyGPTChatResponseBody {
         try await Task.sleep(nanoseconds: UInt64(duration) * 1_000_000_000)
         requestCallCount += 1
         return responseBody

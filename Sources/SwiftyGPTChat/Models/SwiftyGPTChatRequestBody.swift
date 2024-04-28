@@ -7,27 +7,27 @@
 
 import Foundation
 
-struct SwiftyGPTChatRequestBody: Encodable {
-    let messages: [any SwiftyGPTChatMessage]
-    let model: SwiftyGPTChatModel
-    let frequencyPenalty: Double?
-    let logitBias: [Int: Int]?
-    let logprobs: Bool?
-    let topLogprobs: Int?
-    let maxTokens: Int?
-    let n: Int?
-    let presencePenalty: Double?
-    let responseFormat: SwiftyGPTChatResponseFormat?
-    let seed: Int?
+public struct SwiftyGPTChatRequestBody: Encodable {
+    public let messages: [any SwiftyGPTChatMessage]
+    public let model: SwiftyGPTChatModel
+    public let frequencyPenalty: Double?
+    public let logitBias: [Int: Int]?
+    public let logprobs: Bool?
+    public let topLogprobs: Int?
+    public let maxTokens: Int?
+    public let n: Int?
+    public let presencePenalty: Double?
+    public let responseFormat: SwiftyGPTChatResponseFormat?
+    public let seed: Int?
     // TODO: add stop parameter support
     // TODO: add stream parameter support
-    let temperature: Double?
-    let topP: Double?
+    public let temperature: Double?
+    public let topP: Double?
     // TODO: add tools parameter support
     // TODO: add tool_choice parameter support
-    let user: String?
+    public let user: String?
         
-    init(messages: [any SwiftyGPTChatMessage], model: SwiftyGPTChatModel, frequencyPenalty: Double? = nil, logitBias: [Int: Int]? = nil, logprobs: Bool? = nil, topLogprobs: Int? = nil, maxTokens: Int? = nil, n: Int? = nil, presencePenalty: Double? = nil, responseFormat: SwiftyGPTChatResponseFormat? = nil, seed: Int? = nil, temperature: Double? = nil, topP: Double? = nil, user: String? = nil) {
+    public init(messages: [any SwiftyGPTChatMessage], model: SwiftyGPTChatModel, frequencyPenalty: Double? = nil, logitBias: [Int: Int]? = nil, logprobs: Bool? = nil, topLogprobs: Int? = nil, maxTokens: Int? = nil, n: Int? = nil, presencePenalty: Double? = nil, responseFormat: SwiftyGPTChatResponseFormat? = nil, seed: Int? = nil, temperature: Double? = nil, topP: Double? = nil, user: String? = nil) {
         self.messages = messages
         self.model = model
         self.frequencyPenalty = frequencyPenalty
@@ -45,10 +45,8 @@ struct SwiftyGPTChatRequestBody: Encodable {
     }
     
     var codableMessages: [SwiftyGPTChatCodableMessage] {
-        return messages.compactMap {
+        return messages.map {
             switch $0 {
-            case let message as SwiftyGPTChatSystemMessage:
-                return .system(message)
             case let message as SwiftyGPTChatUserMessage:
                 return .user(message)
             case let message as SwiftyGPTChatAssistantMessage:
@@ -56,12 +54,13 @@ struct SwiftyGPTChatRequestBody: Encodable {
             case let message as SwiftyGPTChatToolMessage:
                 return .tool(message)
             default:
-                return .none
+                let message = $0 as! SwiftyGPTChatSystemMessage
+                return .system(message)
             }
         }
     }
     
-    func encode(to encoder: any Encoder) throws {
+    public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
         try container.encode(model, forKey: .model)
         try container.encode(codableMessages, forKey: .messages)

@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol SwiftyGPTChatService {
+public protocol SwiftyGPTChatService {
     func request(body: SwiftyGPTChatRequestBody) async throws -> any SwiftyGPTChatResponseBody
 }

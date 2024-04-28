@@ -7,7 +7,12 @@
 
 import Foundation
 
-struct SwiftyGPTChatResponseError: Decodable, Equatable {
-    let type: String
-    let message: String
+public struct SwiftyGPTChatResponseError: Decodable, Equatable {
+    public let type: String
+    public let message: String
+    
+    public init(type: String, message: String) {
+        self.type = type
+        self.message = message
+    }
 }
