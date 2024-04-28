@@ -12,6 +12,11 @@
 - **Mockable**: SwiftyGPT employs protocol-oriented programming to guarantee testability and maintainability. It already exposes some mock objects that can be seamlessly utilized in testing or SwiftUI previews, eliminating the need for actual API calls. 
 
 ---
+# Explore
+Explore SwiftGPT's capabilities with Explorer app that showcases some of the most popular use cases and provides practical examples of how to utilize it in your projects.<br>
+Whether you're interested in generating text, having conversations, or summarizing documents, Explorer demonstrates the power and versatility of SwiftGPT.
+
+---
 # Recommendations
 
 To ensure security and flexibility, we recommend loading your OpenAI API key using environment variables instead of hardcoding it directly into your source code. This approach offers several advantages:
@@ -21,8 +26,8 @@ To ensure security and flexibility, we recommend loading your OpenAI API key usi
 
 Here's a simple example of how you can load your OpenAI API key from an environment variable in Swift:
 ```swift
-guard let apiKey = ProcessInfo.processInfo.environment["OPENAI_API_KEY"] else {
-    fatalError("Missing OpenAI API key. Please set the OPENAI_API_KEY environment variable.")
+guard let apiKey = ProcessInfo.processInfo.environment["OPEN_AI_API_KEY"] else {
+    fatalError("Missing OpenAI API key. Please set the OPEN_AI_API_KEY environment variable.")
 }
 ```
 
