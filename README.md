@@ -37,6 +37,32 @@ Integrating SwiftyGPT into your Swift project is straightforward. Follow these s
 That's it! You've successfully integrated SwiftyGPT into your project and can now leverage its powerful features.
 
 ---
+# Usage
+The main steps for using SwiftyGPTChat into your project are outlined below, guiding you through the process.
+
+### Service Definition
+First, define a `SwiftyGPTChatService`. You have three options:
+- Use `SwiftyGPTChatNetworkingService` if you want to execute API calls to OpenAI (requires an API Key).
+- Use `SwiftyGPTChatMockService` for mocked responses, ideal for testing or SwiftUI previews.
+- Create your custom instance to suit any of your purposes.
+  
+```swift
+   import SwiftyGPTChat
+
+   // Using SwiftyGPTChatNetworkingService
+   let service = SwiftyGPTChatNetworkingService(apiKey: "YOUR_API_KEY")
+
+   // Using SwiftyGPTChatMockService
+   let service = SwiftyGPTChatMockService(responseBody: responseBody, duration: 0.5)
+```
+### Manager creation
+Create a SwiftyGPTChatManager instance using the defined service.
+
+```swift
+   let manager = SwiftyGPTChatManager(service: service)
+```
+
+---
 # Exploration
 Uncover the limitless possibilities of SwiftGPT as you embark on a journey of discovery through the innovative [Explorer](https://github.com/antonio-war/SwiftyGPT/tree/develop/Explorer) app.<br>
 Delve deep into the realm of natural language processing and unleash the full potential of SwiftGPT with these captivating features:
