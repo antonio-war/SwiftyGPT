@@ -40,7 +40,7 @@ That's it! You've successfully integrated SwiftyGPT into your project and can no
 # Usage
 The main steps for using SwiftyGPTChat into your project are outlined below, guiding you through the process.
 
-### Service Definition
+### Service definition
 First, define a `SwiftyGPTChatService`. You have three options:
 - Use `SwiftyGPTChatNetworkingService` if you want to execute API calls to OpenAI (requires an API Key).
 - Use `SwiftyGPTChatMockService` for mocked responses, ideal for testing or SwiftUI previews.
