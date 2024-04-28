@@ -52,9 +52,9 @@ struct ChatView: View {
     
     private var service: any SwiftyGPTChatService {
         switch environment {
-//        case .release, .debug:
-//            return SwiftyGPTChatNetworkingService(apiKey: apiKey)
-        case .release, .debug, .test, .preview:
+        case .release, .debug:
+            return SwiftyGPTChatNetworkingService(apiKey: apiKey)
+        case .test, .preview:
             let choices = [
                 SwiftyGPTChatResponseChoice(index: 0, message: SwiftyGPTChatAssistantMessage(content: "Hello, how can I assist you ?"), finishReason: .stop)
             ]
