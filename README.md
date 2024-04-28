@@ -12,12 +12,37 @@
 - **Mockable**: SwiftyGPT employs protocol-oriented programming to guarantee testability and maintainability. It already exposes some mock objects that can be seamlessly utilized in testing or SwiftUI previews, eliminating the need for actual API calls. 
 
 ---
-# Explore
+# Integration
+Integrating SwiftyGPT into your Swift project is straightforward. Follow these steps to get started:
+
+1. **Install SwiftyGPT**:
+   - If you're using Swift Package Manager (SPM):
+     - Open your Xcode project.
+     - Navigate to "File" > "Swift Packages" > "Add Package Dependency...".
+     - Enter the SwiftyGPT repository URL: `https://github.com/antonio-war/SwiftyGPT`.
+     - Follow the prompts to select the version and add SwiftyGPT to your project.
+     - SwiftyGPT exposes multiple targets, import only the ones that you really need in your project.
+   - If you're using CocoaPods or Carthage, we're sorry, but they are not currently supported.
+2. **Import SwiftyGPT**:
+   - In the files where you want to use SwiftyGPT features, import its modules at the top of the file:
+     ```swift
+     import SwiftyGPTChat
+     ```
+3. **Start Using SwiftyGPT**:
+   - Once SwiftyGPT is imported, you can start using its APIs to interact with GPT models.
+   - Refer to the documentation for guidance on how to use its features for text generation, conversation, summarization, and more.
+5. **Run Your Project**:
+   - Build and run your project to ensure that SwiftyGPT has been integrated successfully.
+   - Test out the functionality you've implemented using SwiftyGPT to ensure everything works as expected.
+That's it! You've successfully integrated SwiftyGPT into your project and can now leverage its powerful features.
+
+---
+# Exploration
 Discover the full potential of SwiftGPT through the [Explorer](https://github.com/antonio-war/SwiftyGPT/tree/develop/Explorer) app.<br>
 Explore popular use cases and practical examples for seamless integration into your projects.
 
 ---
-# Recommendations
+# Recommendation
 
 To ensure security and flexibility, we recommend loading your OpenAI API key using environment variables instead of hardcoding it directly into your source code. This approach offers several advantages:
 - **Security**: Storing sensitive information like API keys in environment variables helps prevent accidental exposure of credentials, reducing the risk of unauthorized access to your API resources.
@@ -32,7 +57,7 @@ guard let apiKey = ProcessInfo.processInfo.environment["OPEN_AI_API_KEY"] else {
 ```
 
 ---
-# Support the Project
+# Support
 Your generous donations help sustain and improve this project. Here's why supporting us is important:
 1. **Covering API Costs**: Accessing certain features or services may require a paid API key. Your donations help cover the cost of maintaining these subscriptions, ensuring uninterrupted access to essential functionalities.
 2. **Development and Maintenance**: Donations enable us to dedicate more time and resources to developing new features, fixing bugs, and maintaining the project's overall health. Your support directly contributes to the project's ongoing improvement and sustainability.
